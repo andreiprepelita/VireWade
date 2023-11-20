@@ -1,4 +1,5 @@
-# Vire (Vinyl Recommender Tool) #The Mergebackers Team
+# The Mergebackers Team
+# Vire (Vinyl Recommender Tool) 
 
 **Build a (micro-)service Web system** able to **"intelligently" recommend vinyl music records** by exposing a **SPARQL endpoint**. The system tailors recommendations based on various criteria:
 
