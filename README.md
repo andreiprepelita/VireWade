@@ -1,6 +1,22 @@
 # The Mergebackers Team
 # Vire (Vinyl Recommender Tool) 
 
+**Midterm Deliverable Design & Architecture A**:
+
+## Quick Access to Open API Services
+
+1. [UserService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/User%20Service%20-%20Open%20API/index.html)
+2. [RecommendationService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/Recommendation%20Service%20-%20Open%20API/index.html)
+3. [Playlist API](path/to/Playlist/API/documentation) - Same as above.
+
+
+## Quick Access to Scholarly HTML Report
+[Schorlarly HTML Report](https://andreiprepelita.github.io/Tehnical-Report-Vire-Midterm-evaluation/)
+
+## Quick Access to Diagrams ( but can be viewed more easily in the report above)
+
+[Diagrams]([https://andreiprepelita.github.io/Tehnical-Report-Vire-Midterm-evaluation/](https://github.com/andreiprepelita/VireWade/tree/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Diagrams))
+
 **Build a (micro-)service Web system** able to **"intelligently" recommend vinyl music records** by exposing a **SPARQL endpoint**. The system tailors recommendations based on various criteria:
 
 - **User Preferences:** Specified via controlled natural language constructs. 
