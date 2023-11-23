@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Vire (Vinyl Recommender Tool)- Scholarly Technical Report</title>
+  
+  <script src="./Resources/bootstrap.bundle.min.js.download" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="./Resources/jquery.min.js.download"></script>
+  <script src="./Resources/bootstrap.min.js.download"></script>
+  <link rel="stylesheet" href="./Resources/bootstrapv1.min.css">
+  <link href="./Resources/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+
+<body prefix="schema: http://schema.org/ sa: https://ns.science.ai/">
+  <div class="container">
+    <article typeof="schema:ScholarlyArticle">
+      <div class="text-center">
+        <h1>Vire (Vinyl Recommender Tool) - Technical Report</h1>
+      </div>
+
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.linkedin.com/in/cristian-eduard-drob-6223a5196/">Drob Cristian-Eduard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.linkedin.com/in/andrei-prepelita-7aa361217/">Prepelita Andrei</a>
+        </li>
+      </ul>
+
+      <!-- 1. Project description -->
+      <div class="row mt-2">
+        <section typeof="sa:Description">
+          <div class="card text-bg-light mb-3">
+            <div class="card-body">
+              <h2 class="card-title" style="color:blue;">1. Project description</h2>
+              <blockquote>
+                <p>
+                  Build a (micro-)service Web system able to "intelligently" recommend – by exposing a SPARQL endpoint 
+                  – vinyl music records according to various criteria: user preferences (specified via controlled natural 
+                  language constructs such as "I always like/love/prefer classical music, especially opera music by Rossini or Verdi and performed by 
+                  Angela Gheorghiu or Juan Diego Flórez; I sometimes like progressive rock and post-rock; I like only metal albums released before 2000; 
+                  I always dislike/hate rap and hip-hop; I dislike songs produced by Flood in the last 25 years"), past song purchases on various music stores, 
+                  playlists – available online via music streaming services: Last.fm and alternative solutions – and/or locally – for instance, by uploading a 
+                  JSPF/XSPF document. The playlists could be created by the user or shared by her/his virtual "friends" (consider at least one social network). 
+                  The system will use several music-related knowledge models (e.g., Music Ontology or MusicRecording concept from schema.org) and available public 
+                  resources: Discogs, MusicBrainz, Musicmoz Music Styles.
+                </p>
+              </blockquote>
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- 2. Architecture of the Web application -->
+      <div class="row mt-2">
+        <section typeof="sa:Arhitecture">
+          <div class="card text-bg-light mb-3">
+            <div class="card-body">
+              <h2 class="card-title" style="color:blue;">2. Architecture of the Web application</h2>
+              <blockquote>
+                <p>High Level Arhitecture for our WEB Application: </p>
+              </blockquote>
+              <div>
+
+                <div>
+                  <div class="item" style="text-align:center">
+                    <img src="./Resources/High Level Architecture.drawio.png" alt="Current Arhitecture">
+                  </div>
+
+                </div>
+              </div>
+              <h3 class="card-title">Database Arhitecture</h3>
+
+              <div class="item">
+                <img src="./VIRE Scholarly technical report_files/db.PNG" alt="Database" style="width:100%;">
+              </div>
+
+              <h3 class="card-title">Backend Services</h3>
+              <h3 style="color:green;" class="card-title">Vinyl Architecture (Main Endpoint)</h3>
+              <blockquote>
+              <p>       
+                This service offers a single endpoint. The endpoint accepts a query as input and, using this query, generates a list of potential recommendations by accessing data from WikiData. 
+                The endpoint's output will consist of vinyl record information.
+              </p>
+              </blockquote>
+              <h4 style="color:green; font-size: larger;">
+                The arhitecture of the service is the following:
+              </h4>
+              <div class="item" style="text-align:center">
+                <img src="./Resources/Vinyl endpoint - Main endpoint.drawio.png" alt="graphQL" style="">
+              </div>
+              <h4 style="color:green; font-size: larger;">
+                Schema GraphQL:
+              </h4>
+              <div class="item">
+                <pre>                      <code>
+                  type Artist {
+                    name: String
+                    url: String
+                  }
+                  
+                  type Genre {
+                    name: String
+                    url: String
+                  }
+                  
+                  type Vinyl {
+                    title: String
+                    artist: Artist
+                    genre: Genre
+                    url: String
+                  }
+                  
+                  type Query {
+                    vinyls: [Vinyl]
+                  }                  
+                    </code>
+                  </pre>
+              </div>
+
+              <h3 class="card-title" style="color:green;">User Architecture</h3>
+              <blockquote>
+                <p>
+                  The primary function of this service is to support essential user-related operations such as 
+                  signing in, registering, associating accounts with different external sources and others.
+                </p>
+                <p>
+                  Regarding the structure of the service, it consists of the following components:
+                </p>
+              </blockquote>
+          
+              <div class="item" style="text-align: center;">
+                <img src="./Resources/User Arhictecture.drawio.png" alt="userService">
+              </div>
+              <h2 style="color:red; font-size: larger;">Open API:</h2>
+              <p>
+                 <a href="https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/User%20Service%20-%20Open%20API/index.html">Click Here</a>
+              </p>
+              
+              
+              <h3 style="color:green;" class="card-title">Recommandation Architecture</h3>
+              <blockquote>
+                <p>
+                  This service is tasked with offering a range of vinyl record recommendations, 
+                  derived from various criteria.
+                </p>
+                <p>Three distinct endpoints will be made available for this service. Each will have a unique input format, but ultimately, they will be configured to retrieve data from WikiData by interacting with the Vinyls GraphQL endpoint.
+                </p>
+                <p>
+                  The role of this endpoint is to serve as a bridge between the application's frontend and the Vinyls Service, which delivers the actual recommendations. 
+                  The endpoint will convert the received input into a format that the Vinyls GraphQL endpoint 
+                  can readily understand and process.
+                </p>
+              </blockquote>
+              <h4>
+                The arhitecture of the service is the following:
+              </h4>
+              <div class="item" style="text-align: center;">
+                <img src="./Resources/Recommendation Architecture v1.drawio.png" alt="userService">
+              </div>
+
+              <h4 style="color:green; font-size: larger;" class="card-title">I. User Input-Based Recommendation:</h4>
+              <blockquote>
+                <p><b>Concept:</b> Users will express their music preferences using a <b><a href="https://www.sigcnl.org/">Controlled Natural Language (CNL)</a></b>.</p>
+                <p><b>Definition:</b> Controlled natural language are simplified natural languages with limited grammar and vocabulary to reduce ambiguity and complexity.</p>
+                <p><b>Purpose of CNL:</b> To limit user inputs to specific words, ensuring clarity and simplicity.</p>
+                <p><b>CNL Structure:</b></p>
+                <ul>
+                  <li><p>Music Genres and Artists.</p></li>
+                  <li><p>Predicates (e.g., like, dislike) to express feelings.</p></li>
+                  <li><p>Frequency Words (e.g., always, never, sometimes).</p></li>
+                </ul>
+                <p>
+                  <i>Summary:</i> In our user interface, there will be a specific section dedicated to this recommendation feature. 
+                  Essentially, users will be asked to indicate their preferences 
+                  regarding various artists and music genres by selecting either 'like' 
+                  or 'dislike' for each. Additionally, they will be required to choose 
+                  a time period for the music's release, such as the year, to further 
+                  tailor their recommendations.
+                </p>
+              </blockquote>
+
+              <h4 style="color:green; font-size: larger;" class="card-title">II. Recommendation Based on Past Purchases:</h4>
+              <blockquote>
+                <p><b>Mechanism:</b> Users receive recommendations based on their previous purchases on <b><a href="https://www.discogs.com/">Discogs</a></b>.</p>
+                <p><b>Integration:</b> Users link their application account to their Discogs account.</p>
+                <p><b>Process:</b> Upon linking, the app saves the user's Discogs data. When requesting data, the app uses the Discogs authentication token to fetch past purchases.</p>
+                <p><b>Data Conversion: </b> Information from Discogs API is formatted for the Vinyls GraphQL endpoint.</p>
+                <p>We will use <b><a href="https://www.discogs.com/developers">Discogs API v2.0</a></b> and this is a RESTful interface providing access to various Discogs data.</p>
+                <p>
+                  <i>Summary:</i> In our user interface, the first step for the user is to link their account with Discogs. Once this association is completed, they will be able to view personalized recommendations 
+                  derived from their previous purchases on a page titled "Recommendations Based 
+                  on Past Purchases."
+                </p>
+              </blockquote>
+              
+              <h4 style="color:green; font-size: larger;" class="card-title">III. Playlist-Based Recommendation:</h4>
+              <blockquote>
+                  <p><b>Sources:</b> Recommendations are based on playlists from <b><a href="https://www.last.fm/api">Last.fm</a></b> or user-uploaded files.</p>
+                  <p><b>Integration for Last.fm:</b> Users link their app account with Last.fm.</p>
+                  <p><b>Playlist Import:</b> Users upload playlists to their account.</p>
+                  <p><b>Data Handling: </b> Information from Discogs API is formatted for the Vinyls GraphQL endpoint.</p>
+                  <p><b>Playlist Format: </b> The app will utilize <b><a href="https://xspf.org/">XSPF (XML Shareable Playlist Format)</a></b> for playlists, which is a standard web format for shareable playlists.</p>
+                  <p>
+                    <i>Summary:</i> In our user interface, the first step for the user is to link their account with Last.fm. Once this association is completed, 
+                    they will be able to view personalized recommendations on a page titled "Recommendations Based on Playlists."
+                  </p>
+              </blockquote>
+    
+              <h2 style="color:red; font-size: larger;">Open API:</h2>
+              <p>
+                 <a href="https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/Recommendation%20Service%20-%20Open%20API/index.html">Click Here</a>
+              </p>
+
+
+              <h3 class="card-title" style="color:green;">Playlist Architecture</h3>
+              <blockquote>
+                <p>
+                  The purpose of this module is to uphold the functions necessary for managing playlists, 
+                  including creation, editing, deleting, getting and other related tasks.
+                </p>
+                <p>
+                  The service is structured as follows:
+                </p>
+              </blockquote>
+              <div class="item" style="text-align: center;">
+                <img src="./Resources/Playlist Architecture.drawio.png" alt="playlistService">
+              </div>
+              <h2 style="color:red; font-size: larger;">Open API:</h2>
+              <p>
+                 <a href="https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/User%20Service%20-%20Open%20API/index.html">Click Here</a>
+              </p>
+
+            </div>
+        </div></section>
+      </div>
+      
+      <!-- 3. Sources of External Data -->
+      <div class="row mt-2">
+        <section typeof="sa:ExternalDataSource">
+          <div class="card text-bg-light mb-3">
+            <div class="card-body">
+              <h2 class="card-title" style="color:blue;">3. Sources of External Data</h2>
+              <blockquote>
+                <p>
+                  Our goal is to construct a comprehensive vinyl records database that is robust enough to support a 
+                  recommendation system. To establish and populate our database, 
+                  we will utilize the <b><a href="https://www.stardog.com/">Stardog platform</a></b>. We plan to compile a <b><a href="https://www.w3.org/TR/turtle/">Turtle (.ttl)</a></b> file containing data sourced from 
+                  various SparQL queries conducted online. This file will then be 
+                  imported into our database using <b><a href="https://www.stardog.com/">Stardog platform</a></b>. We plan to compile a <b><a href="https://www.stardog.com/studio/">Stardog Studio</a></b>.
+                </p>
+                <p>
+                  The <b><a href="https://www.stardog.com/">Stardog platform</a></b> is particularly advantageous for our vinyl database project because it specializes 
+                  in knowledge graph technology, which allows us to create interconnected data relationships crucial for a recommendation system. Its robust support for SparQL queries 
+                  makes it an ideal choice for integrating diverse data sources. Moreover, Stardog's seamless integration with <b><a href="https://www.stardog.com/studio/">Stardog Studio</a></b> provides a user-friendly environment for managing our data, 
+                  making the development and maintenance of our database both efficient and scalable.
+                </p>
+                <p>
+                  To provide vinyl recommendations to users, we'll utilize various external APIs.
+                </p>
+                <p>
+                  Our strategy includes recommending vinyl records based on the user's history of song purchases from different music stores. For this, we intend to use the <b><a href="https://www.discogs.com/developers/">
+                    Discogs API</a></b>.
+                </p>
+                <p>
+                  Additionally, we plan to offer vinyl suggestions based on the user's playlists from various platforms, using data obtained from <b><a href="https://www.last.fm/api/playlists">Last.fm Playlists</a></b>, a music streaming service.
+                </p>
+              </blockquote>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- 4. Frontend Design -->
+      <div class="row mt-2">
+        <section typeof="sa:UiDesign">
+          <div class="card text-bg-light mb-3">
+            <div class="card-body">
+              <h2 class="card-title" style="color:blue;">4. Frontend Design</h2>
+              <h3 class="card-title">UI Mockup</h3>
+
+                  <div class="item" style="text-align: center;">
+                    <img src="./VIRE Scholarly technical report_files/landingPage.png" alt="Landing" style="width:100%;">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h3></h3>
+                    </div>
+                  </div>
+
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- 5. End Users -->
+      <div class="row mt-2">
+        <section typeof="sa:UseCase">
+          <div class="card text-bg-light mb-3">
+            <div class="card-body">
+              <h2 class="card-title" style="color:blue;">5. End Users</h2>
+              <h3 class="card-title">Use Case Diagram</h3>
+              <blockquote>
+                <p>This outlines the ways in which the user will engage with the application:</p>
+                <div class="item" style="text-align:center">
+                  <img class="img-fluid" src="./Resources/UseCaseDiagramFinal.drawio.png" alt="Use Case Diagram">
+                </div>
+                
+              </blockquote>
+
+              <blockquote>
+                <p>The term "end user" refers to someone who utilizes a product or service. 
+                  This individual might not be the purchaser but is the final consumer of the product. 
+                  In the context of our application, there are two primary types of end users: </p>
+                <ol>
+                  <li>A developer looking to incorporate a music recommendation feature into their application.
+                  </li>
+                  <li>An individual passionate about music, seeking to explore more music that aligns with their preferences.
+                    (Whether through previous purchases, or by creating playlists, or through direct preferences - association of artists, genres.)
+                  </li>
+                </ol>
+              </blockquote>
+
+ 
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- 6. Ontology and Vocabularies -->
+      <div class="row mt-2">
+        <section typeof="sa:Vocabulary">
+          <div class="card text-bg-light mb-3">
+            <div class="card-body">
+              <h2 class="card-title" style="color:blue;">6. Ontology and Vocabularies</h2>
+              <blockquote>
+                <p>
+                  We will use existing ontologies and vocabularies to structure our business case effectively. 
+                  These are required to support the 
+                  Music Ontology we are utilizing and are represented by the following:</p>
+                  <ul>
+                    <li><b>PREFIX foaf</b>: http://xmlns.com/foaf/0.1/</li>
+                    <li><b>PREFIX dc</b>: http://purl.org/dc/elements/1.1/</li>
+                    <li><b>PREFIX xsd</b>: http://www.w3.org/2001/XMLSchema# </li>
+                    <li><b>PREFIX rdfs</b>: http://www.w3.org/2000/01/rdf-schema# </li>
+                    <li><b>PREFIX mo</b>: http://purl.org/ontology/mo/ </li>
+                    <li><b>PREFIX schema</b>: https://schema.org/ </li>
+                    <li><b>PREFIX rdf</b>: http://www.w3.org/1999/02/22-rdf-syntax-ns# </li>
+                  </ul>
+                  
+              </blockquote>
+
+              <h3 class="card-title">How we will represent Vinyls in our Application?</h3>
+              <blockquote>
+                <ul>
+                  <li><b>@type:</b> Specifies the entity's category.</li>
+                  <li><b>@id:</b> Assigns a unique resource identifier URL.</li>
+                  <li><b>foaf:maker:</b> Relates an artist to their musical creation, the vinyl.</li>
+                  <li><b>dc:date:</b> Specifies when the Vinyl was issued.</li>
+                  <li><b>dc:title:</b> Indicates the name of the Vinyl.</li>
+                  <li><b>mo:image:</b> Represents a visual depiction of a musical composition or its manifestation.</li>
+                  <li><b>mo:genre:</b> Denotes a music style, either as text or linked to a WikiData/DBPedia genre entry, providing detailed and structured genre information for semantic web access.</li>
+                  <li><b>@value</b>  Is a way to define the actual content or "value" of a property, in this case being the name of the artist.</li>
+
+                </ul>
+                <div class="item" style="text-align: center;">
+                  <img class="img-fluid" src="./Resources/Vinyl graph final v1.drawio.png" alt="Vinyl Graph">
+                </div>
+               
+              </blockquote>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- 7. Linked Data principles -->
+      <div class="row mt-2">
+        <section typeof="sa:LinkedDataPrinciples">
+          <div class="card text-bg-light mb-3">
+            <div class="card-body">
+              <h2 class="card-title" style="color:blue;">7. Linked Data Principles</h2>
+              <blockquote>
+                <p>
+                  <b>Linked Data</b> is defined as a series of best practices for the publication of structured data on the internet. 
+                  Its primary goal is to foster an ecosystem where information is readily available in a 
+                  universally accessible format, suitable for processing by Semantic Web technologies. 
+                  This objective is realized through adherence to four core Linked Data principles:
+                </p><ul>
+                  <li>Utilizing HTTP URIs to enable users to find these entities.</li>
+                  <li>Assigning Uniform Resource Identifiers (URIs) as names for various entities.</li>
+                  <li>Creating links to other URIs, enhancing the discoverability of additional data.</li>
+                  <li>Employing Semantic Web technologies, such as RDF, OWL, and SPARQL, to relay information.</li>
+                </ul>
+
+                <p>In the context of Vire, several of these principles will be applied as follows:</p>
+                <ul>
+                  <li>The information pertaining to our resources is structured using the robust frameworks of the <b>Music Ontology </b> and the <b>Schema.org</b> vocabularies.</li>
+                  <li>Data on songs, vinyl records, and artists will be interconnected, providing links that guide users to further resources and information about these topics.</li>
+                </ul>
+                <p></p>
+              </blockquote>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- 8. Bibliography -->
+      <div class="row mt-2">
+        <section typeof="sa:Bibliography">
+          <div class="card text-bg-light mb-3">
+            <div class="card-body">
+              <h2 class="card-title" style="color:blue;">8. Bibliography</h2>
+              <blockquote>
+                <ol>
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="sparqlProtocol">
+                    <cite property="schema:name">
+                      <a href="https://www.w3.org/TR/sparql11-protocol/">The SPARQL 1.1 Protocol</a>
+                    </cite>
+                  </li>
+
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="rdf">
+                    <cite property="schema:name">
+                      <a href="https://www.w3.org/RDF/">RDF (Resource Description Framework)</a>
+                    </cite>
+                  </li>
+
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="stardogplatform">
+                    <cite property="schema:name">
+                      <a href="https://www.stardog.com/">Stardog Platform</a>
+                    </cite>
+                  </li>
+
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="stardogstudio">
+                    <cite property="schema:name">
+                      <a href="https://www.stardog.com/studio/">Stardog Studio</a>
+                    </cite>
+                  </li>
+
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="graphqlendpoint">
+                    <cite property="schema:name">
+                      <a href="https://graphql.org/learn/serving-over-http/">GraphQL endpoint</a>
+                    </cite>
+                  </li>
+
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="discogs">
+                    <cite property="schema:name">
+                      <a href="https://www.discogs.com/developers/">Discogs</a>
+                    </cite>
+                  </li>
+
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="lastFm">
+                    <cite property="schema:name">
+                      <a href="https://www.last.fm/api">LastFM</a>
+                    </cite>
+                  </li>
+
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="schemaOrg">
+                    <cite property="schema:name">
+                      <a href="https://schema.org/">Schema.org Vocabulary</a>
+                    </cite>
+                  </li>
+
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="musicOntology">
+                    <cite property="schema:name">
+                      <a href="http://musicontology.com/">Music Ontology</a>
+                    </cite>
+                  </li>
+
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="XSPF">
+                    <cite property="schema:name">
+                      <a href="https://xspf.org/">XSPF for Playlists</a>
+                    </cite>
+                  </li>
+
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="linkeddata">
+                    <cite property="schema:name">
+                      <a href="https://www.w3.org/wiki/LinkedData">Linked Data</a>
+                    </cite>
+                  </li>
+
+                </ol>
+              </blockquote>
+            </div>
+          </div>
+        </section>
+      </div>
+    </article>
+  </div>
+</body>
+</html>
