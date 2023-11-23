@@ -6,5 +6,5 @@
 
 
 ## Quick Access to Scholarly HTML Report
-[UserService API]([https://andreiprepelita.github.io/Tehnical-Report-Vire-Midterm-evaluation/]))
+[UserService API](https://andreiprepelita.github.io/Tehnical-Report-Vire-Midterm-evaluation/))
 
