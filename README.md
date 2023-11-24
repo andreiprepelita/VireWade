@@ -3,20 +3,12 @@
 
 **Midterm Deliverable Design & Architecture A**:
 
-## Quick Access to Scholarly HTML Report
+## Quick Access to Scholarly HTML Report / Open API Services / Diagrams
 1. [Schorlarly HTML Report](https://andreiprepelita.github.io/Tehnical-Report-Vire-Midterm-evaluation/)
-
-## Quick Access to Open API Services
-
-1. [UserService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/User%20Service%20-%20Open%20API/index.html)
-2. [RecommendationService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/Recommendation%20Service%20-%20Open%20API/index.html)
-3. [Playlist API](path/to/Playlist/API/documentation) - Same as above.
-
-
-## Quick Access to Diagrams 
--can be viewed more easily in the Scholarly HTML Report above
-
-[Diagrams](https://github.com/andreiprepelita/VireWade/tree/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Diagrams)
+2. [UserService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/User%20Service%20-%20Open%20API/index.html)
+3. [RecommendationService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/Recommendation%20Service%20-%20Open%20API/index.html)
+4. [Playlist API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/Playlist%20Service%20-%20Open%20API/index.html
+5. [Diagrams](https://github.com/andreiprepelita/VireWade/tree/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Diagrams)
 
 **Build a (micro-)service Web system** able to **"intelligently" recommend vinyl music records** by exposing a **SPARQL endpoint**. The system tailors recommendations based on various criteria:
 
