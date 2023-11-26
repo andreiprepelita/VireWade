@@ -11,6 +11,40 @@
 4. [Playlist API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/Playlist%20Service%20-%20Open%20API/index.html)
 5. [Diagrams](https://github.com/andreiprepelita/VireWade/tree/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Diagrams)
 
+Project progress
+
+Week 6
+
+-Establishing the high-level structure and flow of the APIs. (together)
+
+-Discussing about Topic, Database structure and Diagram structure. (together)
+
+Week 7
+
+-High Level Architecture (Andrei)
+
+-Use-case Diagrams. (Andrei)
+
+-Describe the Vinyl Diagram. (Andrei)
+
+Week 8
+
+-OpenAPI specification.(User and Playlist Service) (Andrei)
+
+-OpenAPI specification (Recommendation Service) (Eduard)
+
+-Database Architecture (Eduard)
+
+-Frontend design (Eduard)
+
+-ScholarlyHTML. (Andrei)
+
+Week 9
+
+-Finalisation of the ScholarlyHTML document from this point. (Eduard)
+
+-Finalisation of the OpenAPI Specification from this point. (Andrei)
+
 **Build a (micro-)service Web system** able to **"intelligently" recommend vinyl music records** by exposing a **SPARQL endpoint**. The system tailors recommendations based on various criteria:
 
 - **User Preferences:** Specified via controlled natural language constructs. 
