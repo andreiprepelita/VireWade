@@ -1,0 +1,7 @@
+.item_v1 img {
+    max-width: 100%;  /* Ensures the image is not wider than its container */
+    max-height: 400px; /* You can adjust this value based on your layout */
+    height: auto;      /* Maintains the aspect ratio */
+    display: block;    /* Aligns image properly within the container */
+    margin: 0 auto;    /* Centers the image */
+}
