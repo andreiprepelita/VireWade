@@ -201,8 +201,8 @@
   </ul>
   <h4><a href="#Users">Users</a></h4>
   <ul>
-  <li><a href="#usersUserIdGet"><code><span class="http-method">get</span> /users/{userId}</code></a></li>
-  <li><a href="#usersUserIdPlaylistsGet"><code><span class="http-method">get</span> /users/{userId}/playlists</code></a></li>
+  <li><a href="#getUserById"><code><span class="http-method">get</span> /users/{userId}</code></a></li>
+  <li><a href="#getUserPlaylists"><code><span class="http-method">get</span> /users/{userId}/playlists</code></a></li>
   </ul>
 
   <h1><a name="Auths">Auths</a></h1>
@@ -210,8 +210,8 @@
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /register</code></pre></div>
-    <div class="method-summary">Add a new user (<span class="nickname">addUser</span>)</div>
-    <div class="method-notes">Add a new user</div>
+    <div class="method-summary">Register a new user (<span class="nickname">addUser</span>)</div>
+    <div class="method-notes">Creates a new user account in the VIRE App. This endpoint is used for user registration.</div>
 
 
     <h3 class="field-label">Consumes</h3>
@@ -224,7 +224,7 @@
     <div class="field-items">
       <div class="param">body <a href="#User">User</a> (required)</div>
       
-            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Create a new user </div>
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Payload containing new user details. </div>
                 </div>  <!-- field-items -->
 
 
@@ -255,19 +255,19 @@
 
     <h3 class="field-label">Responses</h3>
     <h4 class="field-label">201</h4>
-    Successful operation added user
+    User successfully registered and added to the system.
         <a href="#User">User</a>
     <h4 class="field-label">400</h4>
-    Bad request
-        <a href="#"></a>
+    Invalid input, such as missing or invalid user details.
+        <a href="#StatusRequest">StatusRequest</a>
   </div> <!-- method -->
   <hr/>
   <div class="method"><a name="loginUser"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /login</code></pre></div>
-    <div class="method-summary">Login Operation (<span class="nickname">loginUser</span>)</div>
-    <div class="method-notes">Login Operation</div>
+    <div class="method-summary">User login (<span class="nickname">loginUser</span>)</div>
+    <div class="method-notes">Authenticates a user in the VIRE App. It validates user credentials and provides access.</div>
 
 
     <h3 class="field-label">Consumes</h3>
@@ -280,7 +280,7 @@
     <div class="field-items">
       <div class="param">body <a href="#UserLog">UserLog</a> (required)</div>
       
-            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Login </div>
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; User login credentials. </div>
                 </div>  <!-- field-items -->
 
 
@@ -310,19 +310,19 @@
 
     <h3 class="field-label">Responses</h3>
     <h4 class="field-label">200</h4>
-    Successful operation
+    User successfully logged in.
         <a href="#StatusRequest">StatusRequest</a>
     <h4 class="field-label">400</h4>
-    Bad request
-        <a href="#"></a>
+    Authentication failed due to invalid credentials or input.
+        <a href="#StatusRequest">StatusRequest</a>
   </div> <!-- method -->
   <hr/>
   <div class="method"><a name="logoutUser"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="post"><code class="huge"><span class="http-method">post</span> /logout</code></pre></div>
-    <div class="method-summary">Logout Operation (<span class="nickname">logoutUser</span>)</div>
-    <div class="method-notes">Logout Operation</div>
+    <div class="method-summary">User logout (<span class="nickname">logoutUser</span>)</div>
+    <div class="method-notes">Logs out the currently authenticated user from the VIRE App.</div>
 
 
 
@@ -354,26 +354,26 @@
 
     <h3 class="field-label">Responses</h3>
     <h4 class="field-label">200</h4>
-    Successful operation
+    User successfully logged out.
         <a href="#StatusRequest">StatusRequest</a>
     <h4 class="field-label">400</h4>
-    Bad request
-        <a href="#"></a>
+    Logout operation failed due to internal error or invalid session.
+        <a href="#StatusRequest">StatusRequest</a>
   </div> <!-- method -->
   <hr/>
   <h1><a name="Users">Users</a></h1>
-  <div class="method"><a name="usersUserIdGet"></a>
+  <div class="method"><a name="getUserById"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /users/{userId}</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">usersUserIdGet</span>)</div>
-    <div class="method-notes"></div>
+    <div class="method-summary">Get user information (<span class="nickname">getUserById</span>)</div>
+    <div class="method-notes">Retrieves detailed information about a user based on their unique userId.</div>
 
     <h3 class="field-label">Path parameters</h3>
     <div class="field-items">
       <div class="param">userId (required)</div>
       
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  format: uuid</div>    </div>  <!-- field-items -->
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Unique identifier of the user. format: uuid</div>    </div>  <!-- field-items -->
 
 
 
@@ -405,22 +405,25 @@
 
     <h3 class="field-label">Responses</h3>
     <h4 class="field-label">200</h4>
-    Success
+    Successfully retrieved user information.
         <a href="#User">User</a>
+    <h4 class="field-label">404</h4>
+    User not found for the provided userId.
+        <a href="#StatusRequest">StatusRequest</a>
   </div> <!-- method -->
   <hr/>
-  <div class="method"><a name="usersUserIdPlaylistsGet"></a>
+  <div class="method"><a name="getUserPlaylists"></a>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
     <pre class="get"><code class="huge"><span class="http-method">get</span> /users/{userId}/playlists</code></pre></div>
-    <div class="method-summary"> (<span class="nickname">usersUserIdPlaylistsGet</span>)</div>
-    <div class="method-notes"></div>
+    <div class="method-summary">Get user playlists (<span class="nickname">getUserPlaylists</span>)</div>
+    <div class="method-notes">Retrieves all playlists associated with a specific user, identified by their userId.</div>
 
     <h3 class="field-label">Path parameters</h3>
     <div class="field-items">
       <div class="param">userId (required)</div>
       
-            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  format: uuid</div>    </div>  <!-- field-items -->
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Unique identifier of the user whose playlists are being retrieved. format: uuid</div>    </div>  <!-- field-items -->
 
 
 
@@ -456,8 +459,11 @@
 
     <h3 class="field-label">Responses</h3>
     <h4 class="field-label">200</h4>
-    Success
+    Successfully retrieved playlists for the user.
         
+    <h4 class="field-label">404</h4>
+    User not found for the provided userId, or no playlists available.
+        <a href="#StatusRequest">StatusRequest</a>
   </div> <!-- method -->
   <hr/>
 
