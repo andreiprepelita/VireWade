@@ -50,14 +50,14 @@
         </section>
       </div>
 
-      <!-- 2. Architecture of the Web application -->
+      <!-- 2. Architecture of the Web App -->
       <div class="row mt-2">
         <section typeof="sa:Arhitecture">
           <div class="card text-bg-light mb-3">
             <div class="card-body">
               <h2 class="card-title" style="color:blue;">2. Architecture of the Web application</h2>
               <blockquote>
-                <p>High Level Arhitecture for our WEB Application: </p>
+                <h4 style="color:green">High Level Arhitecture for our WEB Application: </h4>
               </blockquote>
               <div>
 
@@ -68,13 +68,63 @@
 
                 </div>
               </div>
-              <h3 class="card-title">Database Arhitecture</h3>
-
-              <div class="item">
-                <img src="./VIRE Scholarly technical report_files/db.PNG" alt="Database" style="width:100%;">
+              <h3 class="card-title" style="color:green">Database Arhitecture</h3>
+              <blockquote>
+                <p>
+                  The database architecture comprises several interrelated tables designed to store and organize information about music tracks, collections of tracks, 
+                  users (referred to as members), and authentication tokens for 
+                  streaming and recording services.
+                </p>
+                <p>
+                  <b>Tracks Table: </b> This table stores details about music tracks. Each track has a unique id, and attributes that specify the singer, creation_date of the track, and its genre.
+                </p>
+                <p>
+                  <b>Collections_tracks Table:</b> This is a junction table that establishes a many-to-many relationship between collections 
+                  and tracks, allowing a single collection to contain multiple tracks 
+                  and a single track to be part of multiple collections. Each record 
+                  has a unique id, with collection_id and track_id serving as foreign 
+                  keys to the collections and tracks tables respectively.
+                </p>
+                <p>
+                  <b>Collections Table:</b> This table details the collections, which can represent albums, 
+                  playlists, or other groupings of tracks. Each collection 
+                  is uniquely identified by an id and is associated with a 
+                  member_id indicating the creator of the collection. It also 
+                  includes the name of the collection and the creation_date.
+                </p>
+                <p>
+                  <b>Collections_members Table:</b> This junction table manages the 
+                  associations between members and collections, 
+                  allowing members to be linked to multiple 
+                  collections and vice versa. The table uses 
+                  collection_id and member_id as foreign keys 
+                  to reference the collections and members tables, respectively.
+                </p>
+                <p>
+                  <b>Members Table:</b> The members table contains user information. 
+                  Each member is assigned a unique id and has fields for 
+                  first_name, last_name, email, country_code, creation_date, 
+                  and secret, where secret is used for storing encrypted 
+                  passwords or authentication-related data.
+                </p>
+                <p>
+                  <b>Stream_fm_tokens Table:</b> This table holds tokens associated 
+                  with streaming services. Each token has a unique id and 
+                  is linked to a member via the email field. The password 
+                  field is used to store an encrypted password or token.
+                </p>
+                <p>
+                  <b>Record_token Table:</b> Similar to the stream_fm_tokens table, 
+                  this table stores tokens related to recording services. 
+                  It includes a unique id, and the email and password 
+                  fields for authentication purposes.
+                </p>
+              </blockquote>
+              <div class="item" style="text-align: center;">
+                <img src="./Resources/DatabaseArchitecture.png" alt="Database">
               </div>
 
-              <h3 class="card-title">Backend Services</h3>
+              <h3 class="card-title" style="color:green">Backend Services</h3>
               <h3 style="color:green;" class="card-title">Vinyl Architecture (Main Endpoint)</h3>
               <blockquote>
               <p>       
@@ -92,7 +142,8 @@
                 Schema GraphQL:
               </h4>
               <div class="item">
-                <pre>                      <code>
+                <pre>
+                  <code style="font-size: 18px;">
                   type Artist {
                     name: String
                     url: String
@@ -112,26 +163,18 @@
                   
                   type Query {
                     vinyls: [Vinyl]
-                  }                  
-                    </code>
-                  </pre>
+                  }
+                  </code>
+                </pre>
               </div>
+              
 
               <h3 class="card-title" style="color:green;">User Architecture</h3>
-              <blockquote>
-                <p>
-                  The primary function of this service is to support essential user-related operations such as 
-                  signing in, registering, associating accounts with different external sources and others.
-                </p>
-                <p>
-                  Regarding the structure of the service, it consists of the following components:
-                </p>
-              </blockquote>
           
               <div class="item" style="text-align: center;">
                 <img src="./Resources/User Arhictecture.drawio.png" alt="userService">
               </div>
-              <h2 style="color:red; font-size: larger;">Open API:</h2>
+              <h2 style="color:red; font-size: larger;"><b>Open API for User Architecture:</b></h2>
               <p>
                  <a href="https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/User%20Service%20-%20Open%20API/index.html">Click Here</a>
               </p>
@@ -206,7 +249,7 @@
                   </p>
               </blockquote>
     
-              <h2 style="color:red; font-size: larger;">Open API:</h2>
+              <h2 style="color:red; font-size: larger;"><b>Open API for Recommendation Architecture:</b></h2>
               <p>
                  <a href="https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/Recommendation%20Service%20-%20Open%20API/index.html">Click Here</a>
               </p>
@@ -225,9 +268,9 @@
               <div class="item" style="text-align: center;">
                 <img src="./Resources/Playlist Architecture.drawio.png" alt="playlistService">
               </div>
-              <h2 style="color:red; font-size: larger;">Open API:</h2>
+              <h2 style="color:red; font-size: larger;"> <b>Open API for Playlist Architecture:</b></h2>
               <p>
-                 <a href="https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/User%20Service%20-%20Open%20API/index.html">Click Here</a>
+                 <a href="https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/Playlist%20Service%20-%20Open%20API/index.html">Click Here</a>
               </p>
 
             </div>
@@ -277,14 +320,25 @@
             <div class="card-body">
               <h2 class="card-title" style="color:blue;">4. Frontend Design</h2>
               <h3 class="card-title">UI Mockup</h3>
+              <div>
 
-                  <div class="item" style="text-align: center;">
-                    <img src="./VIRE Scholarly technical report_files/landingPage.png" alt="Landing" style="width:100%;">
-                    <div class="carousel-caption d-none d-md-block">
-                      <h3></h3>
-                    </div>
-                  </div>
-
+                <div class="item" style="text-align: center; margin-bottom: 20px;">
+                  <h3 style="margin-bottom: 10px;">Login Screen</h3>
+                  <img src="./Resources/login.png" alt="Login">
+                </div>
+              
+                <div class="item" style="text-align: center; margin-bottom: 20px;">
+                  <h3 style="margin-bottom: 10px;">Registration Screen</h3>
+                  <img src="./Resources/register.png" alt="Register">
+                </div>
+              
+                <div class="item" style="text-align: center; margin-bottom: 20px;">
+                  <h3 style="margin-bottom: 10px;">Profile Screen</h3>
+                  <img src="./Resources/profile.png" alt="Profile">
+                </div>
+              
+              </div>
+              
             </div>
           </div>
         </section>
