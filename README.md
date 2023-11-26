@@ -1,4 +1,5 @@
 # The Mergebackers Team
+#project #infoiasi #wade #web
 # Vire (Vinyl Recommender Tool) 
 
 **Midterm Deliverable Design & Architecture A**:
