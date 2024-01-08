@@ -11,13 +11,11 @@ public class JsonLDResponse {
     @JsonProperty("@graph")
     private List<Map<String, Object>> graph;
 
-    // Constructors, getters, and setters
     public JsonLDResponse(Map<String, String> context, List<Map<String, Object>> graph) {
         this.context = context;
         this.graph = graph;
     }
 
-    // The getters and setters can remain unchanged
     public Map<String, String> getContext() {
         return context;
     }

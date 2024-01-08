@@ -12,7 +12,7 @@ public class UserOptions {
     private Integer yearRangeEnd = 0;
     private Integer limit = 0;
     private Integer pageSize = 5;
-    private Integer pageIndex = 1;
+    private Integer numberOfItemsPerPage = 1;
 
     // Getters and Setters
     public List<String> getFavoriteArtists() {
@@ -79,12 +79,12 @@ public class UserOptions {
         this.pageSize = pageSize;
     }
 
-    public Integer getPageIndex() {
-        return pageIndex;
+    public Integer getNumberOfItemsPerPage() {
+        return numberOfItemsPerPage;
     }
 
-    public void setPageIndex(Integer pageIndex) {
-        this.pageIndex = pageIndex;
+    public void setNumberOfItemsPerPage(Integer numberOfItemsPerPage) {
+        this.numberOfItemsPerPage = numberOfItemsPerPage;
     }
 
     @Override
@@ -98,7 +98,7 @@ public class UserOptions {
                 ", yearRangeEnd=" + yearRangeEnd +
                 ", limit=" + limit +
                 ", pageSize=" + pageSize +
-                ", pageIndex=" + pageIndex +
+                ", pageIndex=" + numberOfItemsPerPage +
                 '}';
     }
 }

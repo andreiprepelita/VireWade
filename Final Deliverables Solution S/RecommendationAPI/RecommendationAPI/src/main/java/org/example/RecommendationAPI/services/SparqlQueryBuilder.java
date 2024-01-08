@@ -8,52 +8,52 @@ public class SparqlQueryBuilder {
 
     String queryBuilder = "";
 
-    public SparqlQueryBuilder AddPrefixSparqlResults() {
-        this.queryBuilder += "PREFIX sparqlResults: <http://www.w3.org/2005/sparql-results#>";
+    public SparqlQueryBuilder addPrefixSparqlResults() {
+        this.queryBuilder += "PREFIX sparqlResults: <http://www.w3.org/2005/sparql-results#>" +"\n";
         return this;
     }
 
-    public SparqlQueryBuilder AddPrefixRdfSyntax() {
-        this.queryBuilder += "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>";
+    public SparqlQueryBuilder addPrefixRdfSyntax() {
+        this.queryBuilder += "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"+"\n";
         return this;
     }
 
-    public SparqlQueryBuilder AddPrefixXMLSchema() {
-        this.queryBuilder += "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>";
+    public SparqlQueryBuilder addPrefixXMLSchema() {
+        this.queryBuilder += "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>"+"\n";
         return this;
     }
 
-    public SparqlQueryBuilder AddSelectDistinctSyntax() {
+    public SparqlQueryBuilder addSelectDistinctSyntax() {
         this.queryBuilder += "\nSELECT DISTINCT ";
         return this;
     }
-    public SparqlQueryBuilder AddSelectSyntax() {
+    public SparqlQueryBuilder addSelectSyntax() {
         this.queryBuilder += "\nSELECT ";
         return this;
     }
 
-    public SparqlQueryBuilder AddFieldToSelect(String fieldName) {
+    public SparqlQueryBuilder addFieldToSelect(String fieldName) {
         this.queryBuilder += "?" + fieldName + " ";
         return this;
     }
 
-    public SparqlQueryBuilder AddCountFieldToSelect(String fieldName, String countAlias) {
+    public SparqlQueryBuilder addCountFieldToSelect(String fieldName, String countAlias) {
         this.queryBuilder += "(COUNT(?" + fieldName + ") AS ?" + countAlias + ") ";
         return this;
     }
 
-    public SparqlQueryBuilder AddWhereSyntaxForResult() {
+    public SparqlQueryBuilder addWhereSyntaxForResult() {
         this.queryBuilder += "\nWHERE {\n";
         this.queryBuilder += "?result a sparqlResults:ResultSet .\n";
         this.queryBuilder += "?result sparqlResults:solution ?solution .\n";
         return this;
     }
 
-    public SparqlQueryBuilder AddBindingVariableInWhereSyntax(String fieldName) {
+    public SparqlQueryBuilder addBindingVariableInWhereSyntax(String fieldName) {
         this.queryBuilder += "?solution sparqlResults:binding [ sparqlResults:variable \"" + fieldName + "\" ; sparqlResults:value ?" + fieldName + " ] .\n";
         return this;
     }
-    public SparqlQueryBuilder CleanQuery() {
+    public SparqlQueryBuilder cleanQuery() {
         this.queryBuilder = "";
         return this;
     }
@@ -62,72 +62,72 @@ public class SparqlQueryBuilder {
         return new SparqlQuery(this.queryBuilder);
     }
 
-    public SparqlQueryBuilder AddLimitSyntax (Integer limitValue) {
+    public SparqlQueryBuilder addLimitSyntax(Integer limitValue) {
         this.queryBuilder += "\nLIMIT " + limitValue;
         return this;
     }
 
-    public SparqlQueryBuilder AddGroupBySyntax(String filedName) {
+    public SparqlQueryBuilder addGroupBySyntax(String filedName) {
         this.queryBuilder += "\nGROUP BY ?" + filedName;
         return this;
     }
 
-    public SparqlQueryBuilder AddOrderBySyntax(boolean orderBy, String fieldName) {
+    public SparqlQueryBuilder addOrderBySyntax(boolean orderBy, String fieldName) {
         String order = orderBy ? "ASC" : "DESC";
         this.queryBuilder += "\nORDER BY " + order + "(?"+ fieldName +")";
         return this;
     }
 
-    public SparqlQueryBuilder AddFilterSyntaxInWhereSyntax() {
+    public SparqlQueryBuilder addFilterSyntaxInWhereSyntax() {
         this.queryBuilder += "\nFILTER (";
         return this;
     }
 
-    public SparqlQueryBuilder AddContainsSyntaxInFilterSyntax(String fieldName, String containedValue) {
+    public SparqlQueryBuilder addContainsSyntaxInFilterSyntax(String fieldName, String containedValue) {
         this.queryBuilder += "contains(?" + fieldName + ", \"" + containedValue + "\") ";
         return this;
     }
 
-    public SparqlQueryBuilder AddNotContainsSyntaxInFilterSyntax(String fieldName, String containedValue) {
+    public SparqlQueryBuilder addNotContainsSyntaxInFilterSyntax(String fieldName, String containedValue) {
         this.queryBuilder += "!contains(?" + fieldName + ", \"" + containedValue + "\") ";
         return this;
     }
 
-    public SparqlQueryBuilder AddOrOperatorInFilterSyntax() {
+    public SparqlQueryBuilder addOrOperatorInFilterSyntax() {
         this.queryBuilder += "||\n";
         return this;
     }
 
-    public SparqlQueryBuilder AddAndOperatorInFilterSyntax() {
+    public SparqlQueryBuilder addAndOperatorInFilterSyntax() {
         this.queryBuilder += "&&\n";
         return this;
     }
 
-    public SparqlQueryBuilder AddLeftParanthesisSyntax() {
+    public SparqlQueryBuilder addLeftParanthesisSyntax() {
         this.queryBuilder += "(";
         return this;
     }
 
-    public SparqlQueryBuilder AddRightParanthesisSyntax() {
+    public SparqlQueryBuilder addRightParanthesisSyntax() {
         this.queryBuilder += ")";
         return this;
     }
-    public SparqlQueryBuilder CloseWhereSyntax() {
+    public SparqlQueryBuilder closeWhereSyntax() {
         this.queryBuilder += "}\n";
         return this;
     }
 
-    public SparqlQueryBuilder CloseFilterSyntax() {
+    public SparqlQueryBuilder closeFilterSyntax() {
         this.queryBuilder += ")\n";
         return this;
     }
 
-    public SparqlQueryBuilder AddConditionForDateRangeInFilter(String fieldName, String operator, String date) {
+    public SparqlQueryBuilder addConditionForDateRangeInFilter(String fieldName, String operator, String date) {
         this.queryBuilder += "?" + fieldName + " " + operator + " xsd:dateTime('" + date + "')";
         return this;
     }
 
-    public SparqlQueryBuilder DeleteLastAndOrOperatorInFilter() {
+    public SparqlQueryBuilder deleteLastAndOrOperatorInFilter() {
         this.queryBuilder = this.queryBuilder.substring(0, this.queryBuilder.length() - 3);
         return this;
     }
