@@ -1,0 +1,21 @@
+.elementCardFlex {
+    flex-direction: column;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 10px 10px 10px 10px;
+    border: 2px solid white;
+    height: 280px;
+    width: 240px;
+}
+
+.elementImage {
+    width: 90%;
+    height: 90%;
+    align-self: center;
+    border-radius: 10px 10px 10px 10px;
+    margin: 2%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: none;
+    display: flex;
+}

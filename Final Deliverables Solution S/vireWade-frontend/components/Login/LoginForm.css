@@ -1,0 +1,32 @@
+.titleForm {
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: flex-start;
+}
+
+.loginFormBox {
+    width: 100%;
+
+}
+
+.darkBlueText {
+    color: #2C7A7B;
+}
+
+.authForm {
+    background-color: #a6e3d3;
+    align-self: center;
+    padding: 5vw;
+    border-radius: 20px;
+    width: 45vw;
+    align-items: center;
+    flex-direction: column;
+    align-content: center;
+    margin-bottom: 100vh;
+}
+
+.submitButton {
+    margin-top: 30px;
+    align-self: center;
+    background-color: #4dd7ff;
+}

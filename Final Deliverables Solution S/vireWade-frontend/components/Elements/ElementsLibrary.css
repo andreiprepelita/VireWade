@@ -1,0 +1,31 @@
+.ScrollableList::-webkit-scrollbar {
+    background: transparent;
+    width: 0px;
+}
+
+.ScrollableList {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+}
+
+#elementsLibrary {
+    width: 100%;
+}
+
+.elementsBox {
+    padding: 3px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.leftArrowSimple {
+    display: inline;
+    align-self: center;
+    height: 100%;
+}
+
+.cardWrapperSmall {
+    height: 60px;
+    width: 300px;
+}
