@@ -19,6 +19,14 @@ import javax.ws.rs.core.Response;
 @RequestMapping("/sparqlRecommendation")
 public class SparqlEndpointController {
 
+    private static final String SPARQL_ENDPOINT = "https://sd-d9888383.stardog.cloud:5820/vire/query";
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<String> testGetMethod() {
+
+        return new ResponseEntity<>("Passed Sparql Query!", HttpStatus.OK);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> getDataFromStardog(@RequestBody SparqlQuery query) {
         Client client = createClient();
@@ -51,7 +59,7 @@ public class SparqlEndpointController {
     }
 
     private Response sendRequest(Client client, Entity<Form> payload) {
-        return client.target("https://sd-d9888383.stardog.cloud:5820/vire/query")
+        return client.target(SPARQL_ENDPOINT)
                 .request(MediaType.TEXT_PLAIN)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
                 .header(HttpHeaders.AUTHORIZATION, "Basic YW5kcmVpX3ByZXBlbGl0YUB5YWhvby5jb206TWVsYW5jb2xpZTIwMjQ=")
@@ -60,12 +68,6 @@ public class SparqlEndpointController {
                 .post(payload);
     }
 
-
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<String> testGetMethod() {
-
-        return new ResponseEntity<>("Passed!", HttpStatus.OK);
-    }
 
 
 }
