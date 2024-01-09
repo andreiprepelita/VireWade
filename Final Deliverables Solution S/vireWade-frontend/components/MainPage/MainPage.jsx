@@ -8,8 +8,7 @@ import YearSelector from "../YearSelector/YearSelector";
 
 function MainPage() {
     const pageSize = 10;
-    const vinylsLimit = 100;
-    // const preferencesURL = "https://recommandationapi-374817.ew.r.appspot.com/recommendation/preferences";
+    // const preferencesURL = "";
 
     const [hasError, setErrors] = useState(false);
     const [vinyls, setVinyls] = useState([]);
@@ -41,13 +40,12 @@ function MainPage() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                "likedArtists": likedArtists,
-                "dislikedArtists": dislikedArtists,
-                "likedGenres": likedGenres,
-                "dislikedGenres": dislikedGenres,
-                "startYear": yearRange[0],
-                "endYear": yearRange[1],
-                "limit": vinylsLimit,
+                "favoriteArtists": likedArtists,
+                "leastFavoriteArtists": dislikedArtists,
+                "favoriteGenres": likedGenres,
+                "leastFavoriteGenres": dislikedGenres,
+                "yearRangeStart": yearRange[0],
+                "yearRangeEnd": yearRange[1],
                 "pageSize": pageSize,
                 "pageIndex": currentPage
             })

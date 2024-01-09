@@ -3,7 +3,7 @@ import { Flex } from "@chakra-ui/react";
 
 import ElementsLibrary from "./ElementsLibrary";
 
-const ElementsList = ({ elements }) => {
+const Elements = ({ elements }) => {
 
     return (
 
@@ -13,4 +13,4 @@ const ElementsList = ({ elements }) => {
     )
 }
 
-export default ElementsList;
+export default Elements;

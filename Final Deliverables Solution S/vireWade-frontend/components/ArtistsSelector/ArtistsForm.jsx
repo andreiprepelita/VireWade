@@ -7,7 +7,7 @@ import defaultImage from "../../assets/image.jpg";
 const ArtistsForm = ({setChecked, labelText, helperText, colorScheme}) => {
     const pageSize = 5;
     const artistsLimit = 50;
-    // const countURL = "https://recommandationapi-374817.ew.r.appspot.com/recommendation/count";
+    // const countURL = "";
     var artistStructureData = {};
 
     const [hasError, setErrors] = useState(false);
