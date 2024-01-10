@@ -3,10 +3,12 @@ package org.example.RecommendationAPI.services;
 import org.example.RecommendationAPI.models.SparqlQuery;
 import org.example.RecommendationAPI.models.SparqlResponse;
 import org.example.RecommendationAPI.models.UserOptions;
-import org.example.RecommendationAPI.util.Util;
+import org.example.RecommendationAPI.util.UtilUserOptionsCase;
+import org.example.RecommendationAPI.services.DiscogsService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -14,10 +16,14 @@ public class LinkedDataService {
 
     private final SparqlQueryBuilder sparqlQueryBuilder;
 
+    private final DiscogsService discogsService;
+
 
     @Inject
-    public LinkedDataService(SparqlQueryBuilder sparqlQueryBuilder) {
+    public LinkedDataService(SparqlQueryBuilder sparqlQueryBuilder, DiscogsService discogsService) {
+
         this.sparqlQueryBuilder = sparqlQueryBuilder;
+        this.discogsService = discogsService;
     }
 
     public SparqlResponse getTopItemsByRankingUsingCount(Integer limitQuery, String fieldToRankBy) {
@@ -26,9 +32,9 @@ public class LinkedDataService {
         sparqlQueryBuilder.addSelectSyntax();
         sparqlQueryBuilder.addFieldToSelect(fieldToRankBy);
         sparqlQueryBuilder.addFieldToSelect(fieldToRankBy+"Label");
-        sparqlQueryBuilder.addCountFieldToSelect(Util.VINYL_URI, "numberOfVinyls");
+        sparqlQueryBuilder.addCountFieldToSelect(UtilUserOptionsCase.VINYL_URI, "numberOfVinyls");
         sparqlQueryBuilder.addWhereSyntaxForResult();
-        sparqlQueryBuilder.addBindingVariableInWhereSyntax(Util.VINYL_URI);
+        sparqlQueryBuilder.addBindingVariableInWhereSyntax(UtilUserOptionsCase.VINYL_URI);
         sparqlQueryBuilder.addBindingVariableInWhereSyntax(fieldToRankBy);
         sparqlQueryBuilder.addBindingVariableInWhereSyntax(fieldToRankBy+"Label");
         sparqlQueryBuilder.closeWhereSyntax();
@@ -47,10 +53,34 @@ public class LinkedDataService {
         sparqlQueryBuilder.cleanQuery();
         addBasedPrefixes();
         addInSelectClauseAllFields();
-        AddWhereBindingsAllFields();
+        addWhereBindingsAllFields();
         addFiltersForUserOptions(userOptions.getLeastFavoriteArtists(), userOptions.getLeastFavoriteGenres(),
                 userOptions.getFavoriteArtists(), userOptions.getFavoriteGenres(),
                 userOptions.getYearRangeStart(), userOptions.getYearRangeEnd());
+
+        sparqlQueryBuilder.closeWhereSyntax();
+
+        SparqlQuery query = userOptions.getLimit() == 0
+                ? sparqlQueryBuilder.QueryBuilder()
+                : sparqlQueryBuilder.addLimitSyntax(userOptions.getLimit())
+                .QueryBuilder();
+        System.out.println("QUERY:");
+        System.out.println(query);
+
+        return query.sendRequest();
+    }
+
+    public SparqlResponse getRecommendationByDiscogsUsingDiscogsToken(String discogsToken, String discogsTokenSecret) throws IOException {
+        UserOptions userOptions = discogsService.getPastPurchasesFromDiscogs(discogsToken, discogsTokenSecret);
+
+        sparqlQueryBuilder.cleanQuery();
+        addBasedPrefixes();
+        addInSelectClauseAllFields();
+        addWhereBindingsAllFields();
+        addFiltersForUserOptions(userOptions.getLeastFavoriteArtists(), userOptions.getLeastFavoriteGenres(),
+                userOptions.getFavoriteArtists(), userOptions.getFavoriteGenres(),
+                userOptions.getYearRangeStart(), userOptions.getYearRangeEnd());
+
 
         sparqlQueryBuilder.closeWhereSyntax();
 
@@ -84,13 +114,13 @@ public class LinkedDataService {
             sparqlQueryBuilder.addLeftParanthesisSyntax();
         }
         if(!favoriteArtists.isEmpty()) {
-            addContainsFavoriteList(favoriteArtists, Util.ARTIST_LABEL);
+            addContainsFavoriteList(favoriteArtists, UtilUserOptionsCase.ARTIST_LABEL);
         }
         if(!favoriteArtists.isEmpty() && !favoriteGenres.isEmpty()) {
             sparqlQueryBuilder.addOrOperatorInFilterSyntax();
         }
         if(!favoriteGenres.isEmpty()) {
-            addContainsFavoriteList(favoriteGenres, Util.GENRE_LABEL);
+            addContainsFavoriteList(favoriteGenres, UtilUserOptionsCase.GENRE_LABEL);
         }
         if (!favoriteArtists.isEmpty() || !favoriteGenres.isEmpty()) {
             sparqlQueryBuilder.addRightParanthesisSyntax();
@@ -102,13 +132,13 @@ public class LinkedDataService {
             sparqlQueryBuilder.addAndOperatorInFilterSyntax();
         }
         if (yearRangeStart!=0) {
-            sparqlQueryBuilder.addConditionForDateRangeInFilter(Util.RELEASEDDATE, ">=", yearRangeStart.toString() + "-01-01");
+            sparqlQueryBuilder.addConditionForDateRangeInFilter(UtilUserOptionsCase.RELEASEDDATE, ">=", yearRangeStart.toString() + "-01-01");
         }
         if(yearRangeStart!=0 && yearRangeEnd!=0) {
             sparqlQueryBuilder.addAndOperatorInFilterSyntax();
         }
         if(yearRangeEnd!=0) {
-            sparqlQueryBuilder.addConditionForDateRangeInFilter(Util.RELEASEDDATE, "<=", yearRangeEnd.toString() + "-12-31");
+            sparqlQueryBuilder.addConditionForDateRangeInFilter(UtilUserOptionsCase.RELEASEDDATE, "<=", yearRangeEnd.toString() + "-12-31");
         }
     }
 
@@ -118,13 +148,13 @@ public class LinkedDataService {
             sparqlQueryBuilder.addAndOperatorInFilterSyntax();
         }
         if(!leastFavoriteArtists.isEmpty()) {
-            addNotContainsFavoriteList(leastFavoriteArtists, Util.ARTIST_LABEL);
+            addNotContainsFavoriteList(leastFavoriteArtists, UtilUserOptionsCase.ARTIST_LABEL);
         }
         if(!leastFavoriteArtists.isEmpty() && !leastFavoriteGenres.isEmpty()) {
             sparqlQueryBuilder.addAndOperatorInFilterSyntax();
         }
         if(!leastFavoriteGenres.isEmpty()) {
-            addNotContainsFavoriteList(leastFavoriteGenres, Util.GENRE_LABEL);
+            addNotContainsFavoriteList(leastFavoriteGenres, UtilUserOptionsCase.GENRE_LABEL);
         }
     }
     private void addBasedPrefixes() {
@@ -136,24 +166,24 @@ public class LinkedDataService {
 
     private void addInSelectClauseAllFields() {
         this.sparqlQueryBuilder.addSelectDistinctSyntax()
-                .addFieldToSelect(Util.VINYL_URI)
-                .addFieldToSelect(Util.VINYL_LABEL)
-                .addFieldToSelect(Util.ARTIST_URI)
-                .addFieldToSelect(Util.ARTIST_LABEL)
-                .addFieldToSelect(Util.GENRE_URI)
-                .addFieldToSelect(Util.GENRE_LABEL)
-                .addFieldToSelect(Util.RELEASEDDATE);
+                .addFieldToSelect(UtilUserOptionsCase.VINYL_URI)
+                .addFieldToSelect(UtilUserOptionsCase.VINYL_LABEL)
+                .addFieldToSelect(UtilUserOptionsCase.ARTIST_URI)
+                .addFieldToSelect(UtilUserOptionsCase.ARTIST_LABEL)
+                .addFieldToSelect(UtilUserOptionsCase.GENRE_URI)
+                .addFieldToSelect(UtilUserOptionsCase.GENRE_LABEL)
+                .addFieldToSelect(UtilUserOptionsCase.RELEASEDDATE);
     }
 
-    private void AddWhereBindingsAllFields() {
+    private void addWhereBindingsAllFields() {
         this.sparqlQueryBuilder.addWhereSyntaxForResult()
-                .addBindingVariableInWhereSyntax(Util.VINYL_URI)
-                .addBindingVariableInWhereSyntax(Util.VINYL_LABEL)
-                .addBindingVariableInWhereSyntax(Util.ARTIST_URI)
-                .addBindingVariableInWhereSyntax(Util.ARTIST_LABEL)
-                .addBindingVariableInWhereSyntax(Util.GENRE_URI)
-                .addBindingVariableInWhereSyntax(Util.GENRE_LABEL)
-                .addBindingVariableInWhereSyntax(Util.RELEASEDDATE);
+                .addBindingVariableInWhereSyntax(UtilUserOptionsCase.VINYL_URI)
+                .addBindingVariableInWhereSyntax(UtilUserOptionsCase.VINYL_LABEL)
+                .addBindingVariableInWhereSyntax(UtilUserOptionsCase.ARTIST_URI)
+                .addBindingVariableInWhereSyntax(UtilUserOptionsCase.ARTIST_LABEL)
+                .addBindingVariableInWhereSyntax(UtilUserOptionsCase.GENRE_URI)
+                .addBindingVariableInWhereSyntax(UtilUserOptionsCase.GENRE_LABEL)
+                .addBindingVariableInWhereSyntax(UtilUserOptionsCase.RELEASEDDATE);
     }
 
     private void addContainsFavoriteList(List<String> likedList, String entity) {

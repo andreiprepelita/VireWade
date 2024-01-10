@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.inject.Inject;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/recommendation")
@@ -46,6 +47,18 @@ public class RecommendationAPIController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The query for the request is not valid." + sparqlResponse.message);
         }
         return sparqlResponse.retrieveRecords(userOptions.getNumberOfItemsPerPage(), userOptions.getPageSize(), "userPreferences");
+    }
+
+    @PostMapping("/discogs")
+    public QueryResult getRecommendationByDiscogsUsingDiscogsToken(@RequestParam("discogsToken") String discogsToken, @RequestParam("discogsTokenSecret") String discogsTokenSecret,
+                                                                   @RequestParam("pageNumber")Integer pageNumber, @RequestParam("numberOfItemsPerPage") Integer numberOfItemsPerPage) throws IOException {
+        System.out.println(pageNumber);
+        System.out.println(numberOfItemsPerPage);
+        SparqlResponse sparqlResponse = linkedDataService.getRecommendationByDiscogsUsingDiscogsToken(discogsToken, discogsTokenSecret);
+        if (sparqlResponse.isError) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The query for the request is not valid." + sparqlResponse.message);
+        }
+        return sparqlResponse.retrieveRecords(pageNumber, numberOfItemsPerPage, "userPreferences");
     }
 
 

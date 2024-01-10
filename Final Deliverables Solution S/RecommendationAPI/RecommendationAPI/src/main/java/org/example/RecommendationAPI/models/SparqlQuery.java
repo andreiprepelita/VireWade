@@ -15,7 +15,7 @@ public class SparqlQuery {
     private static final Logger logger = LoggerFactory.getLogger(SparqlQuery.class);
 
     public String query;
-    private static final String SPARQL_ENDPOINT = "http://localhost:8080/sparqlRecommendation";
+    private static final String SPARQL_ENDPOINT = "http://localhost:8082/sparqlRecommendation";
 
     public SparqlQuery(String query) {
         this.query = query;
