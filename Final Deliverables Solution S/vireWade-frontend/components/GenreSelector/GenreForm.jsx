@@ -6,7 +6,7 @@ import { IoIosArrowBack, IoIosArrowForward} from "react-icons/io";
 const GenreForm = ({setChecked, labelText, helperText, colorScheme}) => {
     const pageSize = 5;
     const genreLimit = 50;
-    // const countURL = "";
+    const countURL = "http://127.0.0.1:8081/recommendation/top";
 
     const [hasError, setErrors] = useState(false);
 
@@ -65,26 +65,24 @@ const GenreForm = ({setChecked, labelText, helperText, colorScheme}) => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                "field": "genre",
-                "limit": genreLimit,
-                "pageSize": pageSize,
-                "pageIndex": pageIndex
+                "fieldToRankBy": "genre",
+                "limitQuery": genreLimit,
             })
         };
 
-        // setIsLoading(true);
-        // const res = await fetch(countURL, requestOptions);
-        // res.json()
-        //     .then(res => {
-        //         console.log(res)
-        //         if(res.error) {
-        //             setErrors(true)
-        //         } else {
-        //             setGenres(res.results)
-        //             setErrors(false);
-        //         }})
-        //     .then(res => setIsLoading(false))
-        //     .catch(err => setErrors(true));
+        setIsLoading(true);
+        const res = await fetch(countURL, requestOptions);
+        res.json()
+            .then(res => {
+                console.log(res)
+                if(res.error) {
+                    setErrors(true)
+                } else {
+                    setGenres(res.records)
+                    setErrors(false);
+                }})
+            .then(res => setIsLoading(false))
+            .catch(err => setErrors(true));
 
     }
 
@@ -121,10 +119,10 @@ const GenreForm = ({setChecked, labelText, helperText, colorScheme}) => {
                { genres.map(genre => {
                 return (<div>
                         <Checkbox 
-                            value={genre.genre} 
-                            key={genre.genre} 
+                            value={genre.genreLabel} 
+                            key={genre.genreLabel} 
                             onChange={(event) => {updateCheckedGenres(event.target.checked, event.target.value)}}>
-                            {genre.genre}
+                            {genre.genreLabel}
                         </Checkbox>
                         </div>)
             }) 

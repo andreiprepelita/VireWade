@@ -3,7 +3,7 @@ import { Button } from "@chakra-ui/react";
 import ArtistsForm from "./ArtistsForm";
 
 
-const ArtistsSelection = ( {setLikedArtists, setDislikedArtists} ) => {
+const ArtistsSelector = ( {setLikedArtists, setDislikedArtists} ) => {
 
     const [showArtists, setShowArtists] = useState(false);
 
@@ -37,4 +37,4 @@ const ArtistsSelection = ( {setLikedArtists, setDislikedArtists} ) => {
     </div>);
 }
 
-export default ArtistsSelection;
+export default ArtistsSelector;

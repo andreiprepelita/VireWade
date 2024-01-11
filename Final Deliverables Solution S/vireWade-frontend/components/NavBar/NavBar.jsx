@@ -48,7 +48,7 @@ const NavBar = ({ items }) => {
                         <Link _hover={{
                             textDecoration: 'none', color: 'white'
                         }}
-                            href={'/'}>ViRe</Link>
+                            href={'/'}>ViReWade</Link>
                     </Heading>
 
                     <Flex display={{ base: 1, md: 'flex' }} ml={5} >

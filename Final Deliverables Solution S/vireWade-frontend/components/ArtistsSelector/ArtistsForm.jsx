@@ -7,7 +7,7 @@ import defaultImage from "../../assets/image.jpg";
 const ArtistsForm = ({setChecked, labelText, helperText, colorScheme}) => {
     const pageSize = 5;
     const artistsLimit = 50;
-    // const countURL = "";
+    const countURL = "http://127.0.0.1:8081/recommendation/top";
     var artistStructureData = {};
 
     const [hasError, setErrors] = useState(false);
@@ -67,26 +67,25 @@ const ArtistsForm = ({setChecked, labelText, helperText, colorScheme}) => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                "field": "artist",
-                "limit": artistsLimit,
-                "pageSize": pageSize,
-                "pageIndex": pageIndex
+                "fieldToRankBy": "artist",
+                "limitQuery": artistsLimit,
+                
             })
         };
 
-        // setIsLoading(true);
-        // const res = await fetch(countURL, requestOptions);
-        // res.json()
-        //     .then(res => {
-        //         console.log(res)
-        //         if(res.error) {
-        //             setErrors(true)
-        //         } else {
-        //             loadArtistsImages(res.results)
-        //             setErrors(false);
-        //         }})
-        //     .then(res => setIsLoading(false))
-        //     .catch(err => setErrors(true));
+        setIsLoading(true);
+        const res = await fetch(countURL, requestOptions);
+        res.json()
+            .then(res => {
+                console.log(res)
+                if(res.error) {
+                    setErrors(true)
+                } else {
+                    loadArtistsImages(res.records)
+                    setErrors(false);
+                }})
+            .then(res => setIsLoading(false))
+            .catch(err => setErrors(true));
 
     }
 
@@ -96,7 +95,7 @@ const ArtistsForm = ({setChecked, labelText, helperText, colorScheme}) => {
 
         for (let artist of artists) {
             try {
-                const art = await albumArt(artist.artist)
+                const art = await albumArt(artist.artistLabel)
                 artist.imgPath = art;
             } catch (e) {
                 artist.imgPath = defaultImage;
@@ -154,9 +153,9 @@ const ArtistsForm = ({setChecked, labelText, helperText, colorScheme}) => {
             />
         : artists.map(artist => {
                 return (            
-                <Card variant='outline' key={artist.artist} >
+                <Card variant='outline' key={artist.artistLabel} >
                     <script type="application/ld+json">
-                        {JSON.stringify(getArtistStructuredData(artist.artist, artist.imgPath))}
+                        {JSON.stringify(getArtistStructuredData(artist.artistLabel, artist.imgPath))}
                     </script>
                     <CardHeader>
                         <Heading size='md'>{artistStructureData["foaf:name"]}</Heading>
