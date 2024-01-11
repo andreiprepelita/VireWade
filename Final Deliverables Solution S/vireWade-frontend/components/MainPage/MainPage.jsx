@@ -8,7 +8,7 @@ import YearSelector from "../YearSelector/YearSelector";
 
 function MainPage() {
     const pageSize = 10;
-    // const preferencesURL = "";
+    const preferencesURL = "http://127.0.0.1:8081/recommendation/preferences";
 
     const [hasError, setErrors] = useState(false);
     const [vinyls, setVinyls] = useState([]);
