@@ -10,7 +10,7 @@ const GenreForm = ({setChecked, labelText, helperText, colorScheme}) => {
 
     const [hasError, setErrors] = useState(false);
 
-    const [genres, setGenres] = useState([{genre: "rock"}, {genre:"pop"}, {genre:"stage and screen"}, {genre:"hard rock"}, {genre:"jazz"}]);
+    const [genres, setGenres] = useState([]);
     const [pageIndex, setPageIndex] = useState(1);
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(true);
