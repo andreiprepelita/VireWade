@@ -32,7 +32,7 @@ const VinylCard = ({ element }) => {
     return (
         <Flex className="elementCardFlex">
             <script type="application/ld+json">
-                {JSON.stringify(getVinylStructuredData(element.vinyl, element.artist, element.imgPath, element.genre, element.releaseDate))}
+                {JSON.stringify(getVinylStructuredData(element.vinylLabel, element.artistLabel, element.imgPath, element.genreLabel, element.releaseDate))}
             </script>
             <Box className='elementImage' style={{ backgroundImage: 'url(' + vinylStructureData["mo:image"] + ')' }}></Box>
 
@@ -80,7 +80,7 @@ const VinylCard = ({ element }) => {
 
                 <Link
                     textAlign={'center'} 
-                    href={'/vinyl/details/' + element.vinyl + "/" + element.artist} 
+                    href={'/vinyl/details/' + element.vinylLabel + "/" + element.artistLabel} 
                     isExternal
                     mt="1"
                     lineHeight="tight"

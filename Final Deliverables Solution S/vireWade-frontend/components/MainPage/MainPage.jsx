@@ -73,7 +73,7 @@ function MainPage() {
 
         for (let vinyl of vinyls) {
             try {
-                const art = await albumArt(vinyl.artist, {album: vinyl.vinyl})
+                const art = await albumArt(vinyl.artistLabel, {album: vinyl.vinylLabel})
                 vinyl.imgPath = art;
             } catch (e) {
                 vinyl.imgPath = defaultImage;
