@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Flex, Text, Link } from "@chakra-ui/react";
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import "./VinylCard.css";

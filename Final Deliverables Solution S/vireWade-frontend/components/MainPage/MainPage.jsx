@@ -52,19 +52,19 @@ function MainPage() {
         };
 
         setRecomendationIsLoading(true);
-        // const res = await fetch(preferencesURL, requestOptions);
-        // res.json()
-        //     .then(res => {
-        //         console.log(res)
-        //         if(res.error) {
-        //             setErrors(true)
-        //         } else {
-        //             setTotalCount(res.totalCount)
-        //             loadVinyls(res.results)
-        //             setErrors(false);
-        //         }
-        //     })
-        //     .catch(err => setErrors(true));
+        const res = await fetch(preferencesURL, requestOptions);
+        res.json()
+            .then(res => {
+                console.log(res)
+                if(res.error) {
+                    setErrors(true)
+                } else {
+                    setTotalCount(res.totalRecords)
+                    loadVinyls(res.records)
+                    setErrors(false);
+                }
+            })
+            .catch(err => setErrors(true));
     }
 
     async function loadVinyls(fetchData) {
