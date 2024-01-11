@@ -67,6 +67,8 @@ const GenreForm = ({setChecked, labelText, helperText, colorScheme}) => {
             body: JSON.stringify({
                 "fieldToRankBy": "genre",
                 "limitQuery": genreLimit,
+                "numberOfItemsPerPage" : pageSize,
+                "pageNumber": pageIndex,
             })
         };
 

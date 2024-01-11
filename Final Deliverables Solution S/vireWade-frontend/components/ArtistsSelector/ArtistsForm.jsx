@@ -69,7 +69,8 @@ const ArtistsForm = ({setChecked, labelText, helperText, colorScheme}) => {
             body: JSON.stringify({
                 "fieldToRankBy": "artist",
                 "limitQuery": artistsLimit,
-                
+                "numberOfItemsPerPage" : pageSize,
+                "pageNumber": pageIndex,
             })
         };
 
