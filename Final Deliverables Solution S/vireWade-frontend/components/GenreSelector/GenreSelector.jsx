@@ -10,13 +10,13 @@ const GenreSelector = ( {setLikedGenres, setDislikedGenres} ) => {
     return (
     <div style={{width:"100%", textAlign:"center"}}>
         <Button
-            colorScheme='teal'
+            colorScheme='telegram'
             type='submit'
             p={'20px'}
-            width='40%'
+            width='20%'
             alignSelf={'center'}
             onClick={() => {setShowGenres(!showGenres);}}>
-            Set your genres preferences
+            Genres preferences
         </Button>
         { showGenres 
         ?             
@@ -25,7 +25,7 @@ const GenreSelector = ( {setLikedGenres, setDislikedGenres} ) => {
                 setChecked={setLikedGenres} 
                 labelText="Select your favorite music genres" 
                 helperText="Select only if you're a fan."
-                colorScheme="teal"/> 
+                colorScheme="telegram"/> 
             <GenreForm 
                 setChecked={setDislikedGenres} 
                 labelText="Select the music genre you don't want to hear" 

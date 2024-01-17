@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import '../Login/LoginForm.css'
 import React, { useState, useEffect } from 'react';
 import { redirect, useSearchParams, useNavigate } from "react-router-dom";
@@ -14,12 +14,12 @@ function Profile() {
 
     const navigate = useNavigate()
 
-    function getToken() {
-        const tokenString = sessionStorage.getItem('token')
-        return tokenString
-    }
+    // function getToken() {
+    //     const tokenString = sessionStorage.getItem('token')
+    //     return tokenString
+    // }
 
-    useEffect(() => {
+    // useEffect(() => {
     //     const fetchData = async () => {
     //         const requestOptions = {
     //             method: 'GET',
@@ -54,18 +54,18 @@ function Profile() {
 
     //     getStatus()
     //     navigate('/profile')
-    }, []);
+    // }, []);
 
-    async function getProfileData(user) {
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${getToken()}`
-            },
-            body: JSON.stringify({
-            })
-        }
+    // async function getProfileData(user) {
+    //     const requestOptions = {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': `Bearer ${getToken()}`
+    //         },
+    //         body: JSON.stringify({
+    //         })
+    //     }
 
         // const profileURL = ``
         // const res = await fetch(profileURL, requestOptions)
@@ -77,27 +77,20 @@ function Profile() {
         //         }
         //     })
         // return res
-    }
+    // }
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const user = getToken()
-        getProfileData(user.sub)
-    }, []);
+    //     const user = getToken()
+    //     getProfileData(user.sub)
+    // }, []);
 
-    const onSubmitDiscogs = async (e) => {
+    // const onSubmitDiscogs = async (e) => {
 
         // const res = await fetch('')
         // const token = await res.json()
         // window.location.replace(token.authorizationUrl);
-    }
-
-    const handleLogout = () => {
-    
-        sessionStorage.removeItem('token')
-        navigate('/')
-        window.location.reload();
-    }
+    // }
 
     const backToProfile = () => {
         setErrors(false)
@@ -105,14 +98,20 @@ function Profile() {
 
     if (hasError) {
 
-        return (<Text fontSize='2xl' color='tomato'>An error has occured, please <Link onClick={backToProfile} color='red' fontWeight={'extrabold'}> try again</Link></Text>)
+        return (<Text color='tomato' fontSize='2xl' >We have encountered an error, please <Link fontWeight={'extrabold'} onClick={backToProfile} color='red' >try again</Link></Text>)
+    }
+
+    const handleLogout = () => {
+    
+        sessionStorage.removeItem('token')
+        window.location.reload();
     }
 
 
 
 
     return (
-        <Flex className='authForm' gap='4' justify='space-between' margin={'40vh'}>
+        <Flex className='authForm' gap='4' justify='space-between' margin={'20vh'} width={'fit-content'}>
             {showAlert && (
                 <Alert status='success'>
                     <AlertIcon />
@@ -121,34 +120,44 @@ function Profile() {
                 </Alert>
             )}
             <Flex className='titleForm'>
-                <Heading as='h3' size='lg' className='darkBlueText'>
+                <Heading size='lg' as='h3' className='profile_title'>
                     Profile
                 </Heading>
             </Flex>
 
-            <Button
-                disabled={isDisabledDiscogs}
-                className='submitButton full'
-                type='submit'
-                onClick={onSubmitDiscogs}
-                colorScheme='teal'>
-                Associate account with Discogs
-            </Button>
+            <Box width={'500px'}>
+                <Button
+                    type='submit'
+                    className='full submitButton'
+                    colorScheme='orange'
+                    // onClick={onSubmitLastFm}
+                    >
+                    Associate account with Last.fm
+                </Button>
+            </Box>
+            <Box width={'500px'}>
+                <Button
+                    disabled={isDisabledDiscogs}
+                    className='submitButton full'
+                    type='submit'
+                    width='fit-content'
+                    // onClick={onSubmitDiscogs}
+                    colorScheme='orange'>
+                    Associate account with Discogs
+                </Button>
+            </Box>
 
-            <Button
-                className='submitButton full'
-                type='submit'
-                colorScheme='teal'>
-                Associate account with Last.fm
-            </Button>
-
-            <Button
-                className='submitButton'
-                colorScheme={'red'}
-                onClick={handleLogout}
-                type='submit'>
-                Logout
-            </Button>
+            <Box width={'250px'}>
+                <Button
+                    disabled={isDisabledDiscogs}
+                    className='full submitButton'
+                    width='fit-content'
+                    onClick={handleLogout}
+                    type='submit'
+                    colorScheme='red'>
+                    Logout out of all accounts
+                </Button>
+            </Box>
 
         </Flex>
     )

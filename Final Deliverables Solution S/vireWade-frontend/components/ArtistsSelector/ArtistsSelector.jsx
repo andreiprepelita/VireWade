@@ -10,13 +10,13 @@ const ArtistsSelector = ( {setLikedArtists, setDislikedArtists} ) => {
     return (
     <div style={{width:"100%", textAlign:"center"}}>
         <Button
-            colorScheme='teal'
+            colorScheme='telegram'
             type='submit'
             p={'20px'}
-            width='40%'
+            width='20%'
             alignSelf={'center'}
             onClick={() => {setShowArtists(!showArtists);}}>
-            Set your artists preferences
+            Artists preferences
         </Button>
         { showArtists 
         ?             
@@ -25,7 +25,7 @@ const ArtistsSelector = ( {setLikedArtists, setDislikedArtists} ) => {
                 setChecked={setLikedArtists} 
                 labelText="Select your favorite artists" 
                 helperText="Select only if you're a fan."
-                colorScheme="teal"/> 
+                colorScheme="telegram"/> 
             <ArtistsForm 
                 setChecked={setDislikedArtists} 
                 labelText="Select the artists you don't like" 

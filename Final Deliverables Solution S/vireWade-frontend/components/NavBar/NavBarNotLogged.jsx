@@ -5,12 +5,12 @@ export default function NavBarNotLogged() {
 
     const ITEMS = [
         {
-            label: 'Register',
-            href: '/register'
-        },
-        {
             label: 'Login',
             href: '/login'
+        },
+        {
+            label: 'Register',
+            href: '/register'
         },
     ];
 

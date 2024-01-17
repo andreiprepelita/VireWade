@@ -38,7 +38,7 @@ const PlaylistCard = ({ element }) => {
         )
     }
 
-    // const preferencesURL = "preferences";
+    const preferencesURL = "http://127.0.0.1:8081/recommendation/preferences";
 
     async function getRecommendation() {
 
@@ -68,8 +68,8 @@ const PlaylistCard = ({ element }) => {
             method: 'POST',
             headers: {'Content-Type': 'application/json' },
             body: JSON.stringify({
-                "likedArtists": authors,
-                "likedGenres": genres,
+                "favoriteArtists": authors,
+                "favoriteGenres": genres,
                 "limit": 100,
                 "pageSize": 5,
                 "pageIndex": Math.floor(Math.random() * 3)

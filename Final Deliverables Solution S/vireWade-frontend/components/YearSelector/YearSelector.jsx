@@ -4,20 +4,20 @@ import { Button, RangeSlider, SliderMark, RangeSliderTrack, RangeSliderFilledTra
 const YearSelector = ( {setYearRange} ) => {
 
     const [showYears, setShowYears] = useState(false);
-    const [sliderValue, setSliderValue] = useState([1950, 1975])
+    const [sliderValue, setSliderValue] = useState([1930, 1975])
     const [showTooltip, setShowTooltip] = useState(false)
 
     return (
     <div style={{width:"100%", textAlign:"center"}}>
         <Button
             mb={10}
-            colorScheme='teal'
+            colorScheme='telegram'
             type='submit'
             p={'20px'}
-            width='40%'
+            width='20%'
             alignSelf={'center'}
             onClick={() => {setShowYears(!showYears);}}>
-            Set the years of your prefered music
+            Year of release range
         </Button>
         { showYears 
         ?             
@@ -27,9 +27,9 @@ const YearSelector = ( {setYearRange} ) => {
                 min={1950}
                 max={2023}
                 aria-label={['min', 'max']}
-                colorScheme='teal'
+                colorScheme='telegram'
                 mb={10}
-                width={"80%"}
+                width={"30%"}
                 onChange={(val) => setSliderValue(val)}
                 onMouseEnter={() => setShowTooltip(true)}
                 onMouseLeave={() => setShowTooltip(false)}

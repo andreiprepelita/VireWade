@@ -9,18 +9,21 @@ export default function NavBarLogged() {
             href: '/recommendation'
         },
         {
-            label: 'Profile',
-            href: '/profile'
+            label: 'Playlist',
+            href: '/playlist',
         },
         {
             label: 'Last Purchases',
             href: '/purchases'
         },
         {
-            label: 'Playlist',
-            href: '/playlist',
+            label: 'Profile',
+            href: '/profile'
         },
-        
+        {
+            label: 'Logout',
+            href: '/'
+        }
     ];
 
     return (

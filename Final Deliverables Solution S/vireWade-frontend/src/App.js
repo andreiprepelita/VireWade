@@ -23,10 +23,10 @@ const App = () => {
             <NavBarController />
             <BrowserRouter>
                 <Routes>
-                    <Route exact path="/" element={<MainPage />} />
+                    <Route exact path="/" element={<Profile />} />
                     <Route exact path="login" element={<Login />}/>
                     <Route exact path="playlists/:userId" element={<Playlists />}/>
-                    <Route exact path="profile/:userId" element={<Profile />}/>
+                    <Route exact path="profile/:userId" element={<MainPage />}/>
                     <Route exact path="/vinyl/:artist/:vinylName/" element={<VinylDetails />} />
                     <Route exact path="/purchases" element={<Discog />} />
                     <Route exact path="/playlist" element={<Playlist />} />

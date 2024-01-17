@@ -110,8 +110,8 @@ function MainPage() {
 
     return (
         <Stack className="greenBox" height={"auto"} as='flex'>
-            <Heading as='h1' color={'white'} alignSelf='center' paddingBottom={'10px'}>Welcome to ViRe,</Heading>
-            <Text color={'white'}  size='lg' alignSelf='center' paddingBottom={'10px'}>Start by inserting your preferences</Text>
+            <Heading as='h1' color={'black'} alignSelf='center' paddingBottom={'10px'}>Welcome to ViReWade,</Heading>
+            <Text color={'black'}  size='lg' alignSelf='center' paddingBottom={'10px'}>Please enter your preferences</Text>
             <ArtistsSelector
                 setLikedArtists={setPreferencesLikedArtists} 
                 setDislikedArtists={setPreferencesDislikedArtists}/>
@@ -121,10 +121,10 @@ function MainPage() {
             <YearSelector setYearRange={setPreferencesYears}/>
             <Button
                 m={10}
-                colorScheme='teal'
+                colorScheme='orange'
                 type='submit'
                 padding={'20px'}
-                width='60%'
+                width='30%'
                 alignSelf={'center'}
                 onClick={() => { setShowVinyls(true); fetchVinyls() }}
             >

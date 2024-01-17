@@ -10,21 +10,29 @@ import {
 
 
 const NavBar = ({ items }) => {
+    
+    
+    const handleLogout = () => {
+    
+        sessionStorage.removeItem('token')
+        window.location.reload();
+    }
 
     const NavButtons = () => {
 
         return (
             <Stack direction={'row'} spacing={6} alignItems='flex-end'>
                 {items.map((navItem) => (
-
+                    
                     <Box key={navItem.label} width='fit-content'>
                         <Link href={navItem.href}>
                             <Button
                                 p={5}
                                 href={navItem.href ?? '/'}
+                                onClick={handleLogout}
                                 fontWeight={600}
                                 textAlign='center'
-                                colorScheme='teal'>
+                                colorScheme={navItem.label !== 'Logout' ? 'orange': 'red'}>
                                 {navItem.label}
                             </Button>
                         </Link>
@@ -35,9 +43,9 @@ const NavBar = ({ items }) => {
     };
 
     return (
-        <Box backgroundColor={'#81E6D9'}>
+        <Box backgroundColor={'#0088cc'}>
             <Flex
-                color='green'
+                color='#FFD700'
                 minH={'60px'}
                 py={{ base: 4 }}
                 px={{ base: 4 }}
@@ -46,7 +54,7 @@ const NavBar = ({ items }) => {
                 <Flex flex={{ base: 1 }} justify={{ base: 'center' }} justifyContent='space-between'>
                     <Heading display={"inline-block"}>
                         <Link _hover={{
-                            textDecoration: 'none', color: 'white'
+                            textDecoration: 'none', color: '#dd6b20'
                         }}
                             href={'/'}>ViReWade</Link>
                     </Heading>
