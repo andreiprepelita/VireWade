@@ -9,10 +9,35 @@ function Profile() {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [isDisabledDiscogs, setIsDisablesDicsogs] = useState(false)
+    const [isLastFmDisabled, setIsDisabledLastFm] = useState(false);
     const [hasError, setErrors] = useState(false);
     const [showAlert, setShowAlert] = useState(false)
 
     const navigate = useNavigate()
+
+    const lastFmAuthUrl = "http://www.last.fm/api/auth/?api_key=xxx&cb=http://example.com"; // use HTTP GET and also add the callback path to profile page
+    //we will receive either <callback_url>/?token=xxxxxxx or <callback_url>&token=xxxxxxx
+    //then we use the auth token (60min valid) to create a Last.fm web service session
+
+    //For that we want to Send your api key along with an api signature and your authentication token as arguments to the auth.getSession API method call
+    // The parameters for this call are defined as such:
+
+    // api_key: Your 32-character API Key.
+    // token: The authentication token received at your callback url as a GET variable.
+    // api_sig: Your 32-character API method signature, as explained in Section 6
+
+    // Note: You can only use an authentication token once. It will be consumed when creating your web service session.
+
+    // The response format of this call is :
+        //     <lfm status="ok">
+        //   <session>
+        //     <name>MyLastFMUsername</name>
+        //     <key>d580d57f32848f5dcf574d1ce18d78b2</key>
+        //      <subscriber>0</subscriber>
+        //   </session>
+        // </lfm>
+
+
 
     // function getToken() {
     //     const tokenString = sessionStorage.getItem('token')

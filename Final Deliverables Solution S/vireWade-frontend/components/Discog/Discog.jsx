@@ -13,81 +13,81 @@ function Discog() {
     }
  
     const navigate = useNavigate()
-    const [elements, setElements] = useState([]);
     const [showVinyls, setShowVinyls] = useState(false);
-    const [recomendationIsLoading, setRecomendationIsLoading] = useState([false]);
+    const [elements, setElements] = useState([]);
     const [discogsSecret, setDiscogsSecret] = useState('')
-    const [discogsToken, setDiscogsToken] = useState('')
+    const [recomendationIsLoading, setRecomendationIsLoading] = useState([false]);
     const [isAvailableDiscogs, setIsAvailableDiscogs] = useState(false)
+    const [discogsToken, setDiscogsToken] = useState('')
 
-    async function getProfileData(user) {
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${getToken()}`
-            },
-            body: JSON.stringify({
-            })
-        }
+    // async function getProfileData(user) {
+    //     const requestOptions = {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': `Bearer ${getToken()}`
+    //         },
+    //         body: JSON.stringify({
+    //         })
+    //     }
 
-        const profileURL = ``
-        const res = await fetch(profileURL, requestOptions)
-        res.json()
-            .then(res => {
-                if (res.userData.discogs_secret && res.userData.discogs_token) {
+    //     const profileURL = ``
+    //     const res = await fetch(profileURL, requestOptions)
+    //     res.json()
+    //         .then(res => {
+    //             if (res.userData.discogs_secret && res.userData.discogs_token) {
 
-                    setDiscogsSecret(res.userData.discogs_secret)
-                    setDiscogsToken(res.userData.discogs_token)
-                    setIsAvailableDiscogs(true)
-                }
-            })
-        return res
-    }
+    //                 setDiscogsSecret(res.userData.discogs_secret)
+    //                 setDiscogsToken(res.userData.discogs_token)
+    //                 setIsAvailableDiscogs(true)
+    //             }
+    //         })
+    //     return res
+    // }
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const user = getToken()
-        getProfileData(user.sub)
-    }, []);
+    //     const user = getToken()
+    //     getProfileData(user.sub)
+    // }, []);
 
-    const fetchData = async (e) => {
-        setRecomendationIsLoading(true)
-        const data = await fetch(``)
+    // const fetchData = async (e) => {
+    //     setRecomendationIsLoading(true)
+    //     const data = await fetch(``)
 
-        const vinylsJSON = await data.json()
-        const vinyls = vinylsJSON.results
+    //     const vinylsJSON = await data.json()
+    //     const vinyls = vinylsJSON.results
 
-        const albumArt = require('album-art')
+    //     const albumArt = require('album-art')
 
-        for (let vinyl of vinyls) {
-            try {
-                const art = await albumArt(vinyl['artist'], {album: vinyl['vinyl']})
-                vinyl['imgPath'] = art
-            } catch (e) {
-                vinyl.imgPath = defaultImage;
-                console.log(e);
-            }
-        }
+    //     for (let vinyl of vinyls) {
+    //         try {
+    //             const art = await albumArt(vinyl['artist'], {album: vinyl['vinyl']})
+    //             vinyl['imgPath'] = art
+    //         } catch (e) {
+    //             vinyl.imgPath = defaultImage;
+    //             console.log(e);
+    //         }
+    //     }
 
-        setElements(vinyls)
-        setRecomendationIsLoading(false)
-    };
+    //     setElements(vinyls)
+    //     setRecomendationIsLoading(false)
+    // };
 
 
     return (
-        <Stack className="greenBox">
+        <Stack>
 
             <Button
                 mt={5}
-                colorScheme='teal'
+                colorScheme='orange'
                 type='submit'
                 padding={'20px'}
-                width='60%'
+                width='30%'
                 alignSelf={'center'}
-                onClick={isAvailableDiscogs ? () => { setShowVinyls(true); fetchData() } : () => {navigate('/profile')}}
+                // onClick={isAvailableDiscogs ? () => { setShowVinyls(true); fetchData() } : () => {navigate('/profile')}}
             >
-               {isAvailableDiscogs ? "Get Recommendation based on Discog information" : "Connect to discogs"}
+               {isAvailableDiscogs ? "Get recommandations based on Discog information" : "Connect to Discogs"}
             </Button>
             {showVinyls ?
                 recomendationIsLoading

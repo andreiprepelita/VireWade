@@ -11,6 +11,28 @@ const PlaylistCard = ({ element }) => {
     const [showVinyls, setShowVinyls] = useState(false);
     const [recomendationIsLoading, setRecomendationIsLoading] = useState([false]);
     const [vinyls, setVinyls] = useState([]);
+
+//     You can now sign your web service calls with a method signature, provided along with the session key you received  and your API key.
+//  You will need to include all three as parameters in subsequent calls in order to be able to access services that require authentication.
+//  You can visit individual method call pages to find out if they require authentication. Your three authentication parameters are defined as:
+
+// sk (Required) : The session key returned by auth.getSession service.
+// api_key (Required) : Your 32-character API key.
+// api_sig (Required) : Your API method signature, constructed as explained in Section 6
+
+// Sign your calls
+// Construct your api method signatures by first ordering all the parameters sent in your call alphabetically
+//  by parameter name and concatenating them into one string using a <name><value> scheme. So for a call to auth.getSession you may have:
+
+// **api_key**xxxxxxxx**method**auth.getSession**token**xxxxxxx
+// Ensure your parameters are utf8 encoded. Now append your secret to this string. Finally, generate an md5 hash of the resulting string
+//  For example, for an account with a secret equal to 'mysecret', your api signature will be:
+
+// api signature = md5("api_keyxxxxxxxxmethodauth.getSessiontokenxxxxxxxmysecret")
+// Where md5() is an md5 hashing operation and its argument is the string to be hashed. The hashing operation should return a 32-character hexadecimal md5 hash.
+
+
+
     const onShowTracksClicked = () => {
         console.log(showTracks)
         console.log("pressed on show tracks")

@@ -15,33 +15,33 @@ const ElementsLibrary = ({ elements }) => {
         ref.current.scrollLeft += scrollOffset;
     };
 
-    const getRightArrows = () => {
-        return (
-            <IoIosArrowForward
-                className="leftArrowSimple"
-                size="120px"
-                color={"teal"}
-                onClick={() => scroll(600)}
-            />
-        )
-    }
-
     const getLeftArrows = () => {
 
         return (
             <IoIosArrowBack
-                className="leftArrowSimple"
                 size="120px"
+                className="leftArrowSimple"
                 color={"teal"}
                 onClick={() => scroll(-250)}
             />
         )
     }
 
+    const getRightArrows = () => {
+        return (
+            <IoIosArrowForward
+                size="120px"
+                className="leftArrowSimple"
+                color={"teal"}
+                onClick={() => scroll(600)}
+            />
+        )
+    }
+
     return (
         <Flex
-            id="elementsLibrary"
             position="relative"
+            id="elementsLibrary"
             direction={"column"}
             textAlign="start"
         >
@@ -50,8 +50,8 @@ const ElementsLibrary = ({ elements }) => {
                 <Box ref={ref} className="ScrollableList">
 
                     {elements.map((element) => (
-                        <Box className="elementsBox" key={element.vinyl + element.artist + element.genre} mr="4" display="inline-block">
-                            <VinylCard key={element.vinyl + element.artist + element.genre} element={element} />
+                        <Box display="inline-block" className="elementsBox" key={element.vinyl + element.artist + element.genre} mr="4" >
+                            <VinylCard element={element} key={element.vinyl + element.artist + element.genre}  />
                         </Box>
                     ))}
 

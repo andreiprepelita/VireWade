@@ -6,35 +6,35 @@ import defaultImage from "../../assets/image.jpg";
 
 function VinylDetails() {
 
-    const lastfmURL = "https://ws.audioscrobbler.com/2.0/?";
     const apiKey = "";
-    const format = "json";
     const action = "album.getinfo";
+    const format = "json";
+    const lastfmURL = "https://ws.audioscrobbler.com/2.0/?";
 
-    var trackStructureData = {};
     var vinylStructureData = {};
+    var trackStructureData = {};
 
-    const { vinylName , artist } = useParams();
     const [vinylsDetails, setVinylsDetails] = useState({});
+    const { vinylName , artist } = useParams();
 
-    useEffect(() => {
-        fetchDetails();
-    }, []);
+    // useEffect(() => {
+    //     fetchDetails();
+    // }, []);
 
-    const fetchDetails = async () => {
-        const res = await fetch(lastfmURL + new URLSearchParams({
-            method: action,
-            api_key: apiKey,
-            format: format,
-            artist: artist,
-            album: vinylName
-        }));
-        res.json()
-            .then(res => {
-                console.log(res.album)
-                setVinylsDetails(res.album);
-            })
-    }
+    // const fetchDetails = async () => {
+    //     const res = await fetch(lastfmURL + new URLSearchParams({
+    //         method: action,
+    //         api_key: apiKey,
+    //         format: format,
+    //         artist: artist,
+    //         album: vinylName
+    //     }));
+    //     res.json()
+    //         .then(res => {
+    //             console.log(res.album)
+    //             setVinylsDetails(res.album);
+    //         })
+    // }
 
     const getTrackStructuredData = (title, artist, trackUrl) => {
         trackStructureData = {
@@ -72,27 +72,27 @@ function VinylDetails() {
     return (
         <Stack className="greenBox" height={"auto"}>
             <Card
-                direction={{ base: 'column', sm: 'row' }}
                 overflow='hidden'
+                direction={{ base: 'column', sm: 'row' }}
                 variant='outline' 
                 mb={30}>
                 {
                     vinylsDetails.image ? 
                     <Image
                         objectFit='cover'
+                        alt={artist + " " + vinylName}
                         maxW={{ base: '100%', sm: '200px' }}
                         src={vinylsDetails.image.find(item => item.size === '') 
                         ? vinylsDetails.image.find(item => item.size === '')["#text"] !== '' 
                             ? vinylsDetails.image.find(item => item.size === '')["#text"]
                             : defaultImage
-                        : defaultImage}
-                        alt={artist + " " + vinylName}/>
+                        : defaultImage}/>
                     :
                     <Spinner
+                    speed='0.65s'
                         thickness='4px'
-                        speed='0.65s'
-                        emptyColor='gray.200'
                         color='teal.500'
+                        emptyColor='gray.200'
                         size='xl'
                         alignSelf={'center'}/>
                 }
@@ -107,9 +107,9 @@ function VinylDetails() {
                     <Button variant='solid' colorScheme='teal'>
                         <Link
                             href={vinylsDetails.url}
-                            textAlign={'center'}
                             isExternal
                             lineHeight="tight"
+                            textAlign={'center'}
                             isTruncated>
                             Play it on Last.fm <ExternalLinkIcon m='2px' />
                         </Link>
@@ -143,10 +143,10 @@ function VinylDetails() {
                                     </Heading>
                                     <Link
                                         href={trackStructureData.url}
-                                        textAlign={'center'}
                                         isExternal
-                                        lineHeight="tight"
+                                        textAlign={'center'}
                                         pt='5' 
+                                        lineHeight="tight"
                                         fontSize='sm'
                                         isTruncated>
                                         Play it on Last.fm <ExternalLinkIcon m='2px' />
@@ -158,10 +158,10 @@ function VinylDetails() {
                         :
                         <Spinner
                             thickness='4px'
-                            speed='0.65s'
                             emptyColor='gray.200'
-                            color='teal.500'
+                            speed='0.65s'
                             size='xl'
+                            color='teal.500'
                             alignSelf={'center'}/>
                     }
                 </CardBody>

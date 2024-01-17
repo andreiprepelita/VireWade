@@ -7,7 +7,7 @@ const Elements = ({ elements }) => {
 
     return (
 
-        <Flex alignItems="flex-start" direction="column" py={{ base: 4 }} px={{ base: 4 }}>
+        <Flex alignItems="flex-start" direction="column" px={{base: 3}} py={{base: 3}} >
             <ElementsLibrary elements={elements} />
         </Flex>
     )
