@@ -109,7 +109,7 @@ function MainPage() {
     }
 
     return (
-        <Stack className="blueBox" height={"auto"} as='flex'>
+        <Stack height={"auto"} as='flex'>
             <Heading as='h1' color={'black'} alignSelf='center' paddingBottom={'10px'}>Welcome to ViReWade,</Heading>
             <Text color={'black'}  size='lg' alignSelf='center' paddingBottom={'10px'}>Please enter your preferences</Text>
             <ArtistsSelector

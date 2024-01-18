@@ -60,7 +60,7 @@ const NavBar = ({ items }) => {
                     </Heading>
 
                     <Flex display={{ base: 1, md: 'flex' }} ml={5} >
-                        {  (window.location.pathname !== '/' && window.location.pathname !== 'login' && window.location.pathname !== 'register') ?
+                        {  (window.location.pathname !== 'login' && window.location.pathname !== 'register') ?
                             <NavButtons />
                         :null}
                     </Flex>
