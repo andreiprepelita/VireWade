@@ -83,36 +83,36 @@ export default function Login() {
         }
     }
 
-    const validateSession = async () => {
-        const existingSession = localStorage.getItem('user')
+    // const validateSession = async () => {
+    //     const existingSession = localStorage.getItem('user')
 
 
-        if(existingSession){
-            const {sessionToken, userId} = JSON.parse(existingSession);
+    //     if(existingSession){
+    //         const {sessionToken, userId} = JSON.parse(existingSession);
         
-            if(userId) {
-                const result = await fetch(`http://localhost:8888/session/validate/${userId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        sessionToken
-                    })
+    //         if(userId) {
+    //             const result = await fetch(`http://localhost:8888/session/validate/${userId}`, {
+    //                 method: 'POST',
+    //                 headers: {
+    //                     'Content-Type': 'application/json'
+    //                 },
+    //                 body: JSON.stringify({
+    //                     sessionToken
+    //                 })
                     
-                });
-                const JSONresult = await result.json();
-                if(JSONresult.status === 'success'){
-                    setAuth(true);
-                }
-            }
-        }
+    //             });
+    //             const JSONresult = await result.json();
+    //             if(JSONresult.status === 'success'){
+    //                 setAuth(true);
+    //             }
+    //         }
+    //     }
         
-    };
+    // };
 
-    useEffect(() => {
-        validateSession();
-    },[]);
+    // useEffect(() => {
+    //     validateSession();
+    // },[]);
 
     return(
         <Fragment>
@@ -121,8 +121,7 @@ export default function Login() {
             <div className="grid">
     <div className="container">
         <div className="leftContainer">
-            <img src="http://localhost:8888/photos/MyStories.png" alt="logo" />
-            <h2 className="subtitle">Vinyl fun</h2>
+            <h2 className="subtitle">VireWade</h2>
         </div>
         <div className="rightContainer">
             {error ?

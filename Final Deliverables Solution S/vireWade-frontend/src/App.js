@@ -22,7 +22,7 @@ const App = () => {
             <NavBarController />
             <BrowserRouter>
                 <Routes>
-                    <Route exact path="/" element={<Playlists />} />
+                    <Route exact path="/" element={<Login />} />
                     <Route exact path="login" element={<Login />}/>
                     <Route exact path="register" element={<Login />}/>
                     <Route exact path="playlists/:userId" element={<Playlists />}/>

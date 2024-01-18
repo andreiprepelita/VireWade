@@ -1,7 +1,6 @@
 .grid {
     display: grid;
     grid-template-rows: 20% 47% 33%;
-    background-color: #fff0e5;
 }
 
 .container {
@@ -11,14 +10,20 @@
     justify-content: space-between;
 }
 
+.leftContainer {
+    display: flex;
+    align-items: center;
+}
+
 .leftContainer h2 {
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 28px;
+    font-size: 40px;
     font-weight: normal;
     line-height: 32px;
     width: 500px;
-    margin-top: 50px;
+    text-align: center;
 }
+
 
 .or {
     margin: 0 auto;
@@ -31,10 +36,21 @@
     border-radius: 5px;
     padding: 100px;
     box-shadow: 1px 1px black;
+    background-color: #0088cc;
+}
+
+.rightContainer button {
+    background-color: rgb(221, 107, 32);
+    font-weight: 700;
 }
 
 .rightContainer:hover {
     box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.rightContainer input {
+    text-align: center;
+    font-weight: 700;
 }
 
 .containerChild {
