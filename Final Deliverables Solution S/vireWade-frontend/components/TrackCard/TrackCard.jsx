@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 
@@ -17,17 +18,17 @@ const TrackCard = ({track}) => {
             <Text
                 textAlign={'center'}
                 mt="1"
+                lineHeight="tight"
                 fontWeight={'bold'}
                 as="h4"
-                lineHeight="tight"
                 isTruncated
             >
-                {track.title}
+                Title: {track.title}
             </Text>
             <Text
+                fontWeight={'bold'}
                 textAlign={'left'}
                 mt="1"
-                fontWeight={'bold'}
                 as="h4"
                 lineHeight="tight"
                 isTruncated
@@ -37,8 +38,8 @@ const TrackCard = ({track}) => {
             <Text
                 textAlign={'left'}
                 mt="1"
-                fontWeight={'bold'}
                 as="h4"
+                fontWeight={'bold'}
                 lineHeight="tight"
                 isTruncated
                 >

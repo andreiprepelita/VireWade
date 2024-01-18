@@ -1,16 +1,18 @@
+import React from 'react';
 import { Button, Box, Flex, Text, Link, Spinner, Center} from "@chakra-ui/react";
 import { useState } from "react";
 import "./PlaylistCard.css";
+import '../Elements/ElementsLibrary.css'
 import Elements from "../Elements/Elements";
 import defaultImage from "../../assets/image.jpg";
 import TrackCard from "../TrackCard/TrackCard";
 
 const PlaylistCard = ({ element }) => {
 
-    const [showTracks, setShowTracks] = useState(false)
     const [showVinyls, setShowVinyls] = useState(false);
-    const [recomendationIsLoading, setRecomendationIsLoading] = useState([false]);
+    const [showTracks, setShowTracks] = useState(false)
     const [vinyls, setVinyls] = useState([]);
+    const [recomendationIsLoading, setRecomendationIsLoading] = useState([false]);
 
 //     You can now sign your web service calls with a method signature, provided along with the session key you received  and your API key.
 //  You will need to include all three as parameters in subsequent calls in order to be able to access services that require authentication.
@@ -33,15 +35,15 @@ const PlaylistCard = ({ element }) => {
 
 
 
-    const onShowTracksClicked = () => {
+const onHideTracksClicked = () => {
+    console.log(showTracks)
+    console.log("pressed on hide tracks")
+    setShowTracks(false)
+}
+const onShowTracksClicked = () => {
         console.log(showTracks)
         console.log("pressed on show tracks")
         setShowTracks(true)
-    }
-    const onHideTracksClicked = () => {
-        console.log(showTracks)
-        console.log("pressed on hide tracks")
-        setShowTracks(false)
     }
 
     const Tracks = () => {
@@ -50,7 +52,7 @@ const PlaylistCard = ({ element }) => {
             <div className = 'tracks'>
                 {
                     element['tracks'].map((track) => (
-                            <Box className="elementsBox margin2" key={String(element.id) + track.title} mr="4">
+                            <Box className="margin2 elementsBox" key={String(element.id) + track.title} mr="4">
                                 <TrackCard className="chakra-heading css-uqsj0l"
                                  key={track.title + track.creator} track={track} />
                             </Box>
@@ -90,10 +92,10 @@ const PlaylistCard = ({ element }) => {
             method: 'POST',
             headers: {'Content-Type': 'application/json' },
             body: JSON.stringify({
-                "favoriteArtists": authors,
                 "favoriteGenres": genres,
-                "limit": 100,
+                "favoriteArtists": authors,
                 "pageSize": 5,
+                "limit": 100,
                 "pageIndex": Math.floor(Math.random() * 3)
             })
         }
@@ -133,41 +135,46 @@ const PlaylistCard = ({ element }) => {
 
             <Box className='playlistImage' style={{ backgroundImage: 'url(' + element.image + ')' }}></Box>
 
-            <Box display="flex" flexDirection="column" p="4" alignItems={'flex-start'}>
+            <Box display="flex" flexDirection="column" p="4" alignItems={'flex-start'} justifyContent={'space-between'}>
 
                 <Text
-                    textAlign={'center'}
                     mt="1"
+                    textAlign={'center'}
                     fontWeight={'bold'}
-                    as="h4"
                     lineHeight="tight"
+                    as="h4"
                     isTruncated
                 >
                     {element.title}
                 </Text>
-                <Button
-                    mt={5}
-                    colorScheme='teal'
-                    type='submit'
-                    padding={'20px'}
-                    alignSelf={'center'}
-                    onClick={getRecommendation}
-                >
-                    Get Recommendation based on this playlist
-                </Button>
+                
+                <Box display="flex" flexDirection="row" alignItems={'flex-start'} justifyContent={'space-between'}>
+                    <Button
+                        mt={5}
+                        colorScheme='orange'
+                        padding={'20px'}
+                        type='submit'
+                        alignSelf={'center'}
+                        justifySelf={'flex-start'}
+                        onClick={getRecommendation}
+                    >
+                        Get recommandations based on this playlist
+                    </Button>
+                    <Link
+                        mt={5}
+                        type='submit'
+                        padding={'20px'}
+                        textAlign={'end'}
+                        onClick={
+                            showTracks ? onHideTracksClicked : onShowTracksClicked
+                        }
+                    >
+                {showTracks ? "Hide Tracklist": "See tracklist"}
+            </Link>
+                </Box>
 
             </Box>
-            <Link
-                mt={5}
-                type='submit'
-                padding={'20px'}
-                alignSelf={'flex-end'}
-                onClick={
-                    showTracks ? onHideTracksClicked : onShowTracksClicked
-                }
-            >
-                {showTracks ? "Hide Tracks": "See tracks"}
-            </Link>
+            
             
         </Flex>
         {
@@ -180,8 +187,8 @@ const PlaylistCard = ({ element }) => {
                     <Spinner
                         thickness='4px'
                         speed='0.65s'
-                        emptyColor='gray.200'
                         color='teal.500'
+                        emptyColor='gray.200'
                         size='xl'
                         alignSelf={'center'}/>
                     :

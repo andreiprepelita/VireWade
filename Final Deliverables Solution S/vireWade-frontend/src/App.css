@@ -19,3 +19,24 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+
+.blueBox{
+  background-color: #0088cc;
+  width: 70%;
+  align-self: center;
+  height: fit-content;
+  padding: 2%;
+  margin: 5%!important;
+  border-radius: 20px;
+}
+
+.searchInput{
+  background-color: whitesmoke!important;
+  border-radius: 10px;
+}
+
+.formBox{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

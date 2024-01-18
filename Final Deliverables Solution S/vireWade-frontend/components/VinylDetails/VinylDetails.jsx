@@ -70,7 +70,7 @@ function VinylDetails() {
       };
 
     return (
-        <Stack className="greenBox" height={"auto"}>
+        <Stack className="blueBox" height={"auto"}>
             <Card
                 overflow='hidden'
                 direction={{ base: 'column', sm: 'row' }}

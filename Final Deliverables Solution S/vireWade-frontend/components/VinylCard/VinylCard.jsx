@@ -41,9 +41,9 @@ const VinylCard = ({ element }) => {
 
                 <Text
                     textAlign={'center'}
-                    mt="1"
                     as="h4"
                     lineHeight="tight"
+                    mt="1"
                     isTruncated
                 >
                     {vinylStructureData["dc:title"]}
@@ -52,17 +52,17 @@ const VinylCard = ({ element }) => {
                     textAlign={'center'}
                     mt="1"
                     as="h4"
-                    lineHeight="tight"
                     isTruncated
                     color={'grey'}
+                    lineHeight="tight"
                 >
                     Artist: {vinylStructureData["foaf:maker"]["foaf:name"]}
                 </Text>
                 <Text
                     textAlign={'center'}
                     mt="1"
-                    as="h4"
                     lineHeight="tight"
+                    as="h4"
                     isTruncated
                     color={'grey'}
                 >
@@ -71,9 +71,9 @@ const VinylCard = ({ element }) => {
                 <Text
                     textAlign={'center'}
                     mt="1"
+                    isTruncated
                     as="h4"
                     lineHeight="tight"
-                    isTruncated
                     color={'grey'}
                 >
                     Released Date: {vinylStructureData["dc:date"]["@value"]}
@@ -84,8 +84,8 @@ const VinylCard = ({ element }) => {
                     href={'/vinyl/details/' + element.vinylLabel + "/" + element.artistLabel} 
                     isExternal
                     mt="1"
-                    lineHeight="tight"
                     isTruncated
+                    lineHeight="tight"
                     color={'teal'}>
                     More details <ExternalLinkIcon mx='2px' />
                 </Link>
