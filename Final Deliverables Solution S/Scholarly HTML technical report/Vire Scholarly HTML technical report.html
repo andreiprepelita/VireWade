@@ -286,11 +286,109 @@
               <h2 class="card-title" style="color:blue;">3. Sources of External Data</h2>
               <blockquote>
                 <p>
-                  Our goal is to construct a comprehensive vinyl records database that is robust enough to support a 
+                  We encountered a significant hurdle in sourcing online data about vinyl records. A large portion of the available information was centered on musical aspects such as artists and album details, 
+                  including track listings and other music-related data. In our quest for specific information, 
+                  we turned to several internet query tools, including:
+                  <ul>
+                    <li> Wikidata's WikiData Query Service</li>
+                    <li> DBPedia's SparQL Query Editor</li>
+                  </ul>
+                </p>
+                <p>
+                  Our breakthrough came when we found that WikiData had the specific vinyl data we needed. We developed a specialized query and ran it through the WikiData Query Service.
+                </p>
+
+                <pre><code>
+                  SELECT DISTINCT ?vinylLabel ?artistLabel ?genreLabel ?releaseDate
+                  WHERE {
+                      {
+                          SELECT ?vinyl ?property {
+                              hint:Query hint:optimizer "None" .
+                              ?property wikibase:claim ?p ;
+                                        wikibase:statementProperty ?ps .
+                              ?statement ?ps wd:Q178588 .
+                              ?vinyl ?p ?statement .
+                          }
+                      }
+                      ?vinyl wdt:P175 ?artist .
+                      ?vinyl wdt:P136 ?genre .
+                      ?vinyl wdt:P577 ?releaseDate .
+                      FILTER(?property = wd:P437)
+                      BIND(wd:Q178588 AS ?targetItem)
+                      SERVICE wikibase:label { 
+                          bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" .
+                      }
+                  }
+                      </code></pre>
+
+                <p>
+                  This query is looking to return distinct records containing the labels of vinyl records, their artists, genres, and their release dates.
+                </p>
+                <ul>
+                  <li>?vinyl wdt:P175 ?artist: Links the vinyl record to its artist.</li>
+                  <li>?vinyl wdt:P136 ?genre: Links the vinyl record to its genre.</li>
+                  <li>?vinyl wdt:P577 ?releaseDate: Links the vinyl record to its release date.</li>
+                </ul>  
+                <p>                
+                      Also, we search for all entities that have a distribution format property (wd:P437) set to vinyl record (wd:Q178588).
+                </p>
+                <p>
+                The additional issue we faced involved the need to download this data and import it into the Stardog database. However, the Wikidata Query Service did not support exporting data in
+                the required formats, which included Turtle, RDF/XML, TRiG, TRiX, and NQuads.
+                </p>
+
+                <div class="item" style="text-align: center;">
+                  <img src="./Resources/noformatavailab.png" alt="No Format Available">
+                </div>
+                <br>
+                <p>    
+                We discovered a different online service that allowed us to query Wikidata and export 
+                the results as a Turtle file, namely the OpenLink Virtuoso SPARQL Query Editor.
+                </p>
+                <p>
+                  The query we used is as follows:
+                </p>
+                <pre><code>
+              SELECT ?vinyl ?vinylLabel
+                    ?artist ?artistLabel
+                    ?genre ?genreLabel
+                    ?date as ?releaseDate
+              WHERE {
+                SERVICE <https://query.wikidata.org/sparql> {
+                  SELECT distinct ?vinyl ?vinylLabel
+                                  ?artist ?artistLabel
+                                  ?genre ?genreLabel
+                                  ?date
+                  WHERE {
+                    {
+                      SELECT ?vinyl ?property {
+                        hint:Query hint:optimizer "None" .
+                        ?property wikibase:claim ?p ;
+                                  wikibase:statementProperty ?ps .
+                        ?st ?ps wd:Q178588 .
+                        ?vinyl ?p ?st .
+                      }
+                    }
+                    ?vinyl wdt:P175 ?artist .
+                    ?vinyl wdt:P136 ?genre .
+                    ?vinyl wdt:P577 ?date .
+                    FILTER(?property = wd:P437)
+                    BIND(wd:Q178588 AS ?target)
+                    SERVICE wikibase:label {
+                      bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" .
+                    }
+                  }
+                }
+              }
+              LIMIT 10000
+                </code></pre>
+               
+                <p>
+                  We constructed a comprehensive vinyl records database that is robust enough to support a 
                   recommendation system. To establish and populate our database, 
-                  we will utilize the <b><a href="https://www.stardog.com/">Stardog platform</a></b>. We plan to compile a <b><a href="https://www.w3.org/TR/turtle/">Turtle (.ttl)</a></b> file containing data sourced from 
-                  various SparQL queries conducted online. This file will then be 
-                  imported into our database using <b><a href="https://www.stardog.com/">Stardog platform</a></b>. We plan to compile a <b><a href="https://www.stardog.com/studio/">Stardog Studio</a></b>.
+                  we utilized the <b><a href="https://www.stardog.com/">Stardog platform</a></b>. We compiled a <b><a href="https://www.w3.org/TR/turtle/">Turtle (.ttl)</a></b> file containing data sourced from 
+                  SparQL query executed on OpenLink Virtuoso SPARQL Query Editor. That file was 
+                  imported into our database using <b><a href="https://www.stardog.com/">Stardog platform</a></b>.
                 </p>
                 <p>
                   The <b><a href="https://www.stardog.com/">Stardog platform</a></b> is particularly advantageous for our vinyl database project because it specializes 
@@ -298,13 +396,155 @@
                   makes it an ideal choice for integrating diverse data sources. Moreover, Stardog's seamless integration with <b><a href="https://www.stardog.com/studio/">Stardog Studio</a></b> provides a user-friendly environment for managing our data, 
                   making the development and maintenance of our database both efficient and scalable.
                 </p>
+                <h4>We experimented with several queries, including:</h4>
+                <br>
+                <h5 style="color:green;" class="card-title">Query for Distinct Vinyl Records by Elvis Presley and Others in Pop and Rock Genres from 1960 to 1980, Excluding Queen and Punk Rock</h5>
+                <pre><code> 
+                  SELECT DISTINCT ?vinyl ?vinylLabel ?artist ?artistLabel ?genre ?genreLabel ?releaseDate 
+                  WHERE {
+                  ?result a sparqlResults:ResultSet .
+                  ?result sparqlResults:solution ?solution .
+                  ?solution sparqlResults:binding [ sparqlResults:variable "vinyl" ; sparqlResults:value ?vinyl ] .
+                  ?solution sparqlResults:binding [ sparqlResults:variable "vinylLabel" ; sparqlResults:value ?vinylLabel ] .
+                  ?solution sparqlResults:binding [ sparqlResults:variable "artist" ; sparqlResults:value ?artist ] .
+                  ?solution sparqlResults:binding [ sparqlResults:variable "artistLabel" ; sparqlResults:value ?artistLabel ] .
+                  ?solution sparqlResults:binding [ sparqlResults:variable "genre" ; sparqlResults:value ?genre ] .
+                  ?solution sparqlResults:binding [ sparqlResults:variable "genreLabel" ; sparqlResults:value ?genreLabel ] .
+                  ?solution sparqlResults:binding [ sparqlResults:variable "releaseDate" ; sparqlResults:value ?releaseDate ] .
+
+                  FILTER ((contains(?artistLabel, "Elvis Presley") ||
+                  contains(?genreLabel, "pop music") ||
+                  contains(?genreLabel, "rock music") )&&
+                  ?releaseDate >= xsd:dateTime('1960-01-01')&&
+                  ?releaseDate <= xsd:dateTime('1980-12-31')&&
+                  !contains(?artistLabel, "Queen") &&
+                  !contains(?genreLabel, "punk rock") )
+                  }
+                </code></pre>
+                <br>
+                <h5 style="color:green;" class="card-title">Query for top 10 Years with the Most Vinyl Record Releases:</h5>
+                <pre><code>
+                  SELECT (YEAR(?releaseDate) AS ?releaseYear) (COUNT(?vinyl) AS ?recordsCount)
+                  WHERE {
+                      ?result a res:ResultSet .
+                      ?result res:solution ?solution . 
+                      ?solution res:binding [ res:variable "vinyl" ; res:value ?vinyl ] .
+                      ?solution res:binding [ res:variable "releaseDate" ; res:value ?releaseDate ] .
+                  }
+                  GROUP BY (?releaseDate)
+                  ORDER BY DESC(?recordsCount)
+                  LIMIT 10
+                </code></pre>
+                <br>
+                <h5 style="color:green;" class="card-title">Query for top 10 Artists with the Most Vinyl Releases:</h5>
+                <pre><code>
+                  SELECT DISTINCT ?artistLabel (COUNT(?vinyl) AS ?recordsCount)
+                    WHERE {
+                      ?result a res:ResultSet .
+                      ?result res:solution ?solution . 
+                      ?solution res:binding [ res:variable "vinyl" ; res:value ?vinyl ] .
+                      ?solution res:binding [ res:variable "artistLabel" ; res:value ?artistLabel ] .
+                    }
+                    GROUP BY ?artistLabel
+                    ORDER BY DESC (?recordsCount) 
+                    LIMIT 10
+                </code></pre>
+                <br>
                 <p>
-                  To provide vinyl recommendations to users, we'll utilize various external APIs.
+                  To provide vinyl recommendations to users, we utilized various external APIs, such as: Discogs API and LastFM API.
                 </p>
+                <br>
+                <br>
                 <p>
-                  Our strategy includes recommending vinyl records based on the user's history of song purchases from different music stores. For this, we intend to use the <b><a href="https://www.discogs.com/developers/">
+                  Our strategy included recommending vinyl records based on the user's history of song purchases from different music stores. For this, we used the <b><a href="https://www.discogs.com/developers/">
                     Discogs API</a></b>.
                 </p>
+                <h4>
+                  What is the method for retrieving necessary data?
+                </h4>
+                <p>
+                  To acquire user data, we must implement the OAuth1.0 protocol. 
+                </p>
+                  <p>The OAuth 1.0a process includes three key server-side URLs:</p>
+                  <ul>
+                    <li>URL for Request Token: https://api.discogs.com/oauth/request_token</li>
+                    <li>URL for Authorization: https://www.discogs.com/oauth/authorize</li>
+                    <li>URL for Access Token: https://api.discogs.com/oauth/access_token</li>
+                  </ul>
+                <p>After securing the user token, authenticated requests can be made to these APIs:</p>
+                <ul>
+                  <li>Access USER Identity API: /oauth/identity. This API helps in fetching the Discogs username of the current user, a critical piece of information for accessing their collection.</li>
+                  <li>Retrieve Collection Folders API: /users/{username}/collection/folders. With the username, we can now delve into the user's collection folders. These folders are utilized by Discogs users to organize their vinyl collections.</li>
+                  <li>Obtain Collection Items API: /users/{username}/collection/folders/{folder_id}. Having accessed the user's collection folders, we can use this API to gather the contents of a collection (as previously mentioned). These contents represent past purchases, 
+                    from which we will derive recommendations.</li>
+                </ul>
+
+                </p>
+                <p>
+                  This is a sample of the data we retrieve from the Discogs API.
+                </p>
+                <pre><code>
+                  "releases": [
+                  {
+                    "id": 1350884,
+                    "instance_id": 1560102811,
+                    "date_added": "2024-01-09T04:44:15-08:00",
+                    "rating": 0,
+                    "basic_information": {
+                        "id": 1350884,
+                        "master_id": 73772,
+                        "master_url": "https://api.discogs.com/masters/73772",
+                        "resource_url": "https://api.discogs.com/releases/1350884",
+                        "thumb": "https://i.discogs.com/mKBiPr4ru_Q5WqqOydYO3d1IeOjk94RaRqqYxzYpKWA/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzNTA4/ODQtMTIxMTk2NjAx/MS5qcGVn.jpeg",
+                        "cover_image": "https://i.discogs.com/B1PUEaducyWKlT-PuR6IF5VyQSRmGNoc9HmwPCl2kb0/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzNTA4/ODQtMTIxMTk2NjAx/MS5qcGVn.jpeg",
+                        "title": "Release",
+                        "year": 1983,
+                        "formats": [
+                            {
+                                "name": "Vinyl",
+                                "qty": "1",
+                                "text": "Gatefold Sleeve",
+                                "descriptions": [
+                                    "LP",
+                                    "Album"
+                                ]
+                            }
+                        ],
+                        "artists": [
+                            {
+                                "name": "David Knopfler",
+                                "anv": "",
+                                "join": "",
+                                "role": "",
+                                "tracks": "",
+                                "id": 260480,
+                                "resource_url": "https://api.discogs.com/artists/260480"
+                            }
+                        ],
+                        "labels": [
+                            {
+                                "name": "Polydor",
+                                "catno": "817 235-1",
+                                "entity_type": "1",
+                                "entity_type_name": "Label",
+                                "id": 1610,
+                                "resource_url": "https://api.discogs.com/labels/1610"
+                            }
+                        ],
+                        "genres": [
+                            "Rock",
+                            "Pop"
+                        ],
+                        "styles": [
+                            "Pop Rock",
+                            "Ballad"
+                        ]
+                    },
+                    "folder_id": 1
+                }
+            ]
+                </code></pre>
+                <p>From this data returned by Discogs API we extracted artists and genres</p>
                 <p>
                   Additionally, we plan to offer vinyl suggestions based on the user's playlists from various platforms, using data obtained from <b><a href="https://www.last.fm/api/playlists">Last.fm Playlists</a></b>, a music streaming service.
                 </p>
