@@ -7,6 +7,8 @@ export default function Login() {
     const [type, setType] = useState("login");
     const [error, setError] = useState(false);
     const [username, setUsername] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [pass1, setPass1] = useState("");
     const [pass2, setPass2] = useState("");
@@ -63,7 +65,8 @@ export default function Login() {
                 changeErrorValue();
             }
             const postObject = {
-                username: username,
+                firstName: firstName,
+                lastName: lastName,
                 email: email,
                 password: pass1
             }
@@ -114,6 +117,12 @@ export default function Login() {
     //     validateSession();
     // },[]);
 
+     useEffect(() => {
+       if( window.location.pathname === "/register" && type === 'login') {
+        setType("signup");
+       }
+    },[]);
+
     return(
         <Fragment>
         { userIsAuth? <Navigate to="/" replace={true}/> :
@@ -133,7 +142,13 @@ export default function Login() {
 
             <form onSubmit={type === 'login' ? handleLoginSubmit : handleSignupSubmit} >
             {type === "signup" ?
-            <input type="text" className="containerChild" name="username" id="username" placeholder="Type your username" value={username} onChange={e => setUsername(e.target.value)} required/>
+            (<>
+                {/* <input type="text" className="containerChild" name="username" id="username" placeholder="Type your username" value={username} onChange={e => setUsername(e.target.value)} required/> */}
+                <input type="text" className="containerChild" name="firstName" id="firstName" placeholder="Type your first name" value={firstName} onChange={e => setFirstName(e.target.value)} required/>
+                <input type="text" className="containerChild" name="lastName" id="lastName" placeholder="Type your last name" value={lastName} onChange={e => setLastName(e.target.value)} required/>
+            
+            </>
+            )
             : null
             }
             {type === "signup"

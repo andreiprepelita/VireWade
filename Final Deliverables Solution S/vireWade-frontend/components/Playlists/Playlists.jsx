@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Stack, Button } from "@chakra-ui/react";
+import { useNavigate, Navigate } from "react-router-dom"
 import VerticalElementsList from "../VerticalElementsList/VerticalElementsList";
 
 function Playlists() {
     const [file, setFile] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
+    const [userIsAuth, setIsUserAuth] = useState(getToken());
   
     // const handleClick = () => {
     //   setIsOpen(true);
@@ -56,38 +58,59 @@ function Playlists() {
     //       alert("Failed to read file.");
     //     }
     //   };
+
+    useEffect(() => {
+      setIsUserAuth(getToken());
+  }, []);
+
+  function getToken() {
+      const userLocalStorage = JSON.parse(localStorage.getItem('user'));
+      console.log("userStorage is ", userLocalStorage)
+      let result;
+      if(userLocalStorage){
+          result = (userLocalStorage.message === 'USER_IS_AUTHENTICATED' || userLocalStorage.message === 'USER_REGISTERED_SUCCESSFULLY' || userLocalStorage.message === 'USER_ALREDY_REGISTERED') ? true : false;
+          console.log("Discog result is working: ", result)
+          return result;
+      }
+      console.log("result not working ", result)
+      return false;
+  }
   
     return (
-      <Stack className="blueBox">
-        <Button
-          colorScheme="orange"
-          type="submit"
-          padding="20px"
-          alignSelf="flex-start"
-        //   onClick={handleClick}
-        >
-          Add Playlist
-        </Button>
-        {isOpen && (
-          <input
-            type="file"
-            accept="application/xml"
-            // onChange={handleFileChange}
-          />
-        )}
-        {file && (
+      <Fragment>
+          { userIsAuth ?
+        <Stack className="blueBox">
           <Button
             colorScheme="orange"
             type="submit"
             padding="20px"
             alignSelf="flex-start"
-            // onClick={handleSubmit}
+          //   onClick={handleClick}
           >
-            Submit
+            Add Playlist
           </Button>
-        )}
-        <VerticalElementsList />
-      </Stack>
+          {isOpen && (
+            <input
+              type="file"
+              accept="application/xml"
+              // onChange={handleFileChange}
+            />
+          )}
+          {file && (
+            <Button
+              colorScheme="orange"
+              type="submit"
+              padding="20px"
+              alignSelf="flex-start"
+              // onClick={handleSubmit}
+            >
+              Submit
+            </Button>
+          )}
+          <VerticalElementsList />
+        </Stack>
+        : <Navigate to="/" replace={true}/> }
+      </Fragment>
     );
   }
   

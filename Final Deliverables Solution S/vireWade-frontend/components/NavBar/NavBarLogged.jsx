@@ -1,5 +1,5 @@
+import React, { useEffect, useState } from "react";
 import NavBar from './NavBar';
-import {TbVinyl } from "react-icons/tb";
 
 export default function NavBarLogged() {
 

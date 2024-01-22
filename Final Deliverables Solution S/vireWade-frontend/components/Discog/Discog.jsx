@@ -1,16 +1,16 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Stack, Button, Spinner } from "@chakra-ui/react";
 import Elements from "../Elements/Elements";
 import { useState, useEffect } from "react";
 import defaultImage from "../../assets/image.jpg";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Navigate } from "react-router-dom"
 
 function Discog() {
 
-    function getToken() {
-        const tokenString = sessionStorage.getItem('token')
-        return tokenString
-    }
+    // function getToken() {
+    //     const tokenString = sessionStorage.getItem('token')
+    //     return tokenString
+    // }
  
     const navigate = useNavigate()
     const [showVinyls, setShowVinyls] = useState(false);
@@ -19,6 +19,7 @@ function Discog() {
     const [recomendationIsLoading, setRecomendationIsLoading] = useState([false]);
     const [isAvailableDiscogs, setIsAvailableDiscogs] = useState(false)
     const [discogsToken, setDiscogsToken] = useState('')
+    const [userIsAuth, setIsUserAuth] = useState(getToken());
 
     // async function getProfileData(user) {
     //     const requestOptions = {
@@ -75,7 +76,27 @@ function Discog() {
     // };
 
 
+    useEffect(() => {
+        setIsUserAuth(getToken());
+    }, []);
+
+    function getToken() {
+        const userLocalStorage = JSON.parse(localStorage.getItem('user'));
+        console.log("userStorage is ", userLocalStorage)
+        let result;
+        if(userLocalStorage){
+            result = (userLocalStorage.message === 'USER_IS_AUTHENTICATED' || userLocalStorage.message === 'USER_REGISTERED_SUCCESSFULLY' || userLocalStorage.message === 'USER_ALREDY_REGISTERED') ? true : false;
+            console.log("Discog result is working: ", result)
+            return result;
+        }
+        console.log("result not working ", result)
+        return false;
+    }
+
+
     return (
+        <Fragment>
+            { userIsAuth ? 
         <Stack>
 
             <Button
@@ -105,6 +126,8 @@ function Discog() {
                 : null
             }
         </Stack >
+         : <Navigate to="/" replace={true}/> }
+        </Fragment>
     )
 
 }

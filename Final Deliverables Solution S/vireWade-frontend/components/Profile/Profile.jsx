@@ -1,8 +1,9 @@
 import { Box, Flex } from '@chakra-ui/react';
 import '../Login/LoginForm.css'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { redirect, useSearchParams, useNavigate } from "react-router-dom";
 import { Button, Heading, Text, Link, Alert, AlertIcon, AlertTitle, AlertDescription } from '@chakra-ui/react';
+import {Navigate } from 'react-router-dom';
 import './Profile.css'
 
 function Profile() {
@@ -12,6 +13,7 @@ function Profile() {
     const [isLastFmDisabled, setIsDisabledLastFm] = useState(false);
     const [hasError, setErrors] = useState(false);
     const [showAlert, setShowAlert] = useState(false)
+    const [userIsAuth, setIsUserAuth] = useState(getToken());
 
     const navigate = useNavigate()
 
@@ -132,10 +134,23 @@ function Profile() {
         window.location.reload();
     }
 
+    useEffect(() => {
+        setIsUserAuth(getToken());
+    }, []);
 
+    function getToken() {
+        const userLocalStorage = JSON.parse(localStorage.getItem('user'));
+        console.log("userStorage is ", userLocalStorage)
+        if(userLocalStorage){
+            return (userLocalStorage.message === 'USER_IS_AUTHENTICATED' || userLocalStorage.message === 'USER_REGISTERED_SUCCESSFULLY' || userLocalStorage.message === 'USER_ALREDY_REGISTERED') ? true : false;
+        }
+        return false;
+    }
 
 
     return (
+        <Fragment>
+            { userIsAuth? 
         <Flex className='authForm' gap='4' justify='space-between' margin={'20vh'} width={'fit-content'}>
             {showAlert && (
                 <Alert status='success'>
@@ -185,6 +200,8 @@ function Profile() {
             </Box>
 
         </Flex>
+        : <Navigate to="/" replace={true}/> }
+        </Fragment>
     )
 }
 
