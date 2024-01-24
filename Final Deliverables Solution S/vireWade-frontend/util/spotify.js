@@ -1,6 +1,7 @@
-const clientId = "";
+require('dotenv').config();
+const clientId = process.env.CLIENT_ID;
 let accessToken = "";
-const redirectURI = "http://localhost:3000/";
+const redirectURI = "http://localhost:8080/";
 
 export const Spotify = {
   getAccessToken() {

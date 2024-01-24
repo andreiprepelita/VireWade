@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from 'react-router-dom'
 import { Stack, Button, Spinner, Heading, Text } from "@chakra-ui/react";
 import Elements from "../Elements/Elements";
 import ArtistsSelector from "../ArtistsSelector/ArtistsSelector";
 import GenreSelector from "../GenreSelector/GenreSelector";
 import defaultImage from "../../assets/image.jpg";
 import YearSelector from "../YearSelector/YearSelector";
+window.Buffer = window.Buffer || require("buffer").Buffer;
 
 function MainPage() {
     const pageSize = 10;
@@ -21,6 +23,57 @@ function MainPage() {
     const [recomendationIsLoading, setRecomendationIsLoading] = useState([false]);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalCount, setTotalCount] = useState(0);
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [accesToken, setAccessToken] = useState("");
+
+    
+
+
+    function redirectToken(){
+        let code = searchParams.get('code');
+        const clientId = process.env.REACT_APP_CLIENT_ID;
+        const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
+        const redirectURI = process.env.REACT_APP_REDIRECT_URI;
+        let body = new URLSearchParams({
+          grant_type: 'client_credentials',
+          code: code,
+          redirect_uri: redirectURI,
+          client_id: clientId,
+          client_secret: clientSecret
+        });
+        const response = fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Basic ' + (new Buffer.from(clientId + ':' + clientSecret).toString('base64'))
+        },
+        body: body
+      })
+        .then(response => {
+            if (!response.ok) {
+                console.error('error response', response);
+                response.json().then(json => {
+                    console.error('error body json', json);
+                    throw new Error('HTTP status ' + response.status + ': ' + json.error + ":" + json.error_description);
+                });
+              throw new Error('HTTP status ' + response.status);
+            }
+          return response.json();
+        })
+        .then(data => {
+            console.log("It worked")
+          localStorage.setItem('access-token', data.access_token);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      };
+
+    useEffect(() => {
+        if(searchParams.get('code') && searchParams.get('state')) {
+            redirectToken()
+        }
+    }, [])
 
     useEffect(() => {
         setRecomendationIsLoading(false);
