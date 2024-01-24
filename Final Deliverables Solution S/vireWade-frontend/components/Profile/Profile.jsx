@@ -53,6 +53,7 @@ function Profile() {
                 res.json().then(res => {
                     if (res) {
                         console.log("RES is ", res)
+                        sessionStorage.setItem("discog_token", JSON.stringify({'userToken': res.userToken, 'userTokenSecret': res.userTokenSecret}))
                         setShowAlert(true)
 
                         setTimeout(() => {
