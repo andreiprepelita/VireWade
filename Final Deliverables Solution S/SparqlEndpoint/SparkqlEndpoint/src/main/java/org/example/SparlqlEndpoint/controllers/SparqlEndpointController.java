@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
 @RequestMapping("/sparqlRecommendation")
 public class SparqlEndpointController {
 
-    private static final String SPARQL_ENDPOINT = "https://sd-d9888383.stardog.cloud:5820/vire/query";
+    private static final String SPARQL_ENDPOINT = "https://sd-c21c8daf.stardog.cloud:5820/vire/query";
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<String> testGetMethod() {
@@ -62,7 +62,7 @@ public class SparqlEndpointController {
         return client.target(SPARQL_ENDPOINT)
                 .request(MediaType.TEXT_PLAIN)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED)
-                .header(HttpHeaders.AUTHORIZATION, "Basic YW5kcmVpX3ByZXBlbGl0YUB5YWhvby5jb206TWVsYW5jb2xpZTIwMjQ=")
+                .header(HttpHeaders.AUTHORIZATION, "Basic YW5kcmVpcHJlcDpNZWxhbmNvbGllMjAyNA==")
                 .header(HttpHeaders.ACCEPT, "application/sparql-results+json")
                 .header(HttpHeaders.CACHE_CONTROL, "no-cache")
                 .post(payload);
