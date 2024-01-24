@@ -45,7 +45,7 @@ public class LinkedDataService {
                 ? sparqlQueryBuilder.QueryBuilder()
                 : sparqlQueryBuilder.addLimitSyntax(limitQuery)
                 .QueryBuilder();
-
+        //sparqlQueryBuilder.cleanQuery();
         return query.sendRequest();
     }
 

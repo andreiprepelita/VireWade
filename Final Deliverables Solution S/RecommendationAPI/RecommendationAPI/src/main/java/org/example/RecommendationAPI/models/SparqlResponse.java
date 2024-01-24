@@ -71,7 +71,7 @@ public class SparqlResponse {
             for (Map<String, String> record : finalListResult) {
 
                 Map<String, Object> genreObject = new HashMap<>();
-                genreObject.put("@type", "mo:MusicGenre");
+                genreObject.put("@type", "mo:genre");
                 genreObject.put("@id", record.get("genre"));
                 genreObject.put("rdfs:label", record.get("genreLabel"));
 

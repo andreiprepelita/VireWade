@@ -5,6 +5,7 @@ import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.example.RecommendationAPI.models.OAuth1DiscogsCredentials;
 import org.example.RecommendationAPI.util.UtilDiscogs;
@@ -54,7 +55,8 @@ public class DiscogsAuthService {
                 "oauth_nonce=\"" + UUID.randomUUID() + "\", " +
                 "oauth_signature=\"" + UtilDiscogs.CONSUMER_SECRET + "&\", " +
                 "oauth_signature_method=\"" + "PLAINTEXT" + "\", " +
-                "oauth_timestamp=" + System.currentTimeMillis() / 1000 + "\" ";
+                "oauth_timestamp=" + System.currentTimeMillis() / 1000 + "\", " +
+                "oauth_callback=" + "\"http://localhost:8080/profile/1\"";
     }
 
     public OAuth1DiscogsCredentials getAccessToken(String authentication, String verifier) throws IOException {
@@ -96,9 +98,28 @@ public class DiscogsAuthService {
         System.out.println(tokenSecretUser);
         oAuth1DiscogsCredentials.setUserToken(tokenUser);
         oAuth1DiscogsCredentials.setUserTokenSecret(tokenSecretUser);
+        //saveDiscogsTokenToUserDB(oAuth1DiscogsCredentials, authentication);
         return oAuth1DiscogsCredentials;
     }
+    private void saveDiscogsTokenToUserDB(OAuth1DiscogsCredentials oAuth1DiscogsCredentials, String authentication) {
+        HttpPost userPostRequest = makeHttpPostToUserAPI(oAuth1DiscogsCredentials, authentication);
+        try {
+            HttpResponse response = HttpClients.createDefault().execute(userPostRequest);
+            System.out.println(response.getStatusLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private HttpPost makeHttpPostToUserAPI(OAuth1DiscogsCredentials oAuth1DiscogsCredentials, String authentication) {
+        HttpPost userPostRequest = new HttpPost(UtilDiscogs.IDENTITY_API);
+        userPostRequest.setHeader(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", authentication));
+        userPostRequest.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+        JSONObject jsonData = returnDiscogsTokens(oAuth1DiscogsCredentials);
+        StringEntity data = new StringEntity(jsonData.toString(), "UTF-8");
+        userPostRequest.setEntity(data);
+        return userPostRequest;
+    }
     private JSONObject returnDiscogsTokens(OAuth1DiscogsCredentials oAuth1DiscogsCredentials) {
         JSONObject discogsTokens = new JSONObject();
         discogsTokens.put("token", oAuth1DiscogsCredentials.getUserToken());
