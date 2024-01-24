@@ -11,6 +11,10 @@ function Discog() {
     //     const tokenString = sessionStorage.getItem('token')
     //     return tokenString
     // }
+    
+    
+    
+    //use http://127.0.0.1:8081/recommendation/discogs?discogsToken=&discogsTokenSecret=&pageNumber=4&numberOfItemsPerPage=1
  
     const navigate = useNavigate()
     const [showVinyls, setShowVinyls] = useState(false);

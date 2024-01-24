@@ -10,6 +10,7 @@ function Profile() {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [isDisabledDiscogs, setIsDisablesDicsogs] = useState(false)
+    const [discogsToken, setDiscogsToken] = useState("");
     const [isLastFmDisabled, setIsDisabledLastFm] = useState(false);
     const [hasError, setErrors] = useState(false);
     const [showAlert, setShowAlert] = useState(false)
@@ -24,42 +25,49 @@ function Profile() {
     //     return tokenString
     // }
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const requestOptions = {
-    //             method: 'GET',
-    //             headers: {
-    //                 Authorization: `${getToken()}`
-    //             }
-    //         }
+    useEffect(() => {
 
-    //         const access_token_url = ``
-    //         const res = await fetch(access_token_url, requestOptions)
-    //         return res
-    //     }
+        if(searchParams.get("oauth_verifier") && searchParams.get("oauth_token")) {
 
-    //     const oauth_verifier = searchParams.get("oauth_verifier")
+        
+        const fetchData = async () => {
+            const requestOptions = {
+                method: 'GET',
+                headers: {
+                    Authorization: `${searchParams.get("oauth_token")}`
+                }
+            }
 
-    //     const getStatus = async () => {
-    //         if (oauth_verifier) {
-    //             const res = await fetchData()
+            const access_token_url = `http://localhost:8081/discogs/access_token?verifier=${searchParams.get("oauth_verifier")}`
+            const res = await fetch(access_token_url, requestOptions)
+            console.log("CHECK discogs")
+            return res
+        }
 
-    //             res.json().then(res => {
-    //                 if (res) {
-    //                     setShowAlert(true)
+        const oauth_verifier = searchParams.get("oauth_verifier")
 
-    //                     setTimeout(() => {
-    //                         setShowAlert(false);
-    //                       }, 3000);
-    //                 }
-    //             })
-    //                 .catch(console.error);
-    //         }
-    //     }
+        const getStatus = async () => {
+            if (oauth_verifier) {
+                const res = await fetchData()
 
-    //     getStatus()
-    //     navigate('/profile')
-    // }, []);
+                res.json().then(res => {
+                    if (res) {
+                        console.log("RES is ", res)
+                        setShowAlert(true)
+
+                        setTimeout(() => {
+                            setShowAlert(false);
+                          }, 3000);
+                    }
+                })
+                    .catch(console.error);
+            }
+        }
+
+        getStatus()
+        navigate('/')
+    }
+    }, []);
 
     // async function getProfileData(user) {
     //     const requestOptions = {
@@ -90,16 +98,11 @@ function Profile() {
     //     getProfileData(user.sub)
     // }, []);
 
-    // const onSubmitDiscogs = async (e) => {
+    const onSubmitDiscogs = async (e) => {
 
-        // const res = await fetch('')
-        // const token = await res.json()
-        // window.location.replace(token.authorizationUrl);
-    // }
-
-
-    async function onSubmitSpotify () {
-        const res = await fetch('http://localhost:8888/spotify/login')
+        const res = await fetch('http://localhost:8081/discogs/request_token')
+        const token = await res.json()
+        window.location.replace(token.authorizationURL);
     }
 
     const backToProfile = () => {
@@ -166,7 +169,7 @@ function Profile() {
                     className='submitButton full'
                     type='submit'
                     width='fit-content'
-                    // onClick={onSubmitDiscogs}
+                    onClick={onSubmitDiscogs}
                     colorScheme='orange'>
                     Associate account with Discogs
                 </Button>

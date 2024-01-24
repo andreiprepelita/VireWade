@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useLocation } from 'react-router-dom'
 import { Stack, Button, Spinner, Heading, Text } from "@chakra-ui/react";
 import Elements from "../Elements/Elements";
 import ArtistsSelector from "../ArtistsSelector/ArtistsSelector";
@@ -25,54 +25,77 @@ function MainPage() {
     const [totalCount, setTotalCount] = useState(0);
     const [searchParams, setSearchParams] = useSearchParams()
     const [accesToken, setAccessToken] = useState("");
+    const location = useLocation()
 
     
 
 
-    function redirectToken(){
-        let code = searchParams.get('code');
-        const clientId = process.env.REACT_APP_CLIENT_ID;
-        const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
-        const redirectURI = process.env.REACT_APP_REDIRECT_URI;
-        let body = new URLSearchParams({
-          grant_type: 'client_credentials',
-          code: code,
-          redirect_uri: redirectURI,
-          client_id: clientId,
-          client_secret: clientSecret
-        });
-        const response = fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Basic ' + (new Buffer.from(clientId + ':' + clientSecret).toString('base64'))
-        },
-        body: body
-      })
-        .then(response => {
-            if (!response.ok) {
-                console.error('error response', response);
-                response.json().then(json => {
-                    console.error('error body json', json);
-                    throw new Error('HTTP status ' + response.status + ': ' + json.error + ":" + json.error_description);
-                });
-              throw new Error('HTTP status ' + response.status);
+    // async function redirectToken(){
+    //     let code = searchParams.get('code');
+    //     let state = searchParams.get('state');
+    //     const clientId = process.env.REACT_APP_CLIENT_ID;
+    //     const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
+    //     const redirectURI = process.env.REACT_APP_REDIRECT_URI;
+
+    //     const response = await fetch(`https://accounts.spotify.com/api/token?grant_type=client_credentials&code=${code}&redirect_uri=${redirectURI}&client_id=${clientId}&client_secret=${clientSecret}&state=${state}`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/x-www-form-urlencoded',
+    //       'Authorization': 'Basic ' + (new Buffer.from(clientId + ':' + clientSecret).toString('base64'))
+    //     },
+    //   });
+    //   console.log("Auth m: ", response.json())
+    //   response.json()
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             console.error('error response', response);
+    //             response.json().then(json => {
+    //                 console.error('error body json', json);
+    //                 throw new Error('HTTP status ' + response.status + ': ' + json.error + ":" + json.error_description);
+    //             });
+    //           throw new Error('HTTP status ' + response.status);
+    //         }
+    //       return response.json();
+    //     })
+    //     .then(data => {
+    //         console.log("data is: ", data)
+    //       localStorage.setItem('access-token', data.access_token);
+    //     })
+    //     .catch(error => {
+    //       console.error('Error:', error);
+    //     });
+    //   };
+
+
+    const setSpotifySessionData = () => {
+        if(window.location.href.includes("#")) {
+
+        
+            const windowHref = window.location.href.split("#")[1];
+            const spotifyPairs = windowHref.split("&");
+            let accessToken="";
+            let expiresIn="";
+            for(let pair of spotifyPairs) {
+                console.log("pair: ", pair)
+                console.log("pair[0]: ", pair.split("=")[0] + pair.split("=")[0].length)
+                if(pair.split("=")[0] === "access_token"){
+                    accessToken=pair.split("=")[1];
+                }
+                if(pair.split("=")[0] === "expires_in") {
+                    expiresIn = pair.split("=")[1];
+
+                }
             }
-          return response.json();
-        })
-        .then(data => {
-            console.log("It worked")
-          localStorage.setItem('access-token', data.access_token);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-      };
+            console.log("accessToken: " + accessToken + "  expiresIn: " + expiresIn)
+            if(accessToken && expiresIn) {
+                sessionStorage.setItem('spotify_token', JSON.stringify({'access_token': accessToken, 'expires_in': expiresIn, 'creation_date': new Date()}))
+                // redirectToken()
+            }
+        }
+    }
 
     useEffect(() => {
-        if(searchParams.get('code') && searchParams.get('state')) {
-            redirectToken()
-        }
+        setSpotifySessionData()
     }, [])
 
     useEffect(() => {
