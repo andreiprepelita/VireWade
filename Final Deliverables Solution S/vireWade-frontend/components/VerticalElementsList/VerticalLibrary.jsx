@@ -11,31 +11,35 @@ const VerticalLibrary = ({ elements }) => {
         ref.current.scrollLeft += scrollOffset;
     };
 
+    console.log("ELEMENTS ARE: ", elements)
+
     let playlistStructureData = {};
-    const getPlaylistStructuredData = (playlistImg, playlistName, playlistAuthor, playlistTracks) => {
+    const getPlaylistStructuredData = (playlistImg, playlistName, playlistDescription, playlistTracks) => {
         playlistStructureData = {
             "@context": "https://schema.org/",
             "@type": "MusicPlaylist",
             "numTracks": playlistTracks.length,
             "image": playlistImg,
             "name": playlistName,
-            "author": playlistAuthor,
+            "abstract": playlistDescription,
             "track": {
                 "@type": "ItemList",
                 "itemListElement": []
             }
         }
 
-        playlistTracks.forEach(track => playlistStructureData.track.itemListElement.push({
+        playlistTracks.forEach(track => {
+            console.log("Track is +++ ", track)
+            playlistStructureData.track.itemListElement.push({
             "@type": "MusicRecording",
-            "name": track.title,
+            "name": track.track.name,
             "byArtist": {
                 "@type": "Person",
-                "name": track.creator
+                "name": track.track.artists[0].name
                 },
-            "genre": track.genre,
-            "image": track.image
-        }))
+            "genre": track.track.genre,
+            "image": track.track.album.images[1].url
+        })})
         return playlistStructureData;
       };
 
@@ -47,12 +51,12 @@ const VerticalLibrary = ({ elements }) => {
             <Flex direction={"row"} width='100%'>
                 <Box ref={ref} className="ScrollableListVertical">
 
-                    {elements.map((element) => (
+                    {elements.map((element, i) => (
                         <Box className="elementsBox" key={element.id} mr="4">
                             {<script type="application/ld+json">
-                                {JSON.stringify(getPlaylistStructuredData(element.image, element.title, element.author, element.tracks))}
+                                {JSON.stringify(getPlaylistStructuredData(element.image, element.title, element.description, element.tracks))}
                             </script>}
-                            <PlaylistCard key={element.id} element={element} />
+                            <PlaylistCard key={element.id + i} element={element} />
                         </Box>
                     ))}
 

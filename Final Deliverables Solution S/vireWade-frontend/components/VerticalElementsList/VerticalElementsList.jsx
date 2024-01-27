@@ -1,212 +1,83 @@
 import React, { useEffect, useState } from "react";
 import { Flex } from "@chakra-ui/react";
-import imageExample from '../../assets/image.jpg'
 import VerticalLibrary from "./VerticalLibrary.jsx";
 
 const VerticalElementsList = () => {
 
-    const getPlaylistsURL = ""
+    const [elements, setElements] = useState([])
+    
 
-    const [playlistsIds, setPlaylistsIds] = useState([])
+    const getUserPlaylists = async () => {
+        const requestOptions = {
+          method: 'GET',
+          headers: {
+              Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("spotify_token")).access_token}`
+          }
+        }
+        const res = await fetch(`https://api.spotify.com/v1/me/playlists`, requestOptions);
+        
+        console.log("Enters")
+          const fetchedPlaylists = await res.json();
+
+          let playlists = []
+
+          for(let playlist of fetchedPlaylists.items) {
+
+            let tracks = await getPlaylistTracklist(playlist.id)
+            playlists.push({
+                title: playlist.name,
+                id: playlist.id,
+                image: playlist.images[0],
+                tracks: tracks.items,
+                description: playlist.description
+            });
+          }
+  
+          console.log("playlists ARE: ", playlists)
+
+          setElements(playlists);
+  
+      }
+  
+      const getPlaylistTracklist = async (playlistId) => {
+        const requestOptions = {
+          method: 'GET',
+          headers: {
+              Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("spotify_token")).access_token}`
+          }
+        }
+          const res = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, requestOptions);
+  
+          const JsonRes = await res.json();
+  
+          console.log("playlists trackist: ", JsonRes)
+          return JsonRes;
+      }
+  
+      const getPlaylistImage = async(playlistId) => {
+        const requestOptions = {
+          method: 'GET',
+          headers: {
+              Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("spotify_token")).access_token}`
+          }
+        }
+          const res = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/images`, requestOptions);
+  
+          const JsonRes = await res.json();
+  
+          console.log("playlists image is: ", JsonRes)
+      }
+
 
     useEffect(() => {
 
-        console.log('another test')
+        
+        getUserPlaylists();
 
-        if (sessionStorage.getItem('token') != null) {
-
-            const requestOptions = {
-                method: 'GET',
-                headers: {
-                    'Authorization':  'Bearer ' + sessionStorage.getItem('token')
-                },
-            }
-
-            fetch(getPlaylistsURL, requestOptions)
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
-                setPlaylistsIds(data)
-            });
-        }
 
     }, []);
 
-    useEffect(() => {
-        
-        if (playlistsIds !== undefined && playlistsIds !== null && playlistsIds.length > 0) {
-
-            console.log('inside: ' + playlistsIds)
-            let playlists = []
-
-            const requests = playlistsIds.map(playlistId => {
-                const requestOptions = {
-                    method: 'GET',
-                    headers: {
-                        'Authorization':  'Bearer ' + sessionStorage.getItem('token')
-                    },
-                };
-
-                return fetch(getPlaylistsURL + "/" + playlistId + "/info", requestOptions)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        playlists.push({
-                            title: data['meta']['title'],
-                            id: playlistId,
-                            author: data['meta']['creator'],
-                            image: data['meta']['image'],
-                            genre: data['meta']['genre'],
-                            tracks: data['tracks']
-                        });
-                    });
-            });
-
-            Promise.all(requests)
-                .then(() => {
-                    console.log(playlists);
-                    setElements(playlists);
-                });
-        }
-
-    }, [playlistsIds])
-
-    const [elements, setElements] = useState([
-
-        {
-            id: 1,
-            image: imageExample,
-            title: "Vinyl Name",
-            author: "Author Name",
-            genre: "Genre",
-            tracks: [
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 1"
-                },
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 2"
-                }
-            ]
-        },
-        {
-            id: 2,
-            image: imageExample,
-            title: "Vinyl Name",
-            author: "Author Name",
-            genre: "Genre",
-            tracks: [
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 1"
-                },
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 2"
-                }
-            ]
-        }
-        ,
-        {
-            id: 3,
-            image: imageExample,
-            title: "Vinyl Name",
-            author: "Author Name",
-            genre: "Genre",
-            tracks: [
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 1"
-                },
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 2"
-                }
-            ]
-        }, {
-            id: 4,
-            image: imageExample,
-            title: "Vinyl Name",
-            author: "Author Name",
-            genre: "Genre",
-            tracks: [
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 1"
-                },
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 2"
-                }
-            ]
-        },
-        {
-            id: 5,
-            image: imageExample,
-            title: "Vinyl Name",
-            author: "Author Name",
-            genre: "Genre",
-            tracks: [
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 1"
-                },
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 2"
-                }
-            ]
-        }
-        ,
-        {
-            id: 6,
-            image: imageExample,
-            title: "Vinyl Name",
-            author: "Author Name",
-            genre: "Genre",
-            tracks: [
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 1"
-                },
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 2"
-                }
-            ]
-        },
-        {
-            id: 7,
-            image: imageExample,
-            title: "Vinyl Name",
-            author: "Author Name",
-            genre: "Genre",
-            tracks: [
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 1"
-                },
-                {
-                    "creator": "Author Name",
-                    "image": imageExample,
-                    "title": "Song title 2"
-                }
-            ]
-        }
-    ])
+    
 
     return (
 

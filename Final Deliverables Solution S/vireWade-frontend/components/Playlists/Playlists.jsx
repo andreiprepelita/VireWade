@@ -75,48 +75,7 @@ function Playlists() {
 
     }
 
-    const getUserPlaylists = async () => {
-      const requestOptions = {
-        method: 'GET',
-        headers: {
-            Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("spotify_token")).access_token}`
-        }
-      }
-        const res = await fetch(`https://api.spotify.com/v1/me/playlists`, requestOptions);
-
-        const JsonRes = await res.json();
-
-        console.log("playlists: ", JsonRes)
-
-    }
-
-    const getPlaylistTracklist = async (c) => {
-      const requestOptions = {
-        method: 'GET',
-        headers: {
-            Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("spotify_token")).access_token}`
-        }
-      }
-        const res = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, requestOptions);
-
-        const JsonRes = await res.json();
-
-        console.log("playlists trackist: ", JsonRes)
-    }
-
-    const getPlaylistImage = async(playlistId) => {
-      const requestOptions = {
-        method: 'GET',
-        headers: {
-            Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("spotify_token")).access_token}`
-        }
-      }
-        const res = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/images`, requestOptions);
-
-        const JsonRes = await res.json();
-
-        console.log("playlists image is: ", JsonRes)
-    }
+    
 
     const createPlaylist = async(name, description, publicState) => {
       const requestOptions = {
@@ -155,10 +114,6 @@ function Playlists() {
       setIsUserAuth(getToken());
 
       getUserData();
-
-      getUserPlaylists();
-
-      // getPlaylistTracklist("");
 
     }, []);
 

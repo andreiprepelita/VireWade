@@ -22,7 +22,7 @@ export default function NavBarLogged() {
         },
         {
             label: 'Logout',
-            href: '/'
+            href: '/login'
         }
     ];
 

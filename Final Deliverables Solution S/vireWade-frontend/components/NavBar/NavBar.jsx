@@ -14,7 +14,7 @@ const NavBar = ({ items }) => {
     
     const handleLogout = () => {
     
-        sessionStorage.removeItem('token')
+        localStorage.removeItem('user')
         window.location.reload();
     }
 
@@ -29,7 +29,7 @@ const NavBar = ({ items }) => {
                             <Button
                                 p={5}
                                 href={navItem.href ?? '/'}
-                                onClick={handleLogout}
+                                onClick={navItem.label === 'Logout'? handleLogout : null}
                                 fontWeight={600}
                                 textAlign='center'
                                 colorScheme={navItem.label !== 'Logout' ? 'orange': 'red'}>

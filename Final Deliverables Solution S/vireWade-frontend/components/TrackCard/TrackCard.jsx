@@ -2,16 +2,13 @@ import React from 'react';
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 
-const TrackCard = ({track}) => {
+const TrackCard = ({trackName,trackAuthor,trackGenre, trackImage}) => {
 
-    useEffect(() => {
-        console.log("TRACK RECEIVED = " + track)
-    }, [])
 
     return (
         <Flex className="trackCardFlex ">
 
-        <Box className='trackImage' style={{ backgroundImage: 'url(' + track.image + ')' }}></Box>
+        <img className='trackImage' src ={trackImage} />
 
         <Box display="flex" flexDirection="column" p="4" alignItems={'flex-start'}>
 
@@ -23,7 +20,8 @@ const TrackCard = ({track}) => {
                 as="h4"
                 isTruncated
             >
-                Title: {track.title}
+                Title: 
+                {trackName}
             </Text>
             <Text
                 fontWeight={'bold'}
@@ -33,7 +31,8 @@ const TrackCard = ({track}) => {
                 lineHeight="tight"
                 isTruncated
                 >
-                Author: {track.creator}
+                Author: 
+                {trackAuthor}
             </Text>
             <Text
                 textAlign={'left'}
@@ -43,7 +42,8 @@ const TrackCard = ({track}) => {
                 lineHeight="tight"
                 isTruncated
                 >
-                Genre: {track.genre}
+                Genre: 
+                {trackGenre}
             </Text>
 
         </Box>

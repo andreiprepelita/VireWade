@@ -9,54 +9,39 @@ import TrackCard from "../TrackCard/TrackCard";
 
 const PlaylistCard = ({ element }) => {
 
+    console.log("Playlist image is ", element.image)
+
     const [showVinyls, setShowVinyls] = useState(false);
     const [showTracks, setShowTracks] = useState(false)
     const [vinyls, setVinyls] = useState([]);
     const [recomendationIsLoading, setRecomendationIsLoading] = useState([false]);
 
-//     You can now sign your web service calls with a method signature, provided along with the session key you received  and your API key.
-//  You will need to include all three as parameters in subsequent calls in order to be able to access services that require authentication.
-//  You can visit individual method call pages to find out if they require authentication. Your three authentication parameters are defined as:
-
-// sk (Required) : The session key returned by auth.getSession service.
-// api_key (Required) : Your 32-character API key.
-// api_sig (Required) : Your API method signature, constructed as explained in Section 6
-
-// Sign your calls
-// Construct your api method signatures by first ordering all the parameters sent in your call alphabetically
-//  by parameter name and concatenating them into one string using a <name><value> scheme. So for a call to auth.getSession you may have:
-
-// **api_key**xxxxxxxx**method**auth.getSession**token**xxxxxxx
-// Ensure your parameters are utf8 encoded. Now append your secret to this string. Finally, generate an md5 hash of the resulting string
-//  For example, for an account with a secret equal to 'mysecret', your api signature will be:
-
-// api signature = md5("api_keyxxxxxxxxmethodauth.getSessiontokenxxxxxxxmysecret")
-// Where md5() is an md5 hashing operation and its argument is the string to be hashed. The hashing operation should return a 32-character hexadecimal md5 hash.
-
-
-
 const onHideTracksClicked = () => {
     console.log(showTracks)
-    console.log("pressed on hide tracks")
+    console.log("Tracks hidden")
     setShowTracks(false)
 }
 const onShowTracksClicked = () => {
         console.log(showTracks)
-        console.log("pressed on show tracks")
+        console.log("Tracks visible")
         setShowTracks(true)
     }
 
     const Tracks = () => {
-        console.log(element)
         return (
             <div className = 'tracks'>
                 {
-                    element['tracks'].map((track) => (
-                            <Box className="margin2 elementsBox" key={String(element.id) + track.title} mr="4">
-                                <TrackCard className="chakra-heading css-uqsj0l"
-                                 key={track.title + track.creator} track={track} />
+                    element.tracks.map((track, i) => {
+                        let x = track.track;
+                        let y = x.artists[0].name;
+                        let image = x.album.images[1].url
+                        console.log("My track is ", x)
+                        return (
+                            <Box className="margin2 elementsBox" key={String(element.id) + i + track.title} mr="4">
+                                <TrackCard className="css-uqsj0l chakra-heading"
+                                 key={track.track.name + i + track.track.artists[0]} trackName={x.name} trackAuthor={y} trackGenre={"newGenre"} trackImage={image}/>
                             </Box>
-                        ))
+                        )})
                 }
             </div>
         )
@@ -71,13 +56,11 @@ const onShowTracksClicked = () => {
         let genres = []
         let authors = []
 
-        console.log('track-uri: ' + element['tracks'])
+        console.log('tracks: ' + element['tracks'])
 
         for(let index = 0; index < element['tracks'].length; index++) {
 
             let track = element['tracks'][index]
-
-            console.log('H-am luat ' + track)
 
             if (!genres.includes(track['genre'])) {
                 genres.push(track['genre'])
@@ -133,7 +116,7 @@ const onShowTracksClicked = () => {
         <>
         <Flex className="playlistCardFlex ">
 
-            <Box className='playlistImage' style={{ backgroundImage: 'url(' + element.image + ')' }}></Box>
+            <img className='playlistImage' src={element.image.url} />
 
             <Box display="flex" flexDirection="column" p="4" alignItems={'flex-start'} justifyContent={'space-between'}>
 
@@ -161,15 +144,32 @@ const onShowTracksClicked = () => {
                         Get recommandations based on this playlist
                     </Button>
                     <Link
-                        mt={5}
                         type='submit'
-                        padding={'20px'}
+                        paddingLeft={'20px'}
                         textAlign={'end'}
                         onClick={
                             showTracks ? onHideTracksClicked : onShowTracksClicked
                         }
                     >
-                {showTracks ? "Hide Tracklist": "See tracklist"}
+                {showTracks ? (<Button
+                        mt={5}
+                        colorScheme='orange'
+                        padding={'20px'}
+                        type='submit'
+                        alignSelf={'center'}
+                        justifySelf={'flex-start'}  
+                    >
+                        Hide Tracklist
+                    </Button>): (<Button
+                        mt={5}
+                        colorScheme='orange'
+                        padding={'20px'}
+                        type='submit'
+                        alignSelf={'center'}
+                        justifySelf={'flex-start'}
+                    >
+                        See tracklist
+                    </Button>)}
             </Link>
                 </Box>
 
