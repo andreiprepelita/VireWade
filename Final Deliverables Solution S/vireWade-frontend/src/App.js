@@ -27,7 +27,8 @@ const App = () => {
                     <Route exact path="/register" element={<Login />}/>
                     <Route exact path="/playlists/:userId" element={<Playlists />}/>
                     <Route exact path="/profile/:userId" element={<Profile />}/>
-                    {/* <Route exact path="/vinyl/:artist/:vinylName/" element={<VinylDetails />} /> */}
+                    <Route exact path="/vinyl/:artist/:vinylName/" element={<VinylDetails />} />
+                    <Route exact path="/vinyl/details/:vinylName/:artist" element={<VinylDetails />} />
                     <Route exact path="/purchases" element={<Discog />} />
                     
                 </Routes>

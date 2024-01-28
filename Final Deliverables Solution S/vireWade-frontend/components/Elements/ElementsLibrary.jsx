@@ -45,7 +45,7 @@ const ElementsLibrary = ({ elements }) => {
             direction={"column"}
             textAlign="start"
         >
-            <Flex direction={"row"}>
+            <Flex direction={"row"} justify={"center"}>
                 {getLeftArrows()}
                 <Box ref={ref} className="ScrollableList">
 

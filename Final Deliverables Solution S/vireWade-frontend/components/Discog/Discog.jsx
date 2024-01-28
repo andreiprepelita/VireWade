@@ -18,37 +18,6 @@ function Discog() {
     const [discogsToken, setDiscogsToken] = useState('')
     const [userIsAuth, setIsUserAuth] = useState(getToken());
 
-    // async function getProfileData(user) {
-    //     const requestOptions = {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${getToken()}`
-    //         },
-    //         body: JSON.stringify({
-    //         })
-    //     }
-
-    //     const profileURL = ``
-    //     const res = await fetch(profileURL, requestOptions)
-    //     res.json()
-    //         .then(res => {
-    //             if (res.userData.discogs_secret && res.userData.discogs_token) {
-
-    //                 setDiscogsSecret(res.userData.discogs_secret)
-    //                 setDiscogsToken(res.userData.discogs_token)
-    //                 setIsAvailableDiscogs(true)
-    //             }
-    //         })
-    //     return res
-    // }
-
-    // useEffect(() => {
-
-    //     const user = getToken()
-    //     getProfileData(user.sub)
-    // }, []);
-
     const fetchData = async (e) => {
         setRecomendationIsLoading(true)
 

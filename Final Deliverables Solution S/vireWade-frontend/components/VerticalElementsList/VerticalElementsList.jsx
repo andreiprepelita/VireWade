@@ -14,7 +14,7 @@ const VerticalElementsList = ({elements, setElements}) => {
               Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("spotify_token")).access_token}`
           }
         }
-        const res = await fetch(`https://api.spotify.com/v1/me/playlists?offset=0&limit=1`, requestOptions);
+        const res = await fetch(`https://api.spotify.com/v1/me/playlists?offset=0&limit=10`, requestOptions);
         
         console.log("Enters")
           const fetchedPlaylists = await res.json();
