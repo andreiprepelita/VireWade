@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Box, Flex, Text, Link, Spinner, Center} from "@chakra-ui/react";
 import { useState } from "react";
 import "./PlaylistCard.css";
@@ -7,14 +7,13 @@ import Elements from "../Elements/Elements";
 import defaultImage from "../../assets/image.jpg";
 import TrackCard from "../TrackCard/TrackCard";
 
-const PlaylistCard = ({ element }) => {
-
-    console.log("Playlist image is ", element.image)
-
+const PlaylistCard = ({ element, artists, artistsNames }) => {
+    
     const [showVinyls, setShowVinyls] = useState(false);
     const [showTracks, setShowTracks] = useState(false)
     const [vinyls, setVinyls] = useState([]);
     const [recomendationIsLoading, setRecomendationIsLoading] = useState([false]);
+
 
 const onHideTracksClicked = () => {
     console.log(showTracks)
@@ -39,7 +38,7 @@ const onShowTracksClicked = () => {
                         return (
                             <Box className="margin2 elementsBox" key={String(element.id) + i + track.title} mr="4">
                                 <TrackCard className="css-uqsj0l chakra-heading"
-                                 key={track.track.name + i + track.track.artists[0]} trackName={x.name} trackAuthor={y} trackGenre={"newGenre"} trackImage={image}/>
+                                 key={track.track.name + i + track.track.artists[0]} trackName={x.name} trackAuthor={y} trackImage={image}/>
                             </Box>
                         )})
                 }
@@ -47,36 +46,43 @@ const onShowTracksClicked = () => {
         )
     }
 
+
+    const getGenres = async() => {
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("spotify_token")).access_token}`
+            }
+        }
+          console.log('GET GEnres')
+          const res = await fetch(`https://api.spotify.com/v1/artists?ids=${artists}`, requestOptions);
+    
+          const JsonRes = await res.json();
+
+          let genres = [];
+
+          for(let i = 0; i < JsonRes.artists.length; i ++) {
+            genres.push(...JsonRes.artists[i].genres);
+          }
+
+         let uniqueArray = [...new Set(genres)];
+         console.log("GENRES ", uniqueArray)
+
+         return uniqueArray;
+    }
+
     const preferencesURL = "http://127.0.0.1:8081/recommendation/preferences";
 
     async function getRecommendation() {
 
-        setShowVinyls(true)
-
-        let genres = []
-        let authors = []
-
-        console.log('tracks: ' + element['tracks'])
-
-        for(let index = 0; index < element['tracks'].length; index++) {
-
-            let track = element['tracks'][index]
-
-            if (!genres.includes(track['genre'])) {
-                genres.push(track['genre'])
-            }
-
-            if (!authors.includes(track['creator'])) {
-                authors.push(track['creator'])
-            }
-        }
-
+        let genres = await getGenres();
+        console.log("My genres are", genres)
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json' },
             body: JSON.stringify({
                 "favoriteGenres": genres,
-                "favoriteArtists": authors,
+                "favoriteArtists": artistsNames,
                 "pageSize": 5,
                 "limit": 100,
                 "pageIndex": Math.floor(Math.random() * 3)
@@ -85,13 +91,19 @@ const onShowTracksClicked = () => {
 
         setRecomendationIsLoading(true);
         const res = await fetch(preferencesURL, requestOptions);
+
         res.json()
         .then(res => {
             console.log(res)
-            loadVinyls(res.results)
+            loadVinyls(res.records)
         })
         .catch(err => console.log(err))
     }
+
+    useEffect(() => {
+        console.log("Apare de: ", artists)
+        console.log("Numele artistilor sunt", artistsNames)
+    }, [])
 
     async function loadVinyls(fetchData) {
         const vinyls = fetchData
@@ -139,7 +151,10 @@ const onShowTracksClicked = () => {
                         type='submit'
                         alignSelf={'center'}
                         justifySelf={'flex-start'}
-                        onClick={getRecommendation}
+                        onClick={ () => {
+                            setShowVinyls(true)
+                            getRecommendation(element.name);
+                        }}
                     >
                         Get recommandations based on this playlist
                     </Button>

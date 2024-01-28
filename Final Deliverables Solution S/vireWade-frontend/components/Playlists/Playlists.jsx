@@ -7,20 +7,21 @@ function Playlists() {
     const [file, setFile] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [userIsAuth, setIsUserAuth] = useState(getToken());
+    const [elements, setElements] = useState([])
   
-    // const handleClick = () => {
-    //   setIsOpen(true);
-    // };
+    const handleClick = () => {
+      setIsOpen(true);
+    };
   
-    // const handleFileChange = (event) => {
-    //   const pickedFile = event.target.files[0];
-    //   if (pickedFile.name.endsWith("xml") || pickedFile.name.endsWith("xspf")) {
-    //     setFile(pickedFile);
-    //     setIsOpen(false);
-    //   } else {
-    //     alert("Only XML and XSPF files are allowed.");
-    //   }
-    // };
+    const handleFileChange = (event) => {
+      const pickedFile = event.target.files[0];
+      if (pickedFile.name.endsWith("xml") || pickedFile.name.endsWith("xspf")) {
+        setFile(pickedFile);
+        setIsOpen(false);
+      } else {
+        alert("Only XML and XSPF files are allowed.");
+      }
+    };
   
     // const handleSubmit = async () => {
     //     if (!file) {
@@ -66,11 +67,11 @@ function Playlists() {
             Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("spotify_token")).access_token}`
         }
     }
+      console.log('ENTERs')
       const res = await fetch('https://api.spotify.com/v1/me', requestOptions);
 
       const JsonRes = await res.json();
       
-      // console.log("Res is ", await res.json())
       sessionStorage.setItem('spotify_user_data', JSON.stringify({'display_name': JsonRes.display_name, 'user_id': JsonRes.id, 'uri': JsonRes.uri}))
 
     }
@@ -111,15 +112,13 @@ function Playlists() {
     }
 
     useEffect(() => {
-      setIsUserAuth(getToken());
-
       getUserData();
+      console.log("Enters Playlists Page")
 
     }, []);
 
   function getToken() {
       const userLocalStorage = JSON.parse(localStorage.getItem('user'));
-      console.log("userStorage is ", userLocalStorage)
       let result;
       if(userLocalStorage){
           result = (userLocalStorage.message === 'USER_IS_AUTHENTICATED' || userLocalStorage.message === 'USER_REGISTERED_SUCCESSFULLY' || userLocalStorage.message === 'USER_ALREDY_REGISTERED') ? true : false;
@@ -139,7 +138,7 @@ function Playlists() {
             type="submit"
             padding="20px"
             alignSelf="flex-start"
-          //   onClick={handleClick}
+            onClick={handleClick}
           >
             Add Playlist
           </Button>
@@ -147,7 +146,7 @@ function Playlists() {
             <input
               type="file"
               accept="application/xml"
-              // onChange={handleFileChange}
+              onChange={handleFileChange}
             />
           )}
           {file && (
@@ -161,7 +160,7 @@ function Playlists() {
               Submit
             </Button>
           )}
-          <VerticalElementsList />
+          <VerticalElementsList elements={elements} setElements={setElements}/>
         </Stack>
         : <Navigate to="/" replace={true}/> }
       </Fragment>

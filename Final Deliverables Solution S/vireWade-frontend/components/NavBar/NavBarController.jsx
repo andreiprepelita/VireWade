@@ -4,11 +4,7 @@ import NavBarLogged from './NavBarLogged';
 
 export default function NavBarController() {
 
-    const [token, setToken] = useState();
-
-    useEffect(() => {
-        setToken(getToken());
-    }, []);
+    const [token, setToken] = useState(getToken());
 
     function getToken() {
         const userLocalStorage = JSON.parse(localStorage.getItem('user'));

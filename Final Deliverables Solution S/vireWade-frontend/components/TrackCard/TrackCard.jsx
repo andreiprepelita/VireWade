@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 
-const TrackCard = ({trackName,trackAuthor,trackGenre, trackImage}) => {
+const TrackCard = ({trackName,trackAuthor, trackImage}) => {
 
 
     return (
@@ -33,17 +33,6 @@ const TrackCard = ({trackName,trackAuthor,trackGenre, trackImage}) => {
                 >
                 Author: 
                 {trackAuthor}
-            </Text>
-            <Text
-                textAlign={'left'}
-                mt="1"
-                as="h4"
-                fontWeight={'bold'}
-                lineHeight="tight"
-                isTruncated
-                >
-                Genre: 
-                {trackGenre}
             </Text>
 
         </Box>

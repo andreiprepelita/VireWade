@@ -34,9 +34,9 @@ const GenreForm = ({setChecked, labelText, helperText, colorScheme}) => {
 
     }, [pageIndex]);
 
-    useEffect(() => {
-        setChecked(checkedGenres);
-    }, [checkedGenres])
+    // useEffect(() => {
+    //     setChecked(checkedGenres);
+    // }, [checkedGenres])
 
     const getRightArrows = () => {
         return ( 

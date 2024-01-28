@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/react";
 import ArtistsForm from "./ArtistsForm";
 
@@ -6,6 +6,7 @@ import ArtistsForm from "./ArtistsForm";
 const ArtistsSelector = ( {setLikedArtists, setDislikedArtists} ) => {
 
     const [showArtists, setShowArtists] = useState(false);
+
 
     return (
     <div style={{width:"100%", textAlign:"center"}}>
@@ -25,12 +26,14 @@ const ArtistsSelector = ( {setLikedArtists, setDislikedArtists} ) => {
                 setChecked={setLikedArtists} 
                 labelText="Select your favorite artists" 
                 helperText="Select only if you're a fan."
-                colorScheme="telegram"/> 
+                colorScheme="telegram"
+                /> 
             <ArtistsForm 
                 setChecked={setDislikedArtists} 
                 labelText="Select the artists you don't like" 
                 helperText="Select only if you are a hater."
-                colorScheme="red"/> 
+                colorScheme="red"
+                /> 
         </div>
         : 
         null }

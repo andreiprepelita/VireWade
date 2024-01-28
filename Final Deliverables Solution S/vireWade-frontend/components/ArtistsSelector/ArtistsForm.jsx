@@ -4,7 +4,7 @@ import { IoIosArrowBack, IoIosArrowForward} from "react-icons/io";
 import defaultImage from "../../assets/image.jpg";
 
 
-const ArtistsForm = ({setChecked, labelText, helperText, colorScheme}) => {
+const ArtistsForm = ({setChecked, labelText, helperText, colorScheme, }) => {
     const pageSize = 5;
     const artistsLimit = 50;
     const countURL = "http://127.0.0.1:8081/recommendation/top";
@@ -19,20 +19,29 @@ const ArtistsForm = ({setChecked, labelText, helperText, colorScheme}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [checkedArtists, setCheckedArtists] = useState([]);
 
-    useEffect(() => {
-        fetchArtists(pageIndex);
+    
+    const changeIndex = (newPageIndex) => {
+        fetchArtists(newPageIndex);
 
-        if (pageIndex*pageSize >= artistsLimit) {
+        if (newPageIndex*pageSize >= artistsLimit) {
             setShowRightArrow(false);
         } else if (showRightArrow === false) {
             setShowRightArrow(true);
         }
 
-        if (pageIndex <= 1) {
+        if (newPageIndex <= 1) {
             setShowLeftArrow(false);
         } else if (showLeftArrow === false) {
             setShowLeftArrow(true);
         }
+    
+        setPageIndex(newPageIndex);
+    }
+    
+    
+    useEffect(() => {
+        console.log("Here enters once")
+        fetchArtists(pageIndex);
 
     }, [pageIndex]);
 
@@ -46,7 +55,11 @@ const ArtistsForm = ({setChecked, labelText, helperText, colorScheme}) => {
                 className="leftArrowSimple"
                 size="20px"
                 color={"teal"}
-                onClick={async () => {setPageIndex(pageIndex + 1);}}
+                onClick={async () => {
+                    
+                    
+                    changeIndex(pageIndex + 1);
+                }}
             />
         )
     }
@@ -57,7 +70,7 @@ const ArtistsForm = ({setChecked, labelText, helperText, colorScheme}) => {
                 className="leftArrowSimple"
                 size="20px"
                 color={"teal"}
-                onClick={() => {setPageIndex(pageIndex - 1);}}
+                onClick={() => {changeIndex(pageIndex - 1);}}
             />
         )
     }
@@ -132,12 +145,8 @@ const ArtistsForm = ({setChecked, labelText, helperText, colorScheme}) => {
         return artistStructureData;
       };
 
-
-    if (hasError) {
-        return (<Text fontSize='2xl' color='tomato'>An error has occured, please try again.</Text>)
-    }
-
-    return (     
+    return (  
+        hasError ?   <Text fontSize='2xl' color='tomato'>An error has occured, please try again.</Text> :
     <FormControl as='fieldset' style={{textAlign:"center"}} mt={5}>
         <FormLabel as='legend' style={{textAlign:"center"}}>{labelText}</FormLabel>
         <FormHelperText mb={10}>{helperText}</FormHelperText>

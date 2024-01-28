@@ -18,14 +18,9 @@ function Profile() {
 
     const navigate = useNavigate()
 
-
-
-    // function getToken() {
-    //     const tokenString = sessionStorage.getItem('token')
-    //     return tokenString
-    // }
-
     useEffect(() => {
+
+        setIsUserAuth(getToken());
 
         if(searchParams.get("oauth_verifier") && searchParams.get("oauth_token")) {
 
@@ -70,35 +65,6 @@ function Profile() {
     }
     }, []);
 
-    // async function getProfileData(user) {
-    //     const requestOptions = {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': `Bearer ${getToken()}`
-    //         },
-    //         body: JSON.stringify({
-    //         })
-    //     }
-
-        // const profileURL = ``
-        // const res = await fetch(profileURL, requestOptions)
-        // res.json()
-        //     .then(res => {
-        //         if (res.userData.discogs_secret) {
-
-        //             setIsDisablesDicsogs(true)
-        //         }
-        //     })
-        // return res
-    // }
-
-    // useEffect(() => {
-
-    //     const user = getToken()
-    //     getProfileData(user.sub)
-    // }, []);
-
     const onSubmitDiscogs = async (e) => {
 
         const res = await fetch('http://localhost:8081/discogs/request_token')
@@ -121,9 +87,6 @@ function Profile() {
         window.location.reload();
     }
 
-    useEffect(() => {
-        setIsUserAuth(getToken());
-    }, []);
 
     function getToken() {
         const userLocalStorage = JSON.parse(localStorage.getItem('user'));

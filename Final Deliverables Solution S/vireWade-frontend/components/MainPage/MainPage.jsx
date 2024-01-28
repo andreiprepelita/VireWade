@@ -25,6 +25,7 @@ function MainPage() {
     const [totalCount, setTotalCount] = useState(0);
     const [searchParams, setSearchParams] = useSearchParams()
     const [accesToken, setAccessToken] = useState("");
+    const [showArtists, setShowArtists] = useState(false);
     const location = useLocation()
 
     
@@ -190,7 +191,10 @@ function MainPage() {
             <Text color={'black'}  size='lg' alignSelf='center' paddingBottom={'10px'}>Please enter your preferences</Text>
             <ArtistsSelector
                 setLikedArtists={setPreferencesLikedArtists} 
-                setDislikedArtists={setPreferencesDislikedArtists}/>
+                setDislikedArtists={setPreferencesDislikedArtists}
+                showArtists={showArtists}
+                setShowArtists={setShowArtists}
+                />
             <GenreSelector
                 setLikedGenres={setPreferencesLikedGenres} 
                 setDislikedGenres={setPreferencesDislikedGenres}/>
