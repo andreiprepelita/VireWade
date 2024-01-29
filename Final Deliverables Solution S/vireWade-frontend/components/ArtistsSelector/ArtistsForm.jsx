@@ -84,6 +84,7 @@ const ArtistsForm = ({setChecked, labelText, helperText, colorScheme, }) => {
                 "limitQuery": artistsLimit,
                 "numberOfItemsPerPage" : pageSize,
                 "pageNumber": pageIndex,
+                "shuffle" : true
             })
         };
 
