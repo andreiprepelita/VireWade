@@ -47,6 +47,37 @@ public class SparqlResponse {
 
     }
 
+    public QueryResult retrieveRecords(Integer pageNumber, Integer numberOfItemsOnPage, String queryType, Boolean shuffle) {
+        QueryResult result = new QueryResult();
+        List<Map<String, Map<String, String>>> bindings = this.results.get("bindings");
+        if(shuffle) {
+            java.util.Collections.shuffle(bindings);
+        }
+        List<Map<String, String>> processedResultsList = new ArrayList<>();
+        int totalItems = bindings.size();
+        if(numberOfItemsOnPage == 0) {
+            numberOfItemsOnPage = totalItems;
+        }
+        pageNumber = pageNumber - 1;
+        int startIndex = pageNumber * numberOfItemsOnPage;
+        int endIndex = Math.min(totalItems, (pageNumber + 1) * numberOfItemsOnPage);
+        for (int i = startIndex; i< endIndex; i++){
+            Map<String, String> keyValueFinal = new HashMap<>();
+            bindings.get(i).forEach((key, value) -> keyValueFinal.put(key, value.get("value")));
+            processedResultsList.add(keyValueFinal);
+        }
+        if(shuffle) {
+            java.util.Collections.shuffle(processedResultsList);
+        }
+        result.records = processedResultsList;
+        result.totalRecords = totalItems;
+        result.variables = this.head.get("vars");
+        result.jsonLDRepresentation = transformDataToJsonLd(processedResultsList, queryType);
+
+        return result;
+
+    }
+
     public JsonLDResponse transformDataToJsonLd(List<Map<String, String>> finalListResult, String queryType) {
         Map<String, String> contextMap = new HashMap<>();
         contextMap.put("mo", "http://purl.org/ontology/mo/");

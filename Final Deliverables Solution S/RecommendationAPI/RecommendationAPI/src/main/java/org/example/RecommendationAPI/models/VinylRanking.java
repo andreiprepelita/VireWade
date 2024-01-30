@@ -9,6 +9,8 @@ public class VinylRanking {
 
     private Integer limitQuery = 0;
 
+    private Boolean shuffle = false;
+
     public String getFieldToRankBy() {
         return fieldToRankBy;
     }
@@ -39,5 +41,13 @@ public class VinylRanking {
 
     public void setLimitQuery(Integer limitQuery) {
         this.limitQuery = limitQuery;
+    }
+
+    public Boolean getShuffle() {
+        return shuffle;
+    }
+
+    public void setShuffle(Boolean shuffle) {
+        this.shuffle = shuffle;
     }
 }

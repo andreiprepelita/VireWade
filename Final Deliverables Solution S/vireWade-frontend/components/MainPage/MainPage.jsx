@@ -124,7 +124,8 @@ function MainPage() {
                 "yearRangeStart": yearRange[0],
                 "yearRangeEnd": yearRange[1],
                 "pageSize": pageSize,
-                "pageIndex": currentPage
+                "pageIndex": currentPage,
+                "shuffle": true
             })
         };
 
