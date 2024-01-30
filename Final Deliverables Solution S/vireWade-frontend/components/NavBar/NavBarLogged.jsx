@@ -3,6 +3,16 @@ import NavBar from './NavBar';
 
 export default function NavBarLogged() {
 
+
+
+    function getUser() {
+        const userLocalStorage = JSON.parse(localStorage.getItem('user'));
+        console.log("userStorage is ", userLocalStorage)
+        
+        return userLocalStorage.payload;
+    } 
+
+
     const ITEMS = [
         {
             label: 'Recommendation',
@@ -10,7 +20,7 @@ export default function NavBarLogged() {
         },
         {
             label: 'Playlist',
-            href: '/playlists/1',
+            href: `/playlists/${getUser()}`,
         },
         {
             label: 'Last Purchases',
@@ -18,7 +28,7 @@ export default function NavBarLogged() {
         },
         {
             label: 'Profile',
-            href: '/profile/1'
+            href: `/profile/${getUser()}`
         },
         {
             label: 'Logout',
