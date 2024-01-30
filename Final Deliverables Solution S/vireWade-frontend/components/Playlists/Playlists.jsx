@@ -24,6 +24,7 @@ function Playlists() {
     };
   
     // const handleSubmit = async () => {
+      // http://localhost:8081/recommendation/playlist/local
     //     if (!file) {
     //       return;
     //     }

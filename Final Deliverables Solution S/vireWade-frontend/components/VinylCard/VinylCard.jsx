@@ -81,7 +81,7 @@ const VinylCard = ({ element }) => {
 
                 <Link
                     textAlign={'center'} 
-                    href={'/vinyl/details/' + element.vinylLabel + "/" + element.artistLabel} 
+                    href={element.vinyl} 
                     isExternal
                     mt="1"
                     isTruncated

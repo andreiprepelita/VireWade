@@ -7,7 +7,6 @@ import Login from '../components/Login/Login';
 import Playlists from '../components/Playlists/Playlists';
 import Profile from '../components/Profile/Profile';
 import NavBarController from '../components/NavBar/NavBarController';
-import VinylDetails from '../components/VinylDetails/VinylDetails';
 import Discog from '../components/Discog/Discog';
 
 const App = () => {
@@ -27,8 +26,6 @@ const App = () => {
                     <Route exact path="/register" element={<Login />}/>
                     <Route exact path="/playlists/:userId" element={<Playlists />}/>
                     <Route exact path="/profile/:userId" element={<Profile />}/>
-                    <Route exact path="/vinyl/:artist/:vinylName/" element={<VinylDetails />} />
-                    <Route exact path="/vinyl/details/:vinylName/:artist" element={<VinylDetails />} />
                     <Route exact path="/purchases" element={<Discog />} />
                     
                 </Routes>

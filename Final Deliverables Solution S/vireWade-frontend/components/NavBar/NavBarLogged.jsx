@@ -6,7 +6,7 @@ export default function NavBarLogged() {
     const ITEMS = [
         {
             label: 'Recommendation',
-            href: '/recommendation'
+            href: '/'
         },
         {
             label: 'Playlist',

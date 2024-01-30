@@ -67,9 +67,24 @@ function Profile() {
 
     const onSubmitDiscogs = async (e) => {
 
-        const res = await fetch('http://localhost:8081/discogs/request_token')
-        const token = await res.json()
-        window.location.replace(token.authorizationURL);
+        if(!sessionStorage.getItem('discog_token')) {
+            const res = await fetch('http://localhost:8081/discogs/request_token')
+            const token = await res.json()
+            window.location.replace(token.authorizationURL);
+        } else {
+            sessionStorage.removeItem('discog_token')
+            window.location.reload('/')
+        }
+        
+    }
+
+    const onSpotifySubmit = () => {
+        if(!sessionStorage.getItem('spotify_token')) {
+            window.location.replace("http://localhost:8888/spotify/login");
+        } else {
+            sessionStorage.removeItem('spotify_token')
+            window.location.reload()
+        }
     }
 
     const backToProfile = () => {
@@ -83,7 +98,8 @@ function Profile() {
 
     const handleLogout = () => {
     
-        sessionStorage.removeItem('token')
+        sessionStorage.removeItem('discog-token')
+        sessionStorage.removeItem('spotify-token');
         window.location.reload();
     }
 
@@ -116,16 +132,16 @@ function Profile() {
             </Flex>
 
             <Box width={'500px'}>
-                <a href="http://localhost:8888/spotify/login" >
                     <Button
                         type='submit'
                         className='full submitButton'
-                        colorScheme='orange'
-                        // onClick={onSubmitSpotify}
+                        colorScheme={sessionStorage.getItem('spotify_token') ? 'red' : 'orange'}
+                        onClick={onSpotifySubmit}
                         >
-                        Associate account with Spotify
+                            {sessionStorage.getItem('spotify_token') ? 'Disconnect from Spotify' : 'Associate account with Spotify'}
+                        
                     </Button>
-                </a>
+                
             </Box>
             <Box width={'500px'}>
                 <Button
@@ -134,8 +150,8 @@ function Profile() {
                     type='submit'
                     width='fit-content'
                     onClick={onSubmitDiscogs}
-                    colorScheme='orange'>
-                    Associate account with Discogs
+                    colorScheme={sessionStorage.getItem('discog_token') ? 'red' : 'orange'}>
+                    {sessionStorage.getItem('discog_token') ? 'Disconnect from Discogs' : 'Associate account with Discogs'}
                 </Button>
             </Box>
 

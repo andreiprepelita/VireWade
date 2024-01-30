@@ -14,6 +14,8 @@ const NavBar = ({ items }) => {
     
     const handleLogout = () => {
     
+        sessionStorage.removeItem('discog-token')
+        sessionStorage.removeItem('spotify-token');
         localStorage.removeItem('user')
         window.location.reload();
     }

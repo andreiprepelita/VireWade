@@ -28,7 +28,7 @@ function Discog() {
             
         }
 
-        const data = await fetch(`http://127.0.0.1:8081/recommendation/discogs?discogsToken=${discogToken.userToken}&discogsTokenSecret=${discogToken.userTokenSecret}&pageNumber=4&numberOfItemsPerPage=1`,requestOptions)
+        const data = await fetch(`http://127.0.0.1:8081/recommendation/discogs?discogsToken=${discogToken.userToken}&discogsTokenSecret=${discogToken.userTokenSecret}&pageNumber=1&numberOfItemsPerPage=5`,requestOptions)
 
         const vinylsJSON = await data.json()
         console.log('vinyls discog: ', vinylsJSON)
