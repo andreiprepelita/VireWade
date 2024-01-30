@@ -106,6 +106,7 @@ input:focus {
     }
 }
 
-div p.error-text {
+.error-text {
     background-color: red;
+    font-weight: 500;
 }

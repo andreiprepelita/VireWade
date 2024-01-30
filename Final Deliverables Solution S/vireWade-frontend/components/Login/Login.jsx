@@ -31,7 +31,7 @@ export default function Login() {
         }
     }
 
-    const handleLoginSubmit = (e) => {
+    const handleLoginSubmit = async(e) => {
         e.preventDefault();
         const postObject = {
             email: email,
@@ -39,24 +39,30 @@ export default function Login() {
         }
         console.log(`postObject is ${postObject}`);
         if(type === "login") {
-            fetch('http://localhost:8888/login', {
+           let response = await fetch('http://localhost:8888/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(postObject)
                 }
-            ).then(response => response.json())
-            .then(json => {
+            )
+            if(response.ok){
+                let json = await response.json()
                 console.log('works like ' + JSON.stringify(json));
                 localStorage.setItem('user', JSON.stringify(json));
+                sessionStorage.removeItem('discog-token')
+                sessionStorage.removeItem('spotify-token');
                 setAuth(true);
-            })
-            .catch(err => changeErrorValue());
+            }else {
+                changeErrorValue()
+            }
+            
+            
     }
 }
 
-    const handleSignupSubmit = (e) => {
+    const handleSignupSubmit = async(e) => {
         e.preventDefault();
         console.log(`${username} ${email} ${pass1}`);
         
@@ -70,19 +76,24 @@ export default function Login() {
                 email: email,
                 password: pass1
             }
-            fetch("http://localhost:8888/register", {
+            let response = await fetch("http://localhost:8888/register", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(postObject)
-            }).then(response => response.json())
-            .then(json => {
+            })
+            
+            if(response.ok){
+                let json = await response.json()
                 console.log('works like ' + JSON.stringify(json));
                 localStorage.setItem('user', JSON.stringify(json));
+                sessionStorage.removeItem('discog-token')
+                sessionStorage.removeItem('spotify-token');
                 setAuth(true);
-            })
-            .catch(err => changeErrorValue());
+            }else {
+                changeErrorValue()
+            }
         }
     }
 
@@ -134,8 +145,8 @@ export default function Login() {
         </div>
         <div className="rightContainer">
             {error ?
-                <div className="containerChild">
-                    <p className="error-text">Incorrect email and/or password</p>
+                <div className="containerChild error-text">
+                    <p >Incorrect email and/or password</p>
                  </div>
                  :null
             }
