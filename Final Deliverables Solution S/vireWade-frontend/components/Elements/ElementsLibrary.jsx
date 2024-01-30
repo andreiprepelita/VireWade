@@ -1,5 +1,5 @@
 import { Box, Flex } from "@chakra-ui/react";
-import React, { useRef } from "react";
+import React, { useEffect } from "react";
 import "./ElementsLibrary.css";
 import {
     IoIosArrowBack,
@@ -7,13 +7,9 @@ import {
 } from "react-icons/io";
 import VinylCard from "../VinylCard/VinylCard";
 
-const ElementsLibrary = ({ elements }) => {
-    const ref = useRef(null);
+const ElementsLibrary = ({ elements, changeIndex, pageIndex }) => {
+    
 
-    const scroll = (scrollOffset) => {
-        if (!ref.current) return;
-        ref.current.scrollLeft += scrollOffset;
-    };
 
     const getLeftArrows = () => {
 
@@ -22,7 +18,11 @@ const ElementsLibrary = ({ elements }) => {
                 size="120px"
                 className="leftArrowSimple"
                 color={"teal"}
-                onClick={() => scroll(-250)}
+                onClick={async () => {
+                    
+                    
+                    changeIndex(pageIndex - 1);
+                }}
             />
         )
     }
@@ -33,10 +33,17 @@ const ElementsLibrary = ({ elements }) => {
                 size="120px"
                 className="leftArrowSimple"
                 color={"teal"}
-                onClick={() => scroll(600)}
+                onClick={async () => {
+                    
+                    
+                    changeIndex(pageIndex + 1);
+                }}
             />
         )
     }
+    useEffect(() => {
+
+    }, [pageIndex])
 
     return (
         <Flex
@@ -47,7 +54,7 @@ const ElementsLibrary = ({ elements }) => {
         >
             <Flex direction={"row"} justify={"center"}>
                 {getLeftArrows()}
-                <Box ref={ref} className="ScrollableList">
+                <Box className="ScrollableList">
 
                     {elements.map((element) => (
                         <Box display="inline-block" className="elementsBox" key={element.vinyl + element.artist + element.genre} mr="4" >

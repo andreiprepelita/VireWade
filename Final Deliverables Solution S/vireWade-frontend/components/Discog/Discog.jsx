@@ -12,13 +12,35 @@ function Discog() {
     const navigate = useNavigate()
     const [showVinyls, setShowVinyls] = useState(false);
     const [elements, setElements] = useState([]);
-    const [discogsSecret, setDiscogsSecret] = useState('')
     const [recomendationIsLoading, setRecomendationIsLoading] = useState([false]);
     const [isAvailableDiscogs, setIsAvailableDiscogs] = useState(false)
-    const [discogsToken, setDiscogsToken] = useState('')
     const [userIsAuth, setIsUserAuth] = useState(getToken());
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const fetchData = async (e) => {
+    
+    const artistsLimit = 50;
+    const pageSize = 10;
+    
+    const changeIndex = (newPageIndex) => {
+        
+        let index = newPageIndex;
+        console.log("Page index is: "+ index);
+        console.log(" and is: " + newPageIndex >= artistsLimit/pageSize)
+
+        if (newPageIndex >= artistsLimit/pageSize) {
+            index = (artistsLimit/pageSize) - 1
+        }
+        
+        if (newPageIndex < 1) {
+            index = 1;
+        }
+        
+        fetchData(index)
+        setCurrentPage(index)
+    }
+    
+    
+    const fetchData = async (index) => {
         setRecomendationIsLoading(true)
 
         const discogToken = JSON.parse(sessionStorage.getItem('discog_token'));
@@ -28,7 +50,7 @@ function Discog() {
             
         }
 
-        const data = await fetch(`http://127.0.0.1:8081/recommendation/discogs?discogsToken=${discogToken.userToken}&discogsTokenSecret=${discogToken.userTokenSecret}&pageNumber=1&numberOfItemsPerPage=5`,requestOptions)
+        const data = await fetch(`http://127.0.0.1:8081/recommendation/discogs?discogsToken=${discogToken.userToken}&discogsTokenSecret=${discogToken.userTokenSecret}&pageNumber=${index}&numberOfItemsPerPage=5`,requestOptions)
 
         const vinylsJSON = await data.json()
         console.log('vinyls discog: ', vinylsJSON)
@@ -85,7 +107,7 @@ function Discog() {
                 padding={'20px'}
                 width='30%'
                 alignSelf={'center'}
-                onClick={isAvailableDiscogs ? () => { setShowVinyls(true); fetchData() } : () => {navigate('/profile')}}
+                onClick={isAvailableDiscogs ? () => { setShowVinyls(true); fetchData(currentPage) } : () => {navigate('/profile')}}
             >
                {isAvailableDiscogs ? "Get recommandations based on Discog information" : "Connect to Discogs"}
             </Button>
@@ -101,7 +123,7 @@ function Discog() {
                         alignSelf={'center'}
                     />
                     :
-                    <Elements elements={elements} />
+                    <Elements elements={elements} changeIndex={changeIndex} pageIndex={currentPage}/>
                 : null
             }
         </Stack >

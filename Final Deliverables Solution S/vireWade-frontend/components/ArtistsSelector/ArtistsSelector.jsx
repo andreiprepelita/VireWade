@@ -25,13 +25,13 @@ const ArtistsSelector = ( {setLikedArtists, setDislikedArtists} ) => {
             <ArtistsForm 
                 setChecked={setLikedArtists} 
                 labelText="Select your favorite artists" 
-                helperText="Select only if you're a fan."
+                helperText="Select if you like the artists."
                 colorScheme="telegram"
                 /> 
             <ArtistsForm 
                 setChecked={setDislikedArtists} 
                 labelText="Select the artists you don't like" 
-                helperText="Select only if you are a hater."
+                helperText="Select only if you hate the artists."
                 colorScheme="red"
                 /> 
         </div>

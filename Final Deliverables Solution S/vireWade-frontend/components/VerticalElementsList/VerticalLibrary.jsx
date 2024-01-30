@@ -5,12 +5,6 @@ import "./VerticalLibrary.css";
 
 const VerticalLibrary = ({ elements, playlistStructureData }) => {
 
-    const ref = useRef(null);
-
-    const scroll = (scrollOffset) => {
-        if (!ref.current) return;
-        ref.current.scrollLeft += scrollOffset;
-    };
 
     useEffect(() => {
         console.log("VerticalLibrary is rerendered")
@@ -69,7 +63,7 @@ const VerticalLibrary = ({ elements, playlistStructureData }) => {
             textAlign="start"
         >
             <Flex direction={"row"} width='100%'>
-                <Box ref={ref} className="ScrollableListVertical">
+                <Box className="ScrollableListVertical">
 
                     {elements.map((element, i) => {
                         return (

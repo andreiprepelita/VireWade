@@ -13,6 +13,10 @@ const PlaylistCard = ({ element, artists, artistsNames }) => {
     const [showTracks, setShowTracks] = useState(false)
     const [vinyls, setVinyls] = useState([]);
     const [recomendationIsLoading, setRecomendationIsLoading] = useState([false]);
+    const [pageIndex, setPageIndex] = useState();
+
+    const pageSize = 4;
+    const artistsLimit = 50;
 
 
 const onHideTracksClicked = () => {
@@ -24,6 +28,23 @@ const onShowTracksClicked = () => {
         console.log(showTracks)
         console.log("Tracks visible")
         setShowTracks(true)
+    }
+    
+    const changeIndex = (newPageIndex) => {
+        
+        let index = newPageIndex;
+
+        if (newPageIndex >= artistsLimit/pageSize) {
+            index = (artistsLimit/pageSize) - 1
+        }
+        
+        if (newPageIndex < 1) {
+            index = 1;
+        }
+        
+        getRecommendation(index);
+        setPageIndex(index)
+        
     }
 
     const Tracks = () => {
@@ -73,7 +94,7 @@ const onShowTracksClicked = () => {
 
     const preferencesURL = "http://127.0.0.1:8081/recommendation/preferences";
 
-    async function getRecommendation() {
+    async function getRecommendation(pageIndex) {
 
         let genres = await getGenres();
         console.log("My genres are", genres)
@@ -83,9 +104,9 @@ const onShowTracksClicked = () => {
             body: JSON.stringify({
                 "favoriteGenres": genres,
                 "favoriteArtists": artistsNames,
-                "pageSize": 5,
+                "pageSize": 4,
                 "limit": 100,
-                "pageIndex": Math.floor(Math.random() * 3)
+                "pageIndex": pageIndex
             })
         }
 
@@ -153,7 +174,8 @@ const onShowTracksClicked = () => {
                         justifySelf={'flex-start'}
                         onClick={ () => {
                             setShowVinyls(true)
-                            getRecommendation(element.name);
+                            getRecommendation(1);
+                            setPageIndex(1)
                         }}
                     >
                         Get recommandations based on this playlist
@@ -207,7 +229,7 @@ const onShowTracksClicked = () => {
                         size='xl'
                         alignSelf={'center'}/>
                     :
-                    <Elements elements={vinyls} />
+                    <Elements elements={vinyls} changeIndex={changeIndex} pageIndex={pageIndex}/>
                 : null
             }
         </Center>

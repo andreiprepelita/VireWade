@@ -3,12 +3,12 @@ import { Flex } from "@chakra-ui/react";
 
 import ElementsLibrary from "./ElementsLibrary";
 
-const Elements = ({ elements }) => {
+const Elements = ({ elements, changeIndex, pageIndex }) => {
 
     return (
 
         <Flex alignItems="flex-start" direction="column" px={{base: 3}} py={{base: 3}} >
-            <ElementsLibrary elements={elements} />
+            <ElementsLibrary elements={elements} changeIndex={changeIndex} pageIndex={pageIndex}/>
         </Flex>
     )
 }

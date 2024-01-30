@@ -23,49 +23,32 @@ function MainPage() {
     const [recomendationIsLoading, setRecomendationIsLoading] = useState([false]);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalCount, setTotalCount] = useState(0);
-    const [searchParams, setSearchParams] = useSearchParams()
-    const [accesToken, setAccessToken] = useState("");
     const [showArtists, setShowArtists] = useState(false);
     const location = useLocation()
 
+    const artistsLimit = 50;
+
     
+    const changeIndex = (newPageIndex) => {
+        
+        let index = newPageIndex;
+        console.log("Page index is: "+ index);
+        console.log(" and is: " + newPageIndex >= artistsLimit/pageSize)
+
+        if (newPageIndex >= artistsLimit/pageSize) {
+            index = (artistsLimit/pageSize) - 1
+        }
+        
+        if (newPageIndex < 1) {
+            index = 1;
+        }
+        
+        setShowVinyls(true);
+        fetchVinyls(index);
+        setCurrentPage(index)
+    }
 
 
-    // async function redirectToken(){
-    //     let code = searchParams.get('code');
-    //     let state = searchParams.get('state');
-    //     const clientId = process.env.REACT_APP_CLIENT_ID;
-    //     const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
-    //     const redirectURI = process.env.REACT_APP_REDIRECT_URI;
-
-    //     const response = await fetch(`https://accounts.spotify.com/api/token?grant_type=client_credentials&code=${code}&redirect_uri=${redirectURI}&client_id=${clientId}&client_secret=${clientSecret}&state=${state}`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/x-www-form-urlencoded',
-    //       'Authorization': 'Basic ' + (new Buffer.from(clientId + ':' + clientSecret).toString('base64'))
-    //     },
-    //   });
-    //   console.log("Auth m: ", response.json())
-    //   response.json()
-    //     .then(response => {
-    //         if (!response.ok) {
-    //             console.error('error response', response);
-    //             response.json().then(json => {
-    //                 console.error('error body json', json);
-    //                 throw new Error('HTTP status ' + response.status + ': ' + json.error + ":" + json.error_description);
-    //             });
-    //           throw new Error('HTTP status ' + response.status);
-    //         }
-    //       return response.json();
-    //     })
-    //     .then(data => {
-    //         console.log("data is: ", data)
-    //       localStorage.setItem('access-token', data.access_token);
-    //     })
-    //     .catch(error => {
-    //       console.error('Error:', error);
-    //     });
-    //   };
 
 
     const setSpotifySessionData = () => {
@@ -90,7 +73,6 @@ function MainPage() {
             console.log("accessToken: " + accessToken + "  expiresIn: " + expiresIn)
             if(accessToken && expiresIn) {
                 sessionStorage.setItem('spotify_token', JSON.stringify({'access_token': accessToken, 'expires_in': expiresIn, 'creation_date': new Date()}))
-                // redirectToken()
             }
         }
     }
@@ -101,18 +83,13 @@ function MainPage() {
 
     useEffect(() => {
         setRecomendationIsLoading(false);
-        if ( currentPage * pageSize >= totalCount ) {
-            setCurrentPage(1)
-        } else {
-            setCurrentPage(currentPage + 1);
-        }
     }, [vinyls]);
 
     useEffect(() => {
         setCurrentPage(1)
     }, [likedArtists, dislikedArtists, likedGenres, dislikedGenres, yearRange]);
 
-    async function fetchVinyls() {
+    async function fetchVinyls(index) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -124,7 +101,7 @@ function MainPage() {
                 "yearRangeStart": yearRange[0],
                 "yearRangeEnd": yearRange[1],
                 "pageSize": pageSize,
-                "pageIndex": currentPage,
+                "pageIndex": index,
                 "shuffle": true
             })
         };
@@ -207,7 +184,7 @@ function MainPage() {
                 padding={'20px'}
                 width='30%'
                 alignSelf={'center'}
-                onClick={() => { setShowVinyls(true); fetchVinyls() }}
+                onClick={() => { setShowVinyls(true); fetchVinyls(1) }}
             >
                 Get Recommendation based on my preferences
             </Button>
@@ -222,7 +199,7 @@ function MainPage() {
                         size='xl'
                         alignSelf={'center'}/>
                     :
-                    <Elements elements={vinyls} />
+                    <Elements elements={vinyls} changeIndex={changeIndex} pageIndex={currentPage}/>
                 : null
             }
         </Stack >
