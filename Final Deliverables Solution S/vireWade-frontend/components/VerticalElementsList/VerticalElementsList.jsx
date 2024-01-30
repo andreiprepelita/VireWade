@@ -15,6 +15,11 @@ const VerticalElementsList = ({elements, setElements}) => {
           }
         }
         const res = await fetch(`https://api.spotify.com/v1/me/playlists?offset=0&limit=10`, requestOptions);
+
+        if (!res.ok) {
+          sessionStorage.removeItem('spotify_token')
+          window.location.reload()
+        }
         
         console.log("Enters")
           const fetchedPlaylists = await res.json();
@@ -50,6 +55,11 @@ const VerticalElementsList = ({elements, setElements}) => {
           }
         }
           const result = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, requestOptions);
+
+          if (!result.ok) {
+            sessionStorage.removeItem('spotify_token')
+            window.location.reload()
+          }
   
           const JsonResult = await result.json();
   

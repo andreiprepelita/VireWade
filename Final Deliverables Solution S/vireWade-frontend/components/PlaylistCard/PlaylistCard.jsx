@@ -77,6 +77,11 @@ const onShowTracksClicked = () => {
         }
           console.log('GET GEnres')
           const res = await fetch(`https://api.spotify.com/v1/artists?ids=${artists}`, requestOptions);
+
+          if (!res.ok) {
+            sessionStorage.removeItem('spotify_token')
+            window.location.reload()
+          }
     
           const JsonRes = await res.json();
 

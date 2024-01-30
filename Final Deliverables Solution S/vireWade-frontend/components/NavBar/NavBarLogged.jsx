@@ -10,7 +10,7 @@ export default function NavBarLogged() {
         },
         {
             label: 'Playlist',
-            href: '/playlist',
+            href: '/playlists/1',
         },
         {
             label: 'Last Purchases',
@@ -18,7 +18,7 @@ export default function NavBarLogged() {
         },
         {
             label: 'Profile',
-            href: '/profile'
+            href: '/profile/1'
         },
         {
             label: 'Logout',

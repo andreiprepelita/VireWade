@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Stack, Button } from "@chakra-ui/react";
-import { useNavigate, Navigate } from "react-router-dom"
+import { Stack, Button, Box } from "@chakra-ui/react";
+import { Navigate } from "react-router-dom"
 import VerticalElementsList from "../VerticalElementsList/VerticalElementsList";
 
 function Playlists() {
@@ -70,8 +70,13 @@ function Playlists() {
     }
       console.log('ENTERs')
       const res = await fetch('https://api.spotify.com/v1/me', requestOptions);
-
+      
+      if (!res.ok) {
+        sessionStorage.removeItem('spotify_token')
+        window.location.reload()
+      }
       const JsonRes = await res.json();
+
       
       sessionStorage.setItem('spotify_user_data', JSON.stringify({'display_name': JsonRes.display_name, 'user_id': JsonRes.id, 'uri': JsonRes.uri}))
 
@@ -89,6 +94,11 @@ function Playlists() {
       }
 
       const res = await fetch(`https://api.spotify.com/v1/users/${JSON.parse(sessionStorage.getItem("spotify_user_data")).user_id}/playlists`, requestOptions);
+
+      if (!res.ok) {
+        sessionStorage.removeItem('spotify_token')
+        window.location.reload()
+      }
 
         const JsonRes = await res.json();
 
@@ -109,12 +119,19 @@ function Playlists() {
 
       const res = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, requestOptions);
 
+      if (!res.ok) {
+        sessionStorage.removeItem('spotify_token')
+        window.location.reload()
+      }
+
         const JsonRes = await res.json();
     }
 
     useEffect(() => {
-      getUserData();
-      console.log("Enters Playlists Page")
+      if(sessionStorage.getItem("spotify_token")) {
+        getUserData();
+        console.log("Enters Playlists Page")
+      }
 
     }, []);
 
@@ -129,10 +146,17 @@ function Playlists() {
       console.log("result not working ", result)
       return false;
   }
+
+  const onSpotifySubmit = () => {
+    if(!sessionStorage.getItem('spotify_token')) {
+        window.location.replace("http://localhost:8888/spotify/login");
+    }
+}
   
     return (
       <Fragment>
-          { userIsAuth ?
+          { userIsAuth ? (
+            sessionStorage.getItem("spotify_token") ?
         <Stack className="blueBox">
           <Button
             colorScheme="orange"
@@ -162,7 +186,19 @@ function Playlists() {
             </Button>
           )}
           <VerticalElementsList elements={elements} setElements={setElements}/>
-        </Stack>
+        </Stack> : (<Box width={'500px'} alignSelf={'center'}>
+                    <Button
+                        type='submit'
+                        className='full submitButton'
+                        colorScheme='red'
+                        onClick={onSpotifySubmit}
+                        >
+                            Associate account with Spotify
+                        
+                    </Button>
+                
+            </Box>)
+        )
         : <Navigate to="/" replace={true}/> }
       </Fragment>
     );
