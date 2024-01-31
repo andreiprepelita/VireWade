@@ -8,6 +8,7 @@ import Playlists from '../components/Playlists/Playlists';
 import Profile from '../components/Profile/Profile';
 import NavBarController from '../components/NavBar/NavBarController';
 import Discog from '../components/Discog/Discog';
+import NewPlaylistFile from '../components/Playlists/NewPlaylist';
 
 const App = () => {
   return (
@@ -27,7 +28,7 @@ const App = () => {
                     <Route exact path="/playlists/:userId" element={<Playlists />}/>
                     <Route exact path="/profile/:userId" element={<Profile />}/>
                     <Route exact path="/purchases" element={<Discog />} />
-                    
+                    <Route exact path="/playlists/file" element={< NewPlaylistFile/>} />
                 </Routes>
             </BrowserRouter>
         </Stack>

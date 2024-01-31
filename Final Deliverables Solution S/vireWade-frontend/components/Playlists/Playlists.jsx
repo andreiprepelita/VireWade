@@ -1,65 +1,13 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { Stack, Button, Box } from "@chakra-ui/react";
-import { Navigate } from "react-router-dom"
+import React, { useState, useEffect, Fragment} from "react";
+import { Stack, Button, Box, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
+import { Navigate, useNavigate } from "react-router-dom"
 import VerticalElementsList from "../VerticalElementsList/VerticalElementsList";
 
 function Playlists() {
-    const [file, setFile] = useState(null);
-    const [isOpen, setIsOpen] = useState(false);
     const [userIsAuth, setIsUserAuth] = useState(getToken());
     const [elements, setElements] = useState([])
+    const navigate = useNavigate()
   
-    const handleClick = () => {
-      setIsOpen(true);
-    };
-  
-    const handleFileChange = (event) => {
-      const pickedFile = event.target.files[0];
-      if (pickedFile.name.endsWith("xml") || pickedFile.name.endsWith("xspf")) {
-        setFile(pickedFile);
-        setIsOpen(false);
-      } else {
-        alert("Only XML and XSPF files are allowed.");
-      }
-    };
-  
-    // const handleSubmit = async () => {
-      // http://localhost:8081/recommendation/playlist/local
-    //     if (!file) {
-    //       return;
-    //     }
-    
-    //     try {
-    //       const fileReader = new FileReader();
-    //       fileReader.readAsText(file);
-    //       fileReader.onload = async () => {
-    //         try {
-    //           const response = await fetch("/playlists", {
-    //             method: "POST",
-    //             headers: {
-    //               "Content-Type": "application/xml",
-    //               "Content-Length": file.size,
-    //               "Authorization": "Bearer " + sessionStorage.getItem("token")
-    //             },
-    //             body: fileReader.result,
-    //           });
-    
-    //           if (!response.ok) {
-    //             throw new Error("Failed to upload file.");
-    //           }
-    
-    //           alert("File uploaded successfully.");
-    //           window.location.reload()
-    //         } catch (error) {
-    //           console.error(error);
-    //           alert("Failed to upload file.");
-    //         }
-    //       };
-    //     } catch (error) {
-    //       console.error(error);
-    //       alert("Failed to read file.");
-    //     }
-    //   };
 
     const getUserData = async () => {
       const requestOptions = {
@@ -82,7 +30,6 @@ function Playlists() {
 
     }
 
-    
 
     const createPlaylist = async(name, description, publicState) => {
       const requestOptions = {
@@ -147,11 +94,15 @@ function Playlists() {
       return false;
   }
 
-  const onSpotifySubmit = () => {
+    const onSpotifySubmit = () => {
     if(!sessionStorage.getItem('spotify_token')) {
         window.location.replace("http://localhost:8888/spotify/login");
     }
-}
+  }
+
+  const handleClick = () => {
+    navigate('/playlists/file')
+  }
   
     return (
       <Fragment>
@@ -159,32 +110,15 @@ function Playlists() {
             sessionStorage.getItem("spotify_token") ?
         <Stack className="blueBox">
           <Button
-            colorScheme="orange"
-            type="submit"
-            padding="20px"
-            alignSelf="flex-start"
-            onClick={handleClick}
-          >
-            Add Playlist
-          </Button>
-          {isOpen && (
-            <input
-              type="file"
-              accept="application/xml"
-              onChange={handleFileChange}
-            />
-          )}
-          {file && (
-            <Button
-              colorScheme="orange"
-              type="submit"
-              padding="20px"
-              alignSelf="flex-start"
-              // onClick={handleSubmit}
-            >
-              Submit
-            </Button>
-          )}
+          colorScheme="orange"
+          type="submit"
+          padding="20px"
+          alignSelf="flex-start"
+          onClick={handleClick}
+        >
+          Add Playlist file
+        </Button>
+            
           <VerticalElementsList elements={elements} setElements={setElements}/>
         </Stack> : (<Box width={'500px'} alignSelf={'center'}>
                     <Button
