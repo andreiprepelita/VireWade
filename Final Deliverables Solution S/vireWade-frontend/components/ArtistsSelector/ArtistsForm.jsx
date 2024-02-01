@@ -7,7 +7,7 @@ import defaultImage from "../../assets/image.jpg";
 const ArtistsForm = ({setChecked, labelText, helperText, colorScheme }) => {
     const pageSize = 5;
     const artistsLimit = 50;
-    const countURL = "http://127.0.0.1:8081/recommendation/top";
+    const countURL = "https://recommendation-api-0q3l.onrender.com/recommendation/top";
     var artistStructureData = {};
 
     const [hasError, setErrors] = useState(false);
@@ -150,7 +150,7 @@ const ArtistsForm = ({setChecked, labelText, helperText, colorScheme }) => {
         hasError ?   <Text fontSize='2xl' color='tomato'>An error has occured, please try again.</Text> :
     <FormControl as='fieldset' style={{textAlign:"center"}} mt={5}>
         <FormLabel as='legend' style={{textAlign:"center"}}>{labelText}</FormLabel>
-        <FormHelperText mb={10}>{helperText}</FormHelperText>
+        <FormHelperText mb={5}>{helperText}</FormHelperText>
         <div style={{display: "inline"}}>
         {showLeftArrow ? getLeftArrows() : null}
         <SimpleGrid columns={5} spacing={5}>

@@ -5,6 +5,10 @@ export default function NavBarNotLogged() {
 
     const ITEMS = [
         {
+            label: 'Playlist Recommandation',
+            href: '/playlists/file'
+        },
+        {
             label: 'Login',
             href: '/login'
         },

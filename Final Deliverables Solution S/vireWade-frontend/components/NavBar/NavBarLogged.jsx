@@ -15,11 +15,11 @@ export default function NavBarLogged() {
 
     const ITEMS = [
         {
-            label: 'Recommendation',
-            href: '/'
+            label: 'Playlist Recommandation',
+            href: '/playlists/file'
         },
         {
-            label: 'Playlist',
+            label: 'Playlists',
             href: `/playlists/${getUser()}`,
         },
         {

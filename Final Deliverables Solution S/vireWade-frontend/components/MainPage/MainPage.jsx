@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useLocation } from 'react-router-dom'
-import { Stack, Button, Spinner, Heading, Text } from "@chakra-ui/react";
+import { Stack, Button, Spinner, Heading, Text, Center } from "@chakra-ui/react";
 import Elements from "../Elements/Elements";
 import ArtistsSelector from "../ArtistsSelector/ArtistsSelector";
+import ArtistsDislikedSelector from "../ArtistsSelector/ArtistsDislikedSelector";
 import GenreSelector from "../GenreSelector/GenreSelector";
+import GenreDislikedSelector from "../GenreSelector/GenreDislikedSelector";
 import defaultImage from "../../assets/image.jpg";
 import YearSelector from "../YearSelector/YearSelector";
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
 function MainPage() {
     const pageSize = 10;
-    const preferencesURL = "http://127.0.0.1:8081/recommendation/preferences";
+    const preferencesURL = "https://recommendation-api-0q3l.onrender.com/recommendation/preferences";
 
     const [hasError, setErrors] = useState(false);
     const [vinyls, setVinyls] = useState([]);
@@ -165,17 +167,16 @@ function MainPage() {
 
     return (
         <Stack height={"auto"} as='flex'>
-            <Heading as='h1' color={'black'} alignSelf='center' paddingBottom={'10px'}>Welcome to ViReWade,</Heading>
-            <Text color={'black'}  size='lg' alignSelf='center' paddingBottom={'10px'}>Please enter your preferences</Text>
+            <Text color={'black'}  fontSize='3xl' alignSelf='center' paddingBottom={'10px'} paddingTop={'20px'}>Please enter your preferences</Text>
             <ArtistsSelector
                 setLikedArtists={setPreferencesLikedArtists} 
                 setDislikedArtists={setPreferencesDislikedArtists}
                 showArtists={showArtists}
                 setShowArtists={setShowArtists}
                 />
-            <GenreSelector
-                setLikedGenres={setPreferencesLikedGenres} 
-                setDislikedGenres={setPreferencesDislikedGenres}/>
+            <ArtistsDislikedSelector setDislikedArtists={setPreferencesDislikedArtists}/>
+            <GenreSelector setLikedGenres={setPreferencesLikedGenres}  />
+            <GenreDislikedSelector setDislikedGenres={setPreferencesDislikedGenres}/>
             <YearSelector setYearRange={setPreferencesYears}/>
             <Button
                 m={10}
@@ -197,7 +198,9 @@ function MainPage() {
                         emptyColor='gray.200'
                         color='teal.500'
                         size='xl'
-                        alignSelf={'center'}/>
+                        alignSelf={'center'}
+                        justifyContent={'center'}
+                        />
                     :
                     <Elements elements={vinyls} changeIndex={changeIndex} pageIndex={currentPage}/>
                 : null

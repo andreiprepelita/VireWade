@@ -3,7 +3,7 @@ import { Button } from "@chakra-ui/react";
 import GenreForm from "./GenreForm";
 
 
-const GenreSelector = ( {setLikedGenres} ) => {
+const GenreDislikedSelector = ( {setDislikedGenres} ) => {
 
     const [showGenres, setShowGenres] = useState(false);
 
@@ -16,20 +16,18 @@ const GenreSelector = ( {setLikedGenres} ) => {
             width='20%'
             alignSelf={'center'}
             onClick={() => {setShowGenres(!showGenres);}}>
-            Genres liked
+            Genres disliked
         </Button>
         { showGenres 
         ?             
-        
             <GenreForm 
-                setChecked={setLikedGenres} 
-                labelText="Select your favorite music genres" 
-                helperText="Select only if you're like this genre."
-                colorScheme="telegram"/> 
-        
+                setChecked={setDislikedGenres} 
+                labelText="Select the music genre you don't want to be recommended" 
+                helperText="Select only if you hate this genre."
+                colorScheme="red"/> 
         : 
         null }
     </div>);
 }
 
-export default GenreSelector;
+export default GenreDislikedSelector;

@@ -97,7 +97,7 @@ const onShowTracksClicked = () => {
          return uniqueArray;
     }
 
-    const preferencesURL = "http://127.0.0.1:8081/recommendation/preferences";
+    const preferencesURL = "https://recommendation-api-0q3l.onrender.com/recommendation/preferences";
 
     async function getRecommendation(pageIndex) {
 

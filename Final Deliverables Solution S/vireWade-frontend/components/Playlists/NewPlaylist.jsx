@@ -39,7 +39,7 @@ function NewPlaylistFile() {
             const fileContent = e.target.result;
     
             try {
-                const response = await fetch("http://localhost:8081/recommendation/playlist/local", {
+                const response = await fetch("https://recommendation-api-0q3l.onrender.com/recommendation/playlist/local", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/xml",

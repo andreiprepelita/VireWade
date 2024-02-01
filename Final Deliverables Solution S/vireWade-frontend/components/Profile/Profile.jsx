@@ -33,7 +33,7 @@ function Profile() {
                 }
             }
 
-            const access_token_url = `http://localhost:8081/discogs/access_token?verifier=${searchParams.get("oauth_verifier")}`
+            const access_token_url = `https://recommendation-api-0q3l.onrender.com/discogs/access_token?verifier=${searchParams.get("oauth_verifier")}`
             const res = await fetch(access_token_url, requestOptions)
             console.log("CHECK discogs")
             return res
@@ -68,7 +68,7 @@ function Profile() {
     const onSubmitDiscogs = async (e) => {
 
         if(!sessionStorage.getItem('discog_token')) {
-            const res = await fetch('http://localhost:8081/discogs/request_token')
+            const res = await fetch('https://recommendation-api-0q3l.onrender.com/discogs/request_token')
             const token = await res.json()
             window.location.replace(token.authorizationURL);
         } else {

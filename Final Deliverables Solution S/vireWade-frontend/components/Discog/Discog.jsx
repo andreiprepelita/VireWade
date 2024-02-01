@@ -50,7 +50,7 @@ function Discog() {
             
         }
 
-        const data = await fetch(`http://127.0.0.1:8081/recommendation/discogs?discogsToken=${discogToken.userToken}&discogsTokenSecret=${discogToken.userTokenSecret}&pageNumber=${index}&numberOfItemsPerPage=5`,requestOptions)
+        const data = await fetch(`https://recommendation-api-0q3l.onrender.com/recommendation/discogs?discogsToken=${discogToken.userToken}&discogsTokenSecret=${discogToken.userTokenSecret}&pageNumber=${index}&numberOfItemsPerPage=5`,requestOptions)
 
         const vinylsJSON = await data.json()
         console.log('vinyls discog: ', vinylsJSON)

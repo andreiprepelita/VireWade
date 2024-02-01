@@ -6,7 +6,7 @@ import { IoIosArrowBack, IoIosArrowForward} from "react-icons/io";
 const GenreForm = ({setChecked, labelText, helperText, colorScheme}) => {
     const pageSize = 5;
     const genreLimit = 50;
-    const countURL = "http://127.0.0.1:8081/recommendation/top";
+    const countURL = "https://recommendation-api-0q3l.onrender.com/recommendation/top";
 
     const [hasError, setErrors] = useState(false);
 
@@ -134,7 +134,7 @@ const GenreForm = ({setChecked, labelText, helperText, colorScheme}) => {
             }
             </Stack>
         </CheckboxGroup>
-        <FormHelperText mt={5} mb={10}>{helperText}</FormHelperText>
+        <FormHelperText mt={5} mb={5}>{helperText}</FormHelperText>
     </FormControl> 
 )
 }
