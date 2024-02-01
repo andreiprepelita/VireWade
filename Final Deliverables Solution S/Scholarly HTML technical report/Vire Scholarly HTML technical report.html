@@ -126,11 +126,12 @@
               </div>
 
               <h3 class="card-title" style="color:green">Backend Services</h3>
-              <h3 style="color:green;" class="card-title">Vinyl Architecture (Main Endpoint)</h3>
+              <h3 style="color:green;" class="card-title">Vinyl Architecture (Sparql Endpoint)</h3>
               <blockquote>
               <p>       
-                This service offers a single endpoint. The endpoint accepts a query as input and, using this query, generates a list of potential recommendations by accessing data from WikiData. 
-                The endpoint's output will consist of vinyl record information.
+                This service offers a single endpoint. The endpoint accepts a query as input and we run it on the Stardog platform utilizing the Stardog endpoint.
+                On the Stardog Platform we created our database that contains information about vinyl records in RDF format. Moreover, Stardog platform offered us an endpoint to execute queries on our database.
+                As a result of the query, the endpoint returns a list of vinyl records.
               </p>
               </blockquote>
               <h4 style="color:green; font-size: larger;">
@@ -139,7 +140,7 @@
               <div class="item" style="text-align:center">
                 <img src="./Resources/Vinyl endpoint - Main endpoint.drawio.png" alt="graphQL" style="">
               </div>
-              <h4 style="color:green; font-size: larger;">
+              <!-- <h4 style="color:green; font-size: larger;">
                 Schema GraphQL:
               </h4>
               <div class="item">
@@ -167,7 +168,7 @@
                   }
                   </code>
                 </pre>
-              </div>
+              </div> -->
               
 
               <h3 class="card-title" style="color:green;">User Architecture</h3>
@@ -187,11 +188,11 @@
                   This service is tasked with offering a range of vinyl record recommendations, 
                   derived from various criteria.
                 </p>
-                <p>Three distinct endpoints will be made available for this service. Each will have a unique input format, but ultimately, they will be configured to retrieve data from WikiData by interacting with the Vinyls GraphQL endpoint.
+                <p>Three distinct endpoints will be made available for this service. Each will have a unique input format, but ultimately, they will be configured to retrieve data from WikiData by interacting with the Sparql endpoint.
                 </p>
                 <p>
-                  The role of this endpoint is to serve as a bridge between the application's frontend and the Vinyls Service, which delivers the actual recommendations. 
-                  The endpoint will convert the received input into a format that the Vinyls GraphQL endpoint 
+                  The role of this module is to serve as a bridge between the application's frontend and the Vinyls Service, which delivers the actual recommendations. 
+                  Also this module will convert the received input using the Sparql QueryBuilder into a format that the Sparql endpoint 
                   can readily understand and process.
                 </p>
               </blockquote>
@@ -451,10 +452,11 @@
                 </code></pre>
                 <br>
                 <p>
-                  To provide vinyl recommendations to users, we utilized various external APIs, such as: Discogs API and LastFM API.
+                  To provide vinyl recommendations to users, we utilized various external APIs, such as: <b>Discogs API</b> and <b>Spotify API</b>.
                 </p>
                 <br>
                 <br>
+                <h4 class="card-title"><b>Discogs API</b></h4>
                 <p>
                   Our strategy included recommending vinyl records based on the user's history of song purchases from different music stores. For this, we used the <b><a href="https://www.discogs.com/developers/">
                     Discogs API</a></b>.
@@ -546,8 +548,12 @@
                 </code></pre>
                 <p>From this data returned by Discogs API we extracted artists and genres</p>
                 <p>
-                  Additionally, we plan to offer vinyl suggestions based on the user's playlists from various platforms, using data obtained from <b><a href="https://www.last.fm/api/playlists">Last.fm Playlists</a></b>, a music streaming service.
+                  Additionally, we offer vinyl suggestions based on the user's playlists from various platforms, using data obtained from <b>Spotify</b>, a music streaming service.
                 </p>
+
+                <br>
+                <br>
+                <h4 class="card-title"><b>Spotify API</b></h4>
               </blockquote>
             </div>
           </div>
