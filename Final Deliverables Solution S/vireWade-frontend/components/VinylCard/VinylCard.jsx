@@ -7,21 +7,28 @@ const VinylCard = ({ element }) => {
 
     var vinylStructureData = {};
 
-    const getVinylStructuredData = (title, artist, imgUrl, genre, releaseDate) => {
+    const getVinylStructuredData = (title, artist, imgUrl, genre, releaseDate, idVinyl, idArtist, idGenre) => {
         vinylStructureData = {
             "@context": {
                 "mo": "http://purl.org/ontology/mo/",
                 "dc": "http://purl.org/dc/elements/1.1/",
-                "foaf": "http://xmlns.com/foaf/0.1/"
+                "xsd": "http://www.w3.org/2001/XMLSchema#",
+                "foaf": "http://xmlns.com/foaf/0.1/",
+                "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
               },
               "@type": "mo:Vinyl",
               "dc:title": title,
+              "@id": idVinyl,
               "foaf:maker": {
                 "@type": "mo:MusicArtist",
-                "foaf:name": artist
+                "foaf:name": artist,
+                "@id": idArtist
               },
               "mo:image": imgUrl,
-              "mo:genre": genre,
+              "mo:genre": {
+                "rdfs:label":genre,
+                "@id": idGenre
+                },
               "dc:date": {
                 "@value": releaseDate,
                 "@type": "xsd:date"
@@ -33,7 +40,7 @@ const VinylCard = ({ element }) => {
     return (
         <Flex className="elementCardFlex">
             <script type="application/ld+json">
-                {JSON.stringify(getVinylStructuredData(element.vinylLabel, element.artistLabel, element.imgPath, element.genreLabel, element.releaseDate))}
+                {JSON.stringify(getVinylStructuredData(element.vinylLabel, element.artistLabel, element.imgPath, element.genreLabel, element.releaseDate, element.vinyl, element.artist, element.genre))}
             </script>
             <Box className='elementImage' style={{ backgroundImage: 'url(' + vinylStructureData["mo:image"] + ')' }}></Box>
 
@@ -48,26 +55,28 @@ const VinylCard = ({ element }) => {
                 >
                     {vinylStructureData["dc:title"]}
                 </Text>
-                <Text
+                <Link
                     textAlign={'center'}
                     mt="1"
-                    as="h4"
+                    href={element.artist}
                     isTruncated
+                    isExternal
                     color={'grey'}
                     lineHeight="tight"
                 >
-                    Artist: {vinylStructureData["foaf:maker"]["foaf:name"]}
-                </Text>
-                <Text
+                    Artist: {vinylStructureData["foaf:maker"]["foaf:name"]} <ExternalLinkIcon mx='2px' />
+                </Link>
+                <Link
                     textAlign={'center'}
                     mt="1"
+                    href={element.genre}
                     lineHeight="tight"
-                    as="h4"
                     isTruncated
+                    isExternal
                     color={'grey'}
                 >
-                    Genre: {vinylStructureData["mo:genre"]}
-                </Text>
+                    Genre: {vinylStructureData["mo:genre"]["rdfs:label"]} <ExternalLinkIcon mx='2px' />
+                </Link>
                 <Text
                     textAlign={'center'}
                     mt="1"

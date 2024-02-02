@@ -132,7 +132,7 @@ const ArtistsForm = ({setChecked, labelText, helperText, colorScheme }) => {
         setCheckedArtists(artistList);
     }
 
-    const getArtistStructuredData = (artistName, imgUrl) => {
+    const getArtistStructuredData = (artistName, imgUrl,artistId) => {
         artistStructureData = {
             "@context": {
                 "mo": "http://purl.org/ontology/mo/",
@@ -142,6 +142,7 @@ const ArtistsForm = ({setChecked, labelText, helperText, colorScheme }) => {
               "@type": "mo:MusicArtist",
               "mo:image": imgUrl,
               "foaf:name": artistName,
+              "@id": artistId
         }
         return artistStructureData;
       };
@@ -166,7 +167,7 @@ const ArtistsForm = ({setChecked, labelText, helperText, colorScheme }) => {
                 return (            
                 <Card variant='outline' key={artist.artistLabel} >
                     <script type="application/ld+json">
-                        {JSON.stringify(getArtistStructuredData(artist.artistLabel, artist.imgPath))}
+                        {JSON.stringify(getArtistStructuredData(artist.artistLabel, artist.imgPath, artist.artist))}
                     </script>
                     <CardHeader>
                         <Heading size='md'>{artistStructureData["foaf:name"]}</Heading>
