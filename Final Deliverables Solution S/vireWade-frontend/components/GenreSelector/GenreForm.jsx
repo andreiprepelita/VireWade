@@ -7,7 +7,7 @@ const GenreForm = ({setChecked, labelText, helperText, colorScheme}) => {
     const pageSize = 5;
     const genreLimit = 50;
     const countURL = "https://recommendation-api-0q3l.onrender.com/recommendation/top";
-
+    var genreStructuredData = {};
     const [hasError, setErrors] = useState(false);
 
     const [genres, setGenres] = useState([]);
@@ -60,6 +60,20 @@ const GenreForm = ({setChecked, labelText, helperText, colorScheme}) => {
         )
     }
 
+    const getGenreStructuredData = (genreName, genreId) => {
+        genreStructuredData = {
+            "@context": {
+                "mo": "http://purl.org/ontology/mo/",
+                "dc": "http://purl.org/dc/elements/1.1/",
+                "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+              },
+                "@type": "mo:genre",
+                "rdfs:label": genreName,
+                "@id": genreId
+        }
+        return genreStructuredData;
+      };
+
     const fetchGenres = async () => {
         const requestOptions = {
             method: 'POST',
@@ -103,6 +117,8 @@ const GenreForm = ({setChecked, labelText, helperText, colorScheme}) => {
         return (<Text fontSize='2xl' color='tomato'>An error has occured, please try again.</Text>)
     }
 
+  
+
     return (     
     <FormControl as='fieldset' style={{textAlign:"center"}}>
         <FormLabel as='legend' mb={5} style={{textAlign:"center"}}>{labelText}</FormLabel>
@@ -119,12 +135,19 @@ const GenreForm = ({setChecked, labelText, helperText, colorScheme}) => {
             : <div style={{margin: "0 auto"}}>
                 {showLeftArrow ? getLeftArrows() : null}
                { genres.map(genre => {
-                return (<div>
+                
+                return ( 
+                <div>
+                    <script type="application/ld+json">
+                {JSON.stringify(getGenreStructuredData(genre.genreLabel, genre.genre))}
+                </script>
+                    
                         <Checkbox 
-                            value={genre.genreLabel} 
-                            key={genre.genreLabel} 
+                            value={genreStructuredData["rdfs:label"]} 
+                            key={genreStructuredData["rdfs:label"]} 
                             onChange={(event) => {updateCheckedGenres(event.target.checked, event.target.value)}}>
-                            {genre.genreLabel}
+                            {genreStructuredData["rdfs:label"]}
+                            
                         </Checkbox>
                         </div>)
             }) 
