@@ -23,8 +23,14 @@
     display: inline;
     align-self: center;
     height: 30px;
+    cursor: pointer;
 }
-
+.rightArrowSimple {
+    display: inline;
+    align-self: center;
+    height: 30px;
+    cursor: pointer;
+}
 .cardWrapperSmall {
     height: 60px;
     width: 300px;

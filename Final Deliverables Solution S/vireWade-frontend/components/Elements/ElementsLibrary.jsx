@@ -7,7 +7,7 @@ import {
 } from "react-icons/io";
 import VinylCard from "../VinylCard/VinylCard";
 
-const ElementsLibrary = ({ elements, changeIndex, pageIndex }) => {
+const ElementsLibrary = ({ elements, changeIndex, pageIndex, color }) => {
     
 
 
@@ -17,9 +17,8 @@ const ElementsLibrary = ({ elements, changeIndex, pageIndex }) => {
             <IoIosArrowBack
                 size="120px"
                 className="leftArrowSimple"
-                color={"teal"}
+                color={color? "#DD6B20": "teal"}
                 onClick={async () => {
-                    
                     
                     changeIndex(pageIndex - 1);
                 }}
@@ -31,10 +30,9 @@ const ElementsLibrary = ({ elements, changeIndex, pageIndex }) => {
         return (
             <IoIosArrowForward
                 size="120px"
-                className="leftArrowSimple"
-                color={"teal"}
+                className="rightArrowSimple"
+                color={color? "#DD6B20": "teal"}
                 onClick={async () => {
-                    
                     
                     changeIndex(pageIndex + 1);
                 }}

@@ -1,15 +1,39 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Stack, Button, Box, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
-import { Navigate } from "react-router-dom"
-import VerticalElementsList from "../VerticalElementsList/VerticalElementsList";
+import "./NewPlaylist.css"
+import { Stack, Button, Box, Alert, AlertIcon, AlertTitle, AlertDescription, Spinner, Center } from "@chakra-ui/react";
+import Elements from "../Elements/Elements";
+import defaultImage from "../../assets/image.jpg";
 
 function NewPlaylistFile() {
 
     const [file, setFile] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
-    const [userIsAuth, setIsUserAuth] = useState(getToken());
-    const [elements, setElements] = useState([])
+    const [showVinyls, setShowVinyls] = useState(false);
+    const [vinyls, setVinyls] = useState([]);
     const [alert, setAlert] = useState();
+    const [showAlert, setShowAlert] = useState(false);
+    const [recomendationIsLoading, setRecomendationIsLoading] = useState([false]);
+    const [pageIndex, setPageIndex] = useState();
+
+    const pageSize = 4;
+    const artistsLimit = 50;
+    
+    const changeIndex = (newPageIndex) => {
+        
+        let index = newPageIndex;
+
+        if (newPageIndex >= artistsLimit/pageSize) {
+            index = (artistsLimit/pageSize) - 1
+        }
+        
+        if (newPageIndex < 1) {
+            index = 1;
+        }
+        
+        handleSubmit()
+        setPageIndex(index)
+        
+    }
 
     const handleClick = () => {
         setIsOpen(true);
@@ -39,6 +63,7 @@ function NewPlaylistFile() {
             const fileContent = e.target.result;
     
             try {
+                setRecomendationIsLoading(true);
                 const response = await fetch("https://recommendation-api-0q3l.onrender.com/recommendation/playlist/local", {
                     method: "POST",
                     headers: {
@@ -51,7 +76,9 @@ function NewPlaylistFile() {
                 // Check if the response is in JSON format
                 if (response.headers.get("content-type")?.includes("application/json")) {
                     const jsonResponse = await response.json();
-                    console.log(jsonResponse); // Print the JSON response
+                    setShowAlert(true)
+                    loadVinyls(jsonResponse.records) // Print the JSON response
+
                 } else {
                     const textResponse = await response.text();
                     console.log(textResponse); // Print the text response
@@ -59,6 +86,8 @@ function NewPlaylistFile() {
     
                 if (!response.ok) {
                     setAlert(`Failed to upload file. Status: ${response.status}`);
+                    setShowAlert(true)
+                    setRecomendationIsLoading(false)
                 }
     
                 setAlert("File uploaded successfully.");
@@ -67,36 +96,45 @@ function NewPlaylistFile() {
             } catch (error) {
                 console.error(error);
                 setAlert(`Failed to upload file: ${error.message}`);
+                setShowAlert(true)
+                setRecomendationIsLoading(false)
             }
         };
     
         fileReader.onerror = () => {
             setAlert("Failed to read the file.");
+            setShowAlert(true)
+            setRecomendationIsLoading(false)
         };
     
         fileReader.readAsBinaryString(file); // or use readAsArrayBuffer if you want to send it as binary
-        setIsOpen(false);
-        setFile(null)
+        
     };
 
+    async function loadVinyls(fetchData) {
+      const vinyls = fetchData
+      const albumArt = require('album-art')
 
-  
-    function getToken() {
-        const userLocalStorage = JSON.parse(localStorage.getItem('user'));
-        let result;
-        if(userLocalStorage){
-            result = (userLocalStorage.message === 'USER_IS_AUTHENTICATED' || userLocalStorage.message === 'USER_REGISTERED_SUCCESSFULLY' || userLocalStorage.message === 'USER_ALREDY_REGISTERED') ? true : false;
-            console.log("Discog result is working: ", result)
-            return result;
-        }
-        console.log("result not working ", result)
-        return false;
-    }
+      setRecomendationIsLoading(false)
+
+      for (let vinyl of vinyls) {
+          try {
+              const art = await albumArt(vinyl.artist, {album: vinyl.vinyl})
+              vinyl.imgPath = art;
+          } catch (e) {
+              vinyl.imgPath = defaultImage;
+              console.log(e);
+          }
+
+      }
+      setVinyls(vinyls)
+  }
+
 
 
     return (
-        <Stack className="blueBox">
-        {alert ?
+        <Stack className="blueBox" justifyContent={"center"} alignItems={"center"}>
+        {showAlert ?
             ( alert === "File uploaded successfully." ?
             <Alert status='success'>
               <AlertIcon />
@@ -111,8 +149,10 @@ function NewPlaylistFile() {
           colorScheme="orange"
           type="submit"
           padding="20px"
-          alignSelf="flex-start"
-          onClick={handleClick}
+          onClick={() => {
+            handleClick()
+            setFile(null)
+          }}
         >
           Add Playlist
         </Button>
@@ -125,16 +165,39 @@ function NewPlaylistFile() {
           />
         )}
         {file && (
+          <>
+          <div id="file-label">{file.name}</div>
           <Button
             colorScheme="orange"
             type="submit"
             padding="20px"
-            alignSelf="flex-start"
-            onClick={handleSubmit}
+            onClick={() => {
+              setShowVinyls(true)
+              handleSubmit();
+              setPageIndex(1)
+              setShowAlert(false)
+            }}
           >
-            Submit
+            Get recommandations based on this playlist
           </Button>
+          </>
         )}
+        <Center>
+        {showVinyls ?
+                recomendationIsLoading
+                    ?
+                    <Spinner
+                        thickness='4px'
+                        speed='0.65s'
+                        color='teal.500'
+                        emptyColor='gray.200'
+                        size='xl'
+                        alignSelf={'center'}/>
+                    :
+                    <Elements elements={vinyls} changeIndex={changeIndex} pageIndex={pageIndex} color={"orange"}/>
+                : null
+            }
+        </Center>
         </Stack>
     );
 }

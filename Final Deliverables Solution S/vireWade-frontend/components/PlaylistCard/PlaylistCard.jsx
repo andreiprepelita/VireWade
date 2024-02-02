@@ -234,7 +234,7 @@ const onShowTracksClicked = () => {
                         size='xl'
                         alignSelf={'center'}/>
                     :
-                    <Elements elements={vinyls} changeIndex={changeIndex} pageIndex={pageIndex}/>
+                    <Elements elements={vinyls} changeIndex={changeIndex} pageIndex={pageIndex} color={"orange"}/>
                 : null
             }
         </Center>
