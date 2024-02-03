@@ -71,7 +71,7 @@ const VerticalLibrary = ({ elements, playlistStructureData }) => {
                             {<script type="application/ld+json">
                                 {JSON.stringify(getPlaylistStructuredData(element.image, element.title, element.description, element.tracks))}
                             </script>}
-                            <PlaylistCard key={element.id + i} element={element} artists={artists} artistsNames={artistsNames}/>
+                            <PlaylistCard key={element.id + i} element={element} artists={artists} artistsNames={artistsNames} playlistUrl={element.url}/>
                         </Box>
                     )}
                     )}

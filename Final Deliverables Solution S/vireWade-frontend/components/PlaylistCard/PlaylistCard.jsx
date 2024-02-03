@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button, Box, Flex, Text, Link, Spinner, Center} from "@chakra-ui/react";
+import { Button, Box, Flex, Text, Link, Spinner, Center, Image} from "@chakra-ui/react";
 import { useState } from "react";
 import "./PlaylistCard.css";
 import '../Elements/ElementsLibrary.css'
@@ -7,7 +7,7 @@ import Elements from "../Elements/Elements";
 import defaultImage from "../../assets/image.jpg";
 import TrackCard from "../TrackCard/TrackCard";
 
-const PlaylistCard = ({ element, artists, artistsNames }) => {
+const PlaylistCard = ({ element, artists, artistsNames, playlistUrl }) => {
     
     const [showVinyls, setShowVinyls] = useState(false);
     const [showTracks, setShowTracks] = useState(false)
@@ -54,12 +54,14 @@ const onShowTracksClicked = () => {
                     element.tracks.map((track, i) => {
                         let x = track.track;
                         let y = x.artists[0].name;
+                        let artistUrl = x.artists[0].external_urls.spotify;
+                        let albumUrl = x.album.external_urls.spotify;
                         let image = x.album.images[1].url
                         console.log("My track is ", x)
                         return (
                             <Box className="margin2 elementsBox" key={String(element.id) + i + track.title} mr="4">
                                 <TrackCard className="css-uqsj0l chakra-heading"
-                                 key={track.track.name + i + track.track.artists[0]} trackName={x.name} trackAuthor={y} trackImage={image}/>
+                                 key={track.track.name + i + track.track.artists[0]} trackName={x.name} trackAuthor={y} trackImage={image} artistUrl={artistUrl} albumUrl={albumUrl}/>
                             </Box>
                         )})
                 }
@@ -127,6 +129,7 @@ const onShowTracksClicked = () => {
     }
 
     useEffect(() => {
+        console.log("ELEMENT ESTE ", element)
         console.log("Apare de: ", artists)
         console.log("Numele artistilor sunt", artistsNames)
     }, [])
@@ -154,8 +157,9 @@ const onShowTracksClicked = () => {
         <>
         <Flex className="playlistCardFlex ">
 
-            <img className='playlistImage' src={element.image.url} />
-
+            <a href={playlistUrl} target="_blank">
+            <Image className='playlistImage' src={element.image.url} width={'300px'} height={'300px'} objectFit={"contain"} />
+            </a>
             <Box display="flex" flexDirection="column" p="4" alignItems={'flex-start'} justifyContent={'space-between'}>
 
                 <Text

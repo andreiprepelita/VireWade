@@ -35,7 +35,8 @@ const VerticalElementsList = ({elements, setElements}) => {
                 id: playlist.id,
                 image: playlist.images[0],
                 tracks: tracks.items,
-                description: playlist.description
+                description: playlist.description,
+                url: playlist.external_urls.spotify
             });
             })  
            

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment} from "react";
-import { Stack, Button, Box, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
+import { Stack, Button, Box, Image, Flex} from "@chakra-ui/react";
 import { Navigate, useNavigate } from "react-router-dom"
+import spotifyImage from "../../assets/Spotify_Logo_RGB_Black.png";
 import VerticalElementsList from "../VerticalElementsList/VerticalElementsList";
 
 function Playlists() {
@@ -109,16 +110,20 @@ function Playlists() {
           { userIsAuth ? (
             sessionStorage.getItem("spotify_token") ?
         <Stack className="blueBox">
+          <Flex direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
           <Button
           colorScheme="orange"
           type="submit"
           padding="20px"
-          alignSelf="flex-start"
+          alignSelf="center"
           onClick={handleClick}
         >
           Add Playlist file
         </Button>
-            
+        <a href="https://open.spotify.com/" target="_blank">
+        <Image src={spotifyImage} alt='spotify logo' minHeight='100px' minWidth='100px' objectFit={'contain'} width={'200px'}/>
+        </a>
+        </Flex>
           <VerticalElementsList elements={elements} setElements={setElements}/>
         </Stack> : (<Box width={'500px'} alignSelf={'center'}>
                     <Button
