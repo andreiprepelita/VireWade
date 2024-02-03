@@ -3,7 +3,7 @@ import './Login.css';
 import {useState, useEffect, Fragment} from "react";
 import {Navigate } from 'react-router-dom';
 
-export default function Login() {
+export default function Login({refreshNavbar}) {
     const [type, setType] = useState("login");
     const [error, setError] = useState(false);
     const [username, setUsername] = useState("");
@@ -53,6 +53,7 @@ export default function Login() {
                 localStorage.setItem('user', JSON.stringify(json));
                 sessionStorage.removeItem('discog-token')
                 sessionStorage.removeItem('spotify-token');
+                refreshNavbar(true);
                 setAuth(true);
             }else {
                 changeErrorValue()
@@ -90,6 +91,7 @@ export default function Login() {
                 localStorage.setItem('user', JSON.stringify(json));
                 sessionStorage.removeItem('discog-token')
                 sessionStorage.removeItem('spotify-token');
+                refreshNavbar(true);
                 setAuth(true);
             }else {
                 changeErrorValue()

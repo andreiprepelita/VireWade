@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import { ChakraProvider, Stack } from '@chakra-ui/react';
@@ -11,6 +11,7 @@ import Discog from '../components/Discog/Discog';
 import NewPlaylistFile from '../components/Playlists/NewPlaylist';
 
 const App = () => {
+    const [navbar, refreshNavbar] = useState(false);
   return (
     <ChakraProvider className="app">
         <Stack
@@ -19,12 +20,12 @@ const App = () => {
         direction={'column'}
         justify={'flex-end'}
         spacing={6}>
-            <NavBarController />
+            <NavBarController navbar={navbar}/>
             <BrowserRouter>
                 <Routes>
                     <Route exact path="/" element={<MainPage />} />
-                    <Route exact path="/login" element={<Login />}/>
-                    <Route exact path="/register" element={<Login />}/>
+                    <Route exact path="/login" element={<Login refreshNavbar={refreshNavbar}/>}/>
+                    <Route exact path="/register" element={<Login refreshNavbar={refreshNavbar}/>}/>
                     <Route exact path="/playlists/:userId" element={<Playlists />}/>
                     <Route exact path="/profile/:userId" element={<Profile />}/>
                     <Route exact path="/purchases" element={<Discog />} />

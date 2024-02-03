@@ -182,7 +182,6 @@ function NewPlaylistFile() {
           </Button>
           </>
         )}
-        <Center>
         {showVinyls ?
                 recomendationIsLoading
                     ?
@@ -197,7 +196,6 @@ function NewPlaylistFile() {
                     <Elements elements={vinyls} changeIndex={changeIndex} pageIndex={pageIndex} color={"orange"}/>
                 : null
             }
-        </Center>
         </Stack>
     );
 }
