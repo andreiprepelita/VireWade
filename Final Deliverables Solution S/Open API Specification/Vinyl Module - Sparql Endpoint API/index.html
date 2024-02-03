@@ -225,15 +225,52 @@
 
     <h3 class="field-label">Return type</h3>
     <div class="return-type">
+      <a href="#SparqlResult">SparqlResult</a>
       
-      String
     </div>
 
     <!--Todo: process Response Object and its headers, schema, examples -->
 
     <h3 class="field-label">Example data</h3>
     <div class="example-data-content-type">Content-Type: application/json</div>
-    <pre class="example"><code>"{ \"result\": \"query result here\" }"</code></pre>
+    <pre class="example"><code>{
+  "head" : {
+    "vars" : [ "vars", "vars" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "numberOfVinyls" : {
+        "datatype" : "datatype",
+        "type" : "type",
+        "value" : "value"
+      },
+      "genre" : {
+        "type" : "type",
+        "value" : "value"
+      },
+      "genreLabel" : {
+        "xml:lang" : "xml:lang",
+        "type" : "type",
+        "value" : "value"
+      }
+    }, {
+      "numberOfVinyls" : {
+        "datatype" : "datatype",
+        "type" : "type",
+        "value" : "value"
+      },
+      "genre" : {
+        "type" : "type",
+        "value" : "value"
+      },
+      "genreLabel" : {
+        "xml:lang" : "xml:lang",
+        "type" : "type",
+        "value" : "value"
+      }
+    } ]
+  }
+}</code></pre>
 
     <h3 class="field-label">Produces</h3>
     This API call produces the following media types according to the <span class="header">Accept</span> request header;
@@ -246,7 +283,7 @@
     <h3 class="field-label">Responses</h3>
     <h4 class="field-label">200</h4>
     Query processed successfully
-        <a href="#String">String</a>
+        <a href="#SparqlResult">SparqlResult</a>
     <h4 class="field-label">503</h4>
     Service unavailable or error in processing
         <a href="#String">String</a>
@@ -259,6 +296,13 @@
   <h3>Table of Contents</h3>
   <ol>
     <li><a href="#SparqlQuery"><code>SparqlQuery</code></a></li>
+    <li><a href="#SparqlResult"><code>SparqlResult</code></a></li>
+    <li><a href="#SparqlResult_head"><code>SparqlResult_head</code></a></li>
+    <li><a href="#SparqlResult_results"><code>SparqlResult_results</code></a></li>
+    <li><a href="#SparqlResult_results_bindings"><code>SparqlResult_results_bindings</code></a></li>
+    <li><a href="#SparqlResult_results_genre"><code>SparqlResult_results_genre</code></a></li>
+    <li><a href="#SparqlResult_results_genreLabel"><code>SparqlResult_results_genreLabel</code></a></li>
+    <li><a href="#SparqlResult_results_numberOfVinyls"><code>SparqlResult_results_numberOfVinyls</code></a></li>
   </ol>
 
   <div class="model">
@@ -266,7 +310,67 @@
     
     <div class="field-items">
       <div class="param">query (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
-          <div class="param-desc"><span class="param-type">example: SELECT * WHERE { ?s ?p ?o }</span></div>
+          <div class="param-desc"><span class="param-type">example: PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; PREFIX sparqlResults: &lt;http://www.w3.org/2005/sparql-results#&gt; PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+SELECT ?genre ?genreLabel (COUNT(?vinyl) AS ?numberOfVinyls)  WHERE { ?result a sparqlResults:ResultSet . ?result sparqlResults:solution ?solution . ?solution sparqlResults:binding [ sparqlResults:variable &quot;vinyl&quot; ; sparqlResults:value ?vinyl ] . ?solution sparqlResults:binding [ sparqlResults:variable &quot;genre&quot; ; sparqlResults:value ?genre ] . ?solution sparqlResults:binding [ sparqlResults:variable &quot;genreLabel&quot; ; sparqlResults:value ?genreLabel ] . }
+GROUP BY ?genre ?genreLabel ORDER BY DESC(?numberOfVinyls) LIMIT 5
+</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SparqlResult"><code>SparqlResult</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">head (optional)</div><div class="param-desc"><span class="param-type"><a href="#SparqlResult_head">SparqlResult_head</a></span>  </div>
+<div class="param">results (optional)</div><div class="param-desc"><span class="param-type"><a href="#SparqlResult_results">SparqlResult_results</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SparqlResult_head"><code>SparqlResult_head</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">vars (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SparqlResult_results"><code>SparqlResult_results</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">bindings (optional)</div><div class="param-desc"><span class="param-type"><a href="#SparqlResult_results_bindings">array[SparqlResult_results_bindings]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SparqlResult_results_bindings"><code>SparqlResult_results_bindings</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">numberOfVinyls (optional)</div><div class="param-desc"><span class="param-type"><a href="#SparqlResult_results_numberOfVinyls">SparqlResult_results_numberOfVinyls</a></span>  </div>
+<div class="param">genre (optional)</div><div class="param-desc"><span class="param-type"><a href="#SparqlResult_results_genre">SparqlResult_results_genre</a></span>  </div>
+<div class="param">genreLabel (optional)</div><div class="param-desc"><span class="param-type"><a href="#SparqlResult_results_genreLabel">SparqlResult_results_genreLabel</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SparqlResult_results_genre"><code>SparqlResult_results_genre</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SparqlResult_results_genreLabel"><code>SparqlResult_results_genreLabel</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">xml:lang (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SparqlResult_results_numberOfVinyls"><code>SparqlResult_results_numberOfVinyls</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">datatype (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
     </div>  <!-- field-items -->
   </div>
   </body>
