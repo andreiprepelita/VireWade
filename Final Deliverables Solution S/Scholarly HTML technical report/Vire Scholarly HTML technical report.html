@@ -398,7 +398,7 @@
                 </p>
                 <p>
                 The additional issue we faced involved the need to download this data and import it into the Stardog database. However, the Wikidata Query Service did not support exporting data in
-                the required formats, which included Turtle, RDF/XML, TRiG, TRiX, and NQuads.
+                the required formats, which included Turtle, RDF/XML and NQuads.
                 </p>
 
                 <div class="item" style="text-align: center;">
@@ -407,7 +407,7 @@
                 <br>
                 <p>    
                 We discovered a different online service that allowed us to query Wikidata and export 
-                the results as a Turtle file, namely the OpenLink Virtuoso SPARQL Query Editor.
+                the results as a Turtle file, namely the <b><a href="https://linkeddata.uriburner.com/sparql">OpenLink Virtuoso SPARQL Query Editor</a></b>.
                 </p>
                 <p>
                   The query we used is as follows:
@@ -418,7 +418,7 @@
                     ?genre ?genreLabel
                     ?date as ?releaseDate
               WHERE {
-                SERVICE <https://query.wikidata.org/sparql> {
+                SERVICE https://query.wikidata.org/sparql {
                   SELECT distinct ?vinyl ?vinylLabel
                                   ?artist ?artistLabel
                                   ?genre ?genreLabel
@@ -451,7 +451,7 @@
                   We constructed a comprehensive vinyl records database that is robust enough to support a 
                   recommendation system. To establish and populate our database, 
                   we utilized the <b><a href="https://www.stardog.com/">Stardog platform</a></b>. We compiled a <b><a href="https://www.w3.org/TR/turtle/">Turtle (.ttl)</a></b> file containing data sourced from 
-                  SparQL query executed on OpenLink Virtuoso SPARQL Query Editor. That file was 
+                  SparQL query executed on <b><a href="https://linkeddata.uriburner.com/sparql">OpenLink Virtuoso SPARQL Query Editor</a></b>. That file was 
                   imported into our database using <b><a href="https://www.stardog.com/">Stardog platform</a></b>.
                 </p>
                 <p>
@@ -824,6 +824,25 @@
                 </ul>
                 <p>To demonstrate that our application incorporates schema constructs, we utilized the OpenLink Structured Data Sniffer, 
                   a Google Chrome Extension, and captured several screenshots:</p>
+                  <br>
+                <h4>Artists:</h4>
+                <div class="item" style="text-align: center;">
+                  <img style="max-width:100%; height: auto;" src="./Resources/artist final jsonld sniffer.png" alt="artists jsonld">
+                </div>
+                <br>
+                <h4>Genres:</h4>
+                <div class="item" style="text-align: center;">
+                  <img style="max-width:100%; height: auto;" src="./Resources/genre jsonld sniffer.png" alt="genres jsonld">
+                </div>
+                <br>
+                <h4>Vinyls:</h4>
+                <div class="item" style="text-align: center;">
+                  <img style="max-width:100%; height: auto;" src="./Resources/vinyl final jsonld sniffer.png" alt="vinyls jsonld">
+                </div>
+                <br>
+                <p>
+                  The models derived from those examples have been included in the DataModeling folder.</p>
+
               </blockquote>
             </div>
           </div>
@@ -874,6 +893,18 @@
                     </cite>
                   </li>
 
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="linkeddata">
+                    <cite property="schema:name">
+                      <a href="https://support.discogs.com/hc/en-us/articles/360007331534-How-Does-The-Collection-Feature-Work-">Collections on Discogs</a>
+                    </cite>
+                  </li>
+
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="linkeddata">
+                    <cite property="schema:name">
+                      <a href="https://www.discogs.com/developers#page:authentication">OAuth1.0 protocol on Discogs Platform</a>
+                    </cite>
+                  </li>
+
                   <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="lastFm">
                     <cite property="schema:name">
                       <a href="https://www.last.fm/api">LastFM</a>
@@ -903,6 +934,23 @@
                       <a href="https://www.w3.org/wiki/LinkedData">Linked Data</a>
                     </cite>
                   </li>
+
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="linkeddata">
+                    <cite property="schema:name">
+                      <a href="https://linkeddata.uriburner.com/sparql">OpenLink Virtuoso SPARQL Query Editor</a>
+                    </cite>
+                  </li>
+
+                  <li typeof="schema:WebPage" role="doc-biblioentry" resource="https://schema.org/" property="schema:citation" id="linkeddata">
+                    <cite property="schema:name">
+                      <a href="https://developer.spotify.com/documentation/web-api">Spotify API</a>
+                    </cite>
+                  </li>
+                  
+                  
+
+
+                  
 
                 </ol>
               </blockquote>
