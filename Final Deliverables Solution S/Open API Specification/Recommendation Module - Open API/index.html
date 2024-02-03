@@ -1,0 +1,705 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Recommendation API</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Recommendation API</h1>
+    <div class="app-desc">This is a Recommendation API for Vire Project</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+    <div class="app-desc">BasePath:/ANDREIMARDARE99/RecommendationAPI/1.0.0</div>
+    <div class="license-info">Apache 2.0</div>
+    <div class="license-url">http://www.apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Recommendations">Recommendations</a></h4>
+  <ul>
+  <li><a href="#getRecommendationByDiscogsUsingDiscogsToken"><code><span class="http-method">post</span> /recommendation/discogs</code></a></li>
+  <li><a href="#getRecommendationByLocalPlaylist"><code><span class="http-method">post</span> /recommendation/playlist/local</code></a></li>
+  <li><a href="#getRecommendationByPreferences"><code><span class="http-method">post</span> /recommendation/preferences</code></a></li>
+  </ul>
+
+  <h1><a name="Recommendations">Recommendations</a></h1>
+  <div class="method"><a name="getRecommendationByDiscogsUsingDiscogsToken"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /recommendation/discogs</code></pre></div>
+    <div class="method-summary">Recommendation by Discogs token (<span class="nickname">getRecommendationByDiscogsUsingDiscogsToken</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">discogsToken (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">discogsTokenSecret (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">pageNumber (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div>      <div class="param">numberOfItemsPerPage (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Recommendation">Recommendation</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "totalRecords" : 514,
+  "variables" : [ "[\"vinyl\",\"vinylLabel\",\"artist\",\"artistLabel\",\"genre\",\"genreLabel\",\"releaseDate\"]", "[\"vinyl\",\"vinylLabel\",\"artist\",\"artistLabel\",\"genre\",\"genreLabel\",\"releaseDate\"]" ],
+  "jsonLDRepresentation" : {
+    "@graph" : [ {
+      "@type" : "mo:Vinyl",
+      "dc:title" : "Sì",
+      "dc:date" : {
+        "@value" : "1974-01-01T00:00:00Z",
+        "@type" : "xsd:date"
+      },
+      "@id" : "http://www.wikidata.org/entity/Q2811771",
+      "foaf:maker" : {
+        "foaf:name" : "Gigliola Cinquetti",
+        "@type" : "mo:MusicArtist",
+        "@id" : "http://www.wikidata.org/entity/Q229295"
+      },
+      "mo:genre" : {
+        "rdfs:label" : "pop music",
+        "@id" : "http://www.wikidata.org/entity/Q37073"
+      }
+    }, {
+      "@type" : "mo:Vinyl",
+      "dc:title" : "Sì",
+      "dc:date" : {
+        "@value" : "1974-01-01T00:00:00Z",
+        "@type" : "xsd:date"
+      },
+      "@id" : "http://www.wikidata.org/entity/Q2811771",
+      "foaf:maker" : {
+        "foaf:name" : "Gigliola Cinquetti",
+        "@type" : "mo:MusicArtist",
+        "@id" : "http://www.wikidata.org/entity/Q229295"
+      },
+      "mo:genre" : {
+        "rdfs:label" : "pop music",
+        "@id" : "http://www.wikidata.org/entity/Q37073"
+      }
+    } ],
+    "@context" : {
+      "mo" : "http://purl.org/ontology/mo/",
+      "xsd" : "http://www.w3.org/2001/XMLSchema#",
+      "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+      "foaf" : "http://xmlns.com/foaf/0.1/",
+      "dc" : "http://purl.org/dc/elements/1.1/"
+    }
+  },
+  "records" : [ {
+    "vinylLabel" : "Sì",
+    "artist" : "http://www.wikidata.org/entity/Q229295",
+    "releaseDate" : "1974-01-01T00:00:00Z",
+    "artistLabel" : "Gigliola Cinquetti",
+    "genre" : "http://www.wikidata.org/entity/Q37073",
+    "genreLabel" : "pop music",
+    "vinyl" : "http://www.wikidata.org/entity/Q2811771"
+  }, {
+    "vinylLabel" : "Sì",
+    "artist" : "http://www.wikidata.org/entity/Q229295",
+    "releaseDate" : "1974-01-01T00:00:00Z",
+    "artistLabel" : "Gigliola Cinquetti",
+    "genre" : "http://www.wikidata.org/entity/Q37073",
+    "genreLabel" : "pop music",
+    "vinyl" : "http://www.wikidata.org/entity/Q2811771"
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success Recommendation
+        <a href="#Recommendation">Recommendation</a>
+    <h4 class="field-label">400</h4>
+    Bad request Error
+        <a href="#Error">Error</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getRecommendationByLocalPlaylist"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /recommendation/playlist/local</code></pre></div>
+    <div class="method-summary">Recommendation by local playlist (<span class="nickname">getRecommendationByLocalPlaylist</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/octet-stream</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Object">Object</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Recommendation">Recommendation</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "totalRecords" : 514,
+  "variables" : [ "[\"vinyl\",\"vinylLabel\",\"artist\",\"artistLabel\",\"genre\",\"genreLabel\",\"releaseDate\"]", "[\"vinyl\",\"vinylLabel\",\"artist\",\"artistLabel\",\"genre\",\"genreLabel\",\"releaseDate\"]" ],
+  "jsonLDRepresentation" : {
+    "@graph" : [ {
+      "@type" : "mo:Vinyl",
+      "dc:title" : "Sì",
+      "dc:date" : {
+        "@value" : "1974-01-01T00:00:00Z",
+        "@type" : "xsd:date"
+      },
+      "@id" : "http://www.wikidata.org/entity/Q2811771",
+      "foaf:maker" : {
+        "foaf:name" : "Gigliola Cinquetti",
+        "@type" : "mo:MusicArtist",
+        "@id" : "http://www.wikidata.org/entity/Q229295"
+      },
+      "mo:genre" : {
+        "rdfs:label" : "pop music",
+        "@id" : "http://www.wikidata.org/entity/Q37073"
+      }
+    }, {
+      "@type" : "mo:Vinyl",
+      "dc:title" : "Sì",
+      "dc:date" : {
+        "@value" : "1974-01-01T00:00:00Z",
+        "@type" : "xsd:date"
+      },
+      "@id" : "http://www.wikidata.org/entity/Q2811771",
+      "foaf:maker" : {
+        "foaf:name" : "Gigliola Cinquetti",
+        "@type" : "mo:MusicArtist",
+        "@id" : "http://www.wikidata.org/entity/Q229295"
+      },
+      "mo:genre" : {
+        "rdfs:label" : "pop music",
+        "@id" : "http://www.wikidata.org/entity/Q37073"
+      }
+    } ],
+    "@context" : {
+      "mo" : "http://purl.org/ontology/mo/",
+      "xsd" : "http://www.w3.org/2001/XMLSchema#",
+      "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+      "foaf" : "http://xmlns.com/foaf/0.1/",
+      "dc" : "http://purl.org/dc/elements/1.1/"
+    }
+  },
+  "records" : [ {
+    "vinylLabel" : "Sì",
+    "artist" : "http://www.wikidata.org/entity/Q229295",
+    "releaseDate" : "1974-01-01T00:00:00Z",
+    "artistLabel" : "Gigliola Cinquetti",
+    "genre" : "http://www.wikidata.org/entity/Q37073",
+    "genreLabel" : "pop music",
+    "vinyl" : "http://www.wikidata.org/entity/Q2811771"
+  }, {
+    "vinylLabel" : "Sì",
+    "artist" : "http://www.wikidata.org/entity/Q229295",
+    "releaseDate" : "1974-01-01T00:00:00Z",
+    "artistLabel" : "Gigliola Cinquetti",
+    "genre" : "http://www.wikidata.org/entity/Q37073",
+    "genreLabel" : "pop music",
+    "vinyl" : "http://www.wikidata.org/entity/Q2811771"
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Success Recommendation
+        <a href="#Recommendation">Recommendation</a>
+    <h4 class="field-label">400</h4>
+    Bad request Error
+        <a href="#Error">Error</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getRecommendationByPreferences"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /recommendation/preferences</code></pre></div>
+    <div class="method-summary">Recommendation by preferences (<span class="nickname">getRecommendationByPreferences</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#UserOptions">UserOptions</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Recommendation">Recommendation</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "totalRecords" : 514,
+  "variables" : [ "[\"vinyl\",\"vinylLabel\",\"artist\",\"artistLabel\",\"genre\",\"genreLabel\",\"releaseDate\"]", "[\"vinyl\",\"vinylLabel\",\"artist\",\"artistLabel\",\"genre\",\"genreLabel\",\"releaseDate\"]" ],
+  "jsonLDRepresentation" : {
+    "@graph" : [ {
+      "@type" : "mo:Vinyl",
+      "dc:title" : "Sì",
+      "dc:date" : {
+        "@value" : "1974-01-01T00:00:00Z",
+        "@type" : "xsd:date"
+      },
+      "@id" : "http://www.wikidata.org/entity/Q2811771",
+      "foaf:maker" : {
+        "foaf:name" : "Gigliola Cinquetti",
+        "@type" : "mo:MusicArtist",
+        "@id" : "http://www.wikidata.org/entity/Q229295"
+      },
+      "mo:genre" : {
+        "rdfs:label" : "pop music",
+        "@id" : "http://www.wikidata.org/entity/Q37073"
+      }
+    }, {
+      "@type" : "mo:Vinyl",
+      "dc:title" : "Sì",
+      "dc:date" : {
+        "@value" : "1974-01-01T00:00:00Z",
+        "@type" : "xsd:date"
+      },
+      "@id" : "http://www.wikidata.org/entity/Q2811771",
+      "foaf:maker" : {
+        "foaf:name" : "Gigliola Cinquetti",
+        "@type" : "mo:MusicArtist",
+        "@id" : "http://www.wikidata.org/entity/Q229295"
+      },
+      "mo:genre" : {
+        "rdfs:label" : "pop music",
+        "@id" : "http://www.wikidata.org/entity/Q37073"
+      }
+    } ],
+    "@context" : {
+      "mo" : "http://purl.org/ontology/mo/",
+      "xsd" : "http://www.w3.org/2001/XMLSchema#",
+      "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+      "foaf" : "http://xmlns.com/foaf/0.1/",
+      "dc" : "http://purl.org/dc/elements/1.1/"
+    }
+  },
+  "records" : [ {
+    "vinylLabel" : "Sì",
+    "artist" : "http://www.wikidata.org/entity/Q229295",
+    "releaseDate" : "1974-01-01T00:00:00Z",
+    "artistLabel" : "Gigliola Cinquetti",
+    "genre" : "http://www.wikidata.org/entity/Q37073",
+    "genreLabel" : "pop music",
+    "vinyl" : "http://www.wikidata.org/entity/Q2811771"
+  }, {
+    "vinylLabel" : "Sì",
+    "artist" : "http://www.wikidata.org/entity/Q229295",
+    "releaseDate" : "1974-01-01T00:00:00Z",
+    "artistLabel" : "Gigliola Cinquetti",
+    "genre" : "http://www.wikidata.org/entity/Q37073",
+    "genreLabel" : "pop music",
+    "vinyl" : "http://www.wikidata.org/entity/Q2811771"
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Recommendations successfully passed on Recommendation
+        <a href="#Recommendation">Recommendation</a>
+    <h4 class="field-label">400</h4>
+    Bad request Error
+        <a href="#Error">Error</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#Error"><code>Error</code></a></li>
+    <li><a href="#Recommendation"><code>Recommendation</code></a></li>
+    <li><a href="#Recommendation_jsonLDRepresentation"><code>Recommendation_jsonLDRepresentation</code></a></li>
+    <li><a href="#Recommendation_jsonLDRepresentation_context"><code>Recommendation_jsonLDRepresentation_context</code></a></li>
+    <li><a href="#Recommendation_jsonLDRepresentation_dcdate"><code>Recommendation_jsonLDRepresentation_dcdate</code></a></li>
+    <li><a href="#Recommendation_jsonLDRepresentation_foafmaker"><code>Recommendation_jsonLDRepresentation_foafmaker</code></a></li>
+    <li><a href="#Recommendation_jsonLDRepresentation_graph"><code>Recommendation_jsonLDRepresentation_graph</code></a></li>
+    <li><a href="#Recommendation_jsonLDRepresentation_mogenre"><code>Recommendation_jsonLDRepresentation_mogenre</code></a></li>
+    <li><a href="#Recommendation_records"><code>Recommendation_records</code></a></li>
+    <li><a href="#UserOptions"><code>UserOptions</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="Error"><code>Error</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">statusCode (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 400</span></div>
+<div class="param">messageRequest (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: error occurred!</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Recommendation"><code>Recommendation</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">jsonLDRepresentation (optional)</div><div class="param-desc"><span class="param-type"><a href="#Recommendation_jsonLDRepresentation">Recommendation_jsonLDRepresentation</a></span>  </div>
+<div class="param">totalRecords (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 514</span></div>
+<div class="param">records (optional)</div><div class="param-desc"><span class="param-type"><a href="#Recommendation_records">array[Recommendation_records]</a></span>  </div>
+<div class="param">variables (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Recommendation_jsonLDRepresentation"><code>Recommendation_jsonLDRepresentation</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">@context (optional)</div><div class="param-desc"><span class="param-type"><a href="#Recommendation_jsonLDRepresentation_context">Recommendation_jsonLDRepresentation_context</a></span>  </div>
+<div class="param">@graph (optional)</div><div class="param-desc"><span class="param-type"><a href="#Recommendation_jsonLDRepresentation_graph">array[Recommendation_jsonLDRepresentation_graph]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Recommendation_jsonLDRepresentation_context"><code>Recommendation_jsonLDRepresentation_context</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">mo (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: http://purl.org/ontology/mo/</span></div>
+<div class="param">xsd (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: http://www.w3.org/2001/XMLSchema#</span></div>
+<div class="param">rdfs (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: http://www.w3.org/2000/01/rdf-schema#</span></div>
+<div class="param">foaf (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: http://xmlns.com/foaf/0.1/</span></div>
+<div class="param">dc (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: http://purl.org/dc/elements/1.1/</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Recommendation_jsonLDRepresentation_dcdate"><code>Recommendation_jsonLDRepresentation_dcdate</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">@value (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 1974-01-01T00:00:00Z</span></div>
+<div class="param">@type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: xsd:date</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Recommendation_jsonLDRepresentation_foafmaker"><code>Recommendation_jsonLDRepresentation_foafmaker</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">foaf:name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Gigliola Cinquetti</span></div>
+<div class="param">@type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: mo:MusicArtist</span></div>
+<div class="param">@id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: http://www.wikidata.org/entity/Q229295</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Recommendation_jsonLDRepresentation_graph"><code>Recommendation_jsonLDRepresentation_graph</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">@type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: mo:Vinyl</span></div>
+<div class="param">dc:title (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Sì</span></div>
+<div class="param">dc:date (optional)</div><div class="param-desc"><span class="param-type"><a href="#Recommendation_jsonLDRepresentation_dcdate">Recommendation_jsonLDRepresentation_dcdate</a></span>  </div>
+<div class="param">@id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: http://www.wikidata.org/entity/Q2811771</span></div>
+<div class="param">foaf:maker (optional)</div><div class="param-desc"><span class="param-type"><a href="#Recommendation_jsonLDRepresentation_foafmaker">Recommendation_jsonLDRepresentation_foafmaker</a></span>  </div>
+<div class="param">mo:genre (optional)</div><div class="param-desc"><span class="param-type"><a href="#Recommendation_jsonLDRepresentation_mogenre">Recommendation_jsonLDRepresentation_mogenre</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Recommendation_jsonLDRepresentation_mogenre"><code>Recommendation_jsonLDRepresentation_mogenre</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">rdfs:label (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: pop music</span></div>
+<div class="param">@id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: http://www.wikidata.org/entity/Q37073</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Recommendation_records"><code>Recommendation_records</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">vinylLabel (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Sì</span></div>
+<div class="param">artist (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: http://www.wikidata.org/entity/Q229295</span></div>
+<div class="param">releaseDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 1974-01-01T00:00:00Z</span></div>
+<div class="param">artistLabel (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Gigliola Cinquetti</span></div>
+<div class="param">genre (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: http://www.wikidata.org/entity/Q37073</span></div>
+<div class="param">genreLabel (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: pop music</span></div>
+<div class="param">vinyl (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: http://www.wikidata.org/entity/Q2811771</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UserOptions"><code>UserOptions</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">favoriteArtists (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: [&quot;Elvis Presley&quot;]</span></div>
+<div class="param">leastFavoriteArtists (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: [&quot;Queen&quot;]</span></div>
+<div class="param">favoriteGenres (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: [&quot;pop music&quot;,&quot;rock music&quot;]</span></div>
+<div class="param">leastFavoriteGenres (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: [&quot;punk rock&quot;]</span></div>
+<div class="param">yearRangeStart (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 1960</span></div>
+<div class="param">yearRangeEnd (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 1980</span></div>
+<div class="param">pageIndex (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 1</span></div>
+<div class="param">pageSize (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 1</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
