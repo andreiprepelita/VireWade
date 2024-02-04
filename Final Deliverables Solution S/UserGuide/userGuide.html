@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+    <title>VIRE Scholarly User Guide</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class='container'>
+        <article typeof="schema:ScholarlyArticle">
+            <div class="text-center">
+                <h1>VIRE User Guide</h1>
+            </div>
+
+            <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.linkedin.com/in/cristian-eduard-drob-6223a5196/" style="font-size: 20px;">Drob Cristian-Eduard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.linkedin.com/in/andrei-prepelita-7aa361217/" style="font-size: 20px;">Prepelita Andrei</a>
+            </li>
+            </ul>
+            <h5 style="color:green">Table of contents</h5>
+            <ol>
+                <li><a href="#project_description">Project description</a></li>
+                <li><a href="#user_guide">User Guide</a>
+                <ol>
+                    <li><a href="#creating_an_account">Creating an account</a></li>
+                    <li><a href="#logging_into_your_account">Logging into your account</a></li>
+                    <li><a href="#getting_vinyl_recommendation">Getting Vinyl Recommendation</a></li>
+                    <ol>
+                        <li><a href="#based_on_your_preferences">Based on your preferences</a></li>
+                        <li><a href="#based_on_local_playlist">Based on Local Playlist</a></li>
+                        <li><a href="#based_on_discogs_data">Based on Discogs Data</a></li>
+                        <li><a href="#based_on_playlists_using_spotify_app">Based on playlists using Spotify App</a></li>
+                    </ol>
+                </ol>
+                </li>
+            </ol>
+
+            <div class="row mt-2">
+                <section typeof="sa:Description">
+                    <div class="card text-bg-light mb-3">
+                        <div class="card-body">
+                            <h2 class="card-title" id="project_description">1. Project description</h2>
+                            <blockquote>
+                                <p>
+                                    Build a (micro-)service Web system able to "intelligently" recommend – by exposing a SPARQL endpoint 
+                                    – vinyl music records according to various criteria: user preferences (specified via controlled natural 
+                                    language constructs such as "I always like/love/prefer classical music, especially opera music by Rossini or Verdi and performed by 
+                                    Angela Gheorghiu or Juan Diego Flórez; I sometimes like progressive rock and post-rock; I like only metal albums released before 2000; 
+                                    I always dislike/hate rap and hip-hop; I dislike songs produced by Flood in the last 25 years"), past song purchases on various music stores, 
+                                    playlists – available online via music streaming services: Last.fm and alternative solutions – and/or locally – for instance, by uploading a 
+                                    JSPF/XSPF document. The playlists could be created by the user or shared by her/his virtual "friends" (consider at least one social network). 
+                                    The system will use several music-related knowledge models (e.g., Music Ontology or MusicRecording concept from schema.org) and available public 
+                                    resources: Discogs, MusicBrainz, Musicmoz Music Styles.
+                                  </p>
+                            </blockquote>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="row mt-2">
+                <section typeof="sa:Description">
+                    <div class="card text-bg-light mb-3">
+                        <div class="card-body">
+                            <h2 id="user_guide" class="card-title" >2. User Guide</h2>
+                            <blockquote>
+                                <h3>Accessing the Application</h3>
+                                <p>To utilize certain features of the application, no account is necessary. However, 
+                                    for full access to all features, account creation and signing in are required.
+                                </p>
+                                <h4 id="creating_an_account"><b>Creating an account</b></h4>
+                                <p>To set up your account, please go to the register page and provide 
+                                    your first name, last name, email, and password (confirmation of the password 
+                                    is necessary). All these fields are mandatory. Once registration is 
+                                    successfully completed, you need to go to the login page, 
+                                    enabling you to access all available features.</p>
+                                    <p style="text-align: center;">Register Page</p>
+                                    <img src="register page.png" alt="Register Page" style="width:100%;">
+
+                                <h4 id="logging_into_your_account"><b>Logging into your account</b></h4>
+                                <p>
+                                    Once your account is successfully set up, you can log in to the application. 
+                                    To do this, visit the login page and enter your account credentials.</p>
+                                    <p style="text-align: center;">Login Page</p>
+                                    <img src="login page.png" alt="Login Page" style="width:100%;">
+                               
+
+                            </blockquote>
+
+                            <blockquote>
+                                <h3 id="getting_vinyl_recommendation">Getting Vinyl Recommendations</h3>
+                                <p>
+                                    There are several approaches to accessing the vinyl recommendations.</p>
+                                    <p>For the first 2 approaches, you don't need to be authenticated in the application to access them.</p>
+                                <ol>
+                                    <li id="based_on_your_preferences"><b>Based on your preferences</b>
+                                        <p>
+                                            If you wish to receive recommendations based on multiple criteria of your choice, 
+                                            you need to visit the Main page.</p>
+                                        <p style="text-align: center;">Main Page</p>
+                                        <img src="main page.png" alt="Main Page"style="width:100%;">
+                                        
+
+                                        <br />
+                                        <p>As displayed, various filters are available. You can choose whether you like or dislike certain artists, genres, and select a 
+                                            specific year range for the vinyls you desire.</p>
+                                        </br>
+                                        <p>
+                                            For instance, when you select the 'Artist Liked' option, you will be prompted to 
+                                            choose from a list of your preferred artists.</p>
+                                            <p style="text-align: center;">Artist liked option</p>
+                                            <img src="artists liked.png" style="width:100%;">
+                                        
+                                        <p>
+                                            You need to follow the same steps for artists you dislike.</p>
+                                        <p>
+                                            To select your preferred genres, click on the 'Genres Liked' button, and you will be prompted to choose 
+                                            from a list of genres you favor. </p>
+                                        <p style="text-align: center;">Genre liked option</p>
+                                        <img src="genre liked option.png" style="width:100%;">
+                                        
+                                        <p>
+                                            You need to follow the same steps for genres you dislike.</p>
+                                        <p>
+
+                                        <p>                                 
+                                            You can also receive recommendations based on a specific release range. To do this, click on the 'Year of release range' button and 
+                                            use the slider to adjust it to your preferred release interval.
+                                        </p>
+                                        <p style="text-align: center;">Year of release range option</p>
+                                        <img src="Year of release range.png" style="width:100%;">
+                                        
+                                        <p>
+                                            After setting your filters, click on <b>Get Recommendation based on my preferences</b> button to receive a list of recommendations based on your preferences.
+                                            After you click on that button, a list of vinyls will be displayed.
+                                        </p>
+                                        <p style="text-align: center;">The list of recommendations based on your preferences.</p>
+                                        <img src="Vinyls list based on preferences.png" style="width:100%;">
+                                        </p>
+                                        <p>
+
+                                        </p>
+                                        <p>
+                                        After receiving the recommendations in list form, you can click on the artist or genre, and you will be redirected to the WikiData pages corresponding to the URIs of the artists or genres. If you click on More details, 
+                                        you will be redirected to the Wikidata page associated with the vinyl. </p>
+                                        <p style="text-align: center;">More details action result</p>
+                                        <img src="vinyl wiki data page.png" style="width:100%;">
+
+                                    </li>
+
+                                    <li id="based_on_local_playlist"><b>Based on Local Playlist</b></li>
+                                    <p>
+                                        To receive recommendations derived from your Local Playlist, you should click on the <i>Playlist Recommendation</i> button located in the 
+                                        navigation bar above. The page will appear as follows:</p>
+                                    <p style="text-align: center;">Local Playlist Page</p>
+                                    <img src="local playlist page.png" style="width:100%;">
+
+                                    </p>
+                                    <p>
+                                        Following that, you should click the "Add Playlist" button and choose the XSPF format file that contains your playlist. Once you've selected the file, click the "Get recommendations
+                                        based on this playlist" button to receive the list of recommendations.
+                                    <p style="text-align: center;">Local Playlist Page - Choose File as First Step</p>
+                                    <img src="playlist local page choose file as first step.png" style="width:100%;">
+                                    </p>
+                                    <p>
+                                        After clicking the "Get recommendations based on this playlist" button, a success message will appear above the panel, and a list of 
+                                        vinyl records will be displayed in the following manner:
+                                    <p style="text-align: center;">Local Playlist Page - List of Vinyls returned</p>
+                                    <img src="playlist local page list of vinyls.png" style="width:100%;">
+                                    </p>
+                                    <p>
+                                        To access the subsequent approaches, <b>authentication within the application is required</b>.</p>
+                               
+                                    <li id="based_on_discogs_data"><b>Based on Discogs Data</b></li>
+                                    <p>
+                                        To access the recommendation based on Discogs Data, <b>authentication is necessary</b>. Following authentication, you should navigate 
+                                        to the Profile Page where you will find the following content:
+                                    </p>
+                                    <p style="text-align: center;">Profile Page</p>
+                                    <img src="profile page.jpeg" style="width:100%;">
+                                    <p>
+                                        To link your account with your Discogs account, click on the "Associate account with Discogs" button. Subsequently, you will be directed to the Discogs page where you must log 
+                                        in and grant the application permission to access your data..
+                                    </p>
+                                    <p style="text-align: center;">Discogs Authorization Page</p>
+                                    <img src="authoriza page discogs url.jpeg" style="width:100%;">
+
+                                    <p>
+                                        If the authorization process was successful, you will be redirected to the Profile Page, and the content will be displayed as follows:</p>
+                                    <p style="text-align: center;">Profile Page - Discogs Account Linked</p>
+                                    <img src="profile page with succesful associated accounts.jpeg" style="width:100%;">
+
+                                    <p>You can now navigate to the Last Purchases page by selecting it from the navbar section, and the content will appear as follows: </p>
+                                    <p style="text-align: center;">Last Purchases Page</p>
+                                    <img src="last purchases page.jpeg" style="width:100%;">
+
+                                    <p>When you click on the "Get recommendations based on Discogs Information" button, a list of Vinyl Recommendations 
+                                        will appear. As mentioned earlier, you can click on the Artist, Genre, and More Details links to be redirected to additional information about the Artist, Genre, or Vinyl.
+                                    </p>
+
+                                    <p style="text-align: center;">List of Vinyls based on Discogs Information</p>
+                                    <img src="vinyl list returned using discogs data.jpeg" style="width:100%;">
+
+                                    <li id="based_on_playlists_using_spotify_app"><b>Based on playlists using Spotify App</b></li>
+                                        <p>
+                                            To obtain recommendations based on your Spotify playlists, you should follow the same account association process as you did for Discogs. 
+                                            Once you've connected to Spotify, you can then access the Playlists Page.
+                                        </p>
+                                        <p style="text-align: center;">Playlist page with Playlists From Spotify Account</p>
+                                        <img src="Playlist page displayed Playlist from Spotify.jpeg" style="width: 100%;">
+
+                                        <p>
+                                            To view the tracks within a particular playlist, simply click on the "See tracklist" button, and a list 
+                                            of the tracks will be presented.</p>
+                                        <p style="text-align: center;">Playlist page with Tracks from a Playlist</p>
+                                        <img src="Playlist page with tracks from a playlist.jpeg" style="width: 100%;">
+
+                                        <p>
+                                            Clicking on the image of a track will take you to the corresponding Spotify URL, where you can find 
+                                            additional useful information about the track. </p>
+                                        </p>
+                                        <p>To hide the tracks within a playlist, you can simply click on the "Hide Tracklist" button.</p>
+
+                                        <p>To receive recommendations based on a particular playlist, click the "Get recommendations based on this playlist" button located on the Playlist card. 
+                                            Once you've clicked the button, a list of vinyl records will be presented.</p>
+
+                                        <p style="text-align: center;">Playlist page with Vinyls Recommendations</p>
+                                        <img src="playlist page with list of vinyl returned.jpeg" style="width: 100%;">
+                                        <p>
+                                            To view a new list of recommended vinyl records, simply click the right arrow 
+                                            located on the right side of the vinyl list. 
+                                        </p>
+                                        <p>For more details about the vinyl records, you can click on the artist, genre, and more 
+                                            details links to be directed to the respective Wikidata pages.
+                                        </p>
+                                        <br>
+                                        <p>That's all for today. I hope you enjoyed exploring our application. &#128578;</p>
+                                </ol>
+                            </blockquote>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </article>
+    </div>
+
+</body>
+
+</html>
