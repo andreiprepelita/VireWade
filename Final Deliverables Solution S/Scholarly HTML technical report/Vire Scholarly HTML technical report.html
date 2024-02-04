@@ -178,6 +178,22 @@
               <div class="item" style="text-align:center">
                 <img src="./Resources/Vinyl endpoint - Main endpoint.drawio.png" alt="graphQL" style="">
               </div>
+              <p>"An example of the input for the request to the endpoint would look like this:"</p>
+              <pre><code>
+                {
+                  "query": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX sparqlResults: <http://www.w3.org/2005/sparql-results#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\nSELECT ?genre ?genreLabel (COUNT(?vinyl) AS ?numberOfVinyls) \nWHERE {\n?result a sparqlResults:ResultSet .\n?result 
+                    sparqlResults:solution ?solution .\n?solution sparqlResults:binding 
+                    [ sparqlResults:variable \"vinyl\" ; sparqlResults:value ?vinyl ] .\n?solution 
+                    sparqlResults:binding [ sparqlResults:variable \"genre\" ; sparqlResults:value ?genre ] .\n?solution sparqlResults:binding [ sparqlResults:variable \"genreLabel\" ; sparqlResults:value ?genreLabel ] .\n}\n\n
+                    GROUP BY ?genre ?genreLabel\nORDER BY DESC(?numberOfVinyls)\nLIMIT 1\n"
+                }
+                
+              </code></pre>
+              <p>The data structure returned by this endpoint is characterized in the following way:</p>
+              <div class="item" style="text-align: center;">
+                <img src="./Resources/output sparql endpoint.png" alt="output sparql endpoint">
+              </div>
+
 
               <h2  style="color:red; font-size: larger;"><b>Open API for Sparql Endpoint Module:</b></h2>
               <p>
@@ -634,44 +650,68 @@
           <div class="card text-bg-light mb-3">
             <div class="card-body">
               <h2 id="frontend_design" class="card-title" style="color:blue;">4. Frontend Design</h2>
-              <h3 class="card-title">UI Mockup</h3>
+              <blockquote>
+                <p>
+                  This part of the application was developed using <b>React</b>, a JavaScript library for building user interfaces.
+                </p>
+                <p>
+                  A particular library employed in our project can be found at the following link: <a href="https://www.npmjs.com/package/album-art">Library Link</a>. 
+                  It is utilized to fetch the album cover corresponding to the album name.
+                </p>
+                </blockquote>
+                <h3 class="card-title
+              <h3 class="card-title">Current UI</h3>
               <div>
+                <p style="text-align: center;"><b>Register Page</b></p>
+              <img src="./Resources/register page.png" alt="Register Page" style="width:100%;">
 
-                <div class="item_v1" style="text-align: center; margin-bottom: 20px;">
-                  <h3 style="margin-bottom: 10px;">Login Screen</h3>
-                  <img src="./Resources/login.png" alt="Login">
-                </div>
-              
-                <div class="item_v1" style="text-align: center; margin-bottom: 20px;">
-                  <h3 style="margin-bottom: 10px;">Registration Screen</h3>
-                  <img src="./Resources/register.png" alt="Register">
-                </div>
-              
-                <div class="item_v1" style="text-align: center; margin-bottom: 20px;">
-                  <h3 style="margin-bottom: 10px;">Profile Screen</h3>
-                  <img src="./Resources/profile.png" alt="Profile">
-                </div>
+              <p style="text-align: center;"><b>Login Page</b></p>
+              <img src="./Resources/login page.png" alt="Login Page" style="width:100%;">
 
-                <div class="item_v1" style="text-align: center; margin-bottom: 20px;">
-                  <h3 style="margin-bottom: 10px;">Recommendation based on user preferences</h3>
-                  <img src="./Resources/recommendation preferences.png" alt="Recommendation based on user preferences">
-                </div>
+              <p style="text-align: center;"><b>Main Page</b></p>
+              <img src="./Resources/main page.png" alt="Main Page" style="width:100%;">
 
-                <div class="item_v1" style="text-align: center; margin-bottom: 20px;">
-                  <h3 style="margin-bottom: 10px;">Recommendation based on last purchases</h3>
-                  <img src="./Resources/recommendation discogs.png" alt="Recommendation based on last purchases">
-                </div>
+              <p style="text-align: center;"><b>Artist liked option</b></p>
+              <img src="./Resources/artists liked.png" style="width:100%;">
 
-                <div class="item_v1" style="text-align: center; margin-bottom: 20px;">
-                  <h3 style="margin-bottom: 10px;">Last purchases</h3>
-                  <img src="./Resources/recommendation discogs last purchases.png" alt="Last purchases">
-                </div>
+              <p style="text-align: center;"><b>Genre liked option</b></p>
+              <img src="./Resources/genre liked option.png" style="width:100%;">
 
-                <div class="item_v1" style="text-align: center; margin-bottom: 20px;">
-                  <h3 style="margin-bottom: 10px;">Recommendation based on User Playlist</h3>
-                  <img src="./Resources/recommendation playlist.png" alt="Recommendation based on User Playlist">
-                </div>
+              <p style="text-align: center;"><b>Year of release range option</b></p>
+              <img src="./Resources/Year of release range.png" style="width:100%;">
 
+              <p style="text-align: center;"><b>The list of recommendations based on your preferences.</b></p>
+              <img src="./Resources/Vinyls list based on preferences.png" style="width:100%;">
+
+              <p style="text-align: center;"><b>Local Playlist Page</b></p>
+              <img src="./Resources/local playlist page.png" style="width:100%;">
+
+              <p style="text-align: center;"><b>Local Playlist Page - Choose File as First Step</b></p>
+              <img src="./Resources/playlist local page choose file as first step.png" style="width:100%;">
+
+              <p style="text-align: center;"><b>Local Playlist Page - List of Vinyls returned</b></p>
+              <img src="./Resources/playlist local page list of vinyls.png" style="width:100%;">
+
+              <p style="text-align: center;"><b>Profile Page</b></p>
+              <img src="./Resources/profile page.jpeg" style="width:100%;">
+
+              <p style="text-align: center;"><b>Profile Page - Discogs Account Linked</b></p>
+              <img src="./Resources/profile page with succesful associated accounts.jpeg" style="width:100%;">
+
+              <p style="text-align: center;"><b>Last Purchases Page</b></p>
+              <img src="./Resources/last purchases page.jpeg" style="width:100%;">
+
+              <p style="text-align: center;"><b>List of Vinyls based on Discogs Information</b></p>
+              <img src="./Resources/vinyl list returned using discogs data.jpeg" style="width:100%;">
+
+              <p style="text-align: center;"><b>Playlist page with Playlists From Spotify Account</b></p>
+              <img src="./Resources/Playlist page displayed Playlist from Spotify.jpeg" style="width: 100%;">
+
+              <p style="text-align: center;"><b>Playlist page with Tracks from a Playlist</b></p>
+              <img src="./Resources/Playlist page with tracks from a playlist.jpeg" style="width: 100%;">
+
+              <p style="text-align: center;"><b>Playlist page with Vinyls Recommendations</b></p>
+              <img src="./Resources/playlist page with list of vinyl returned.jpeg" style="width: 100%;">
               
               </div>
               
@@ -686,6 +726,11 @@
           <div class="card text-bg-light mb-3">
             <div class="card-body">
               <h2 id="end_users" class="card-title" style="color:blue;">5. End Users</h2>
+              <h3 class="card-title">Use Manual Reference</h3>
+              <blockquote>
+                <p>For a more comprehensive user guide, please refer to the </p>
+                  <a href="https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/UserGuide/userGuide.html">User Guide Page</a>.
+              </blockquote>
               <h3 class="card-title">Use Case Diagram</h3>
               <blockquote>
                 <p>This outlines the ways in which the user will engage with the application:</p>
