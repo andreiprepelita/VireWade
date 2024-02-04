@@ -6,7 +6,7 @@
 
 ## Quick Access to Scholarly HTML Report / Open API Services / Diagrams / DataModeling / Code / UserGuide / Our endpoints
 
-1. [Schorlarly HTML Report](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/Scholarly%20HTML%20technical%20report/Vire%20Scholarly%20HTML%20technical%20report.html#playlist_based_recommendation)
+1. [Schorlarly HTML Report](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/Scholarly%20HTML%20technical%20report/Vire%20Scholarly%20HTML%20technical%20report.html)
 2. [UserService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade//blob/main/Final%20Deliverables%20Solution%20S/Open%20API%20Specification/Users%20%26%20Playlist%20Modules%20-%20Spotify%20%26%20Local%20Endpoint%20Opn%20API/index.html)
 3. [RecommendationService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/Open%20API%20Specification/Recommendation%20Module%20-%20Open%20API/index.html)
 4. [Diagrams](https://github.com/andreiprepelita/VireWade/tree/main/Final%20Deliverables%20Solution%20S/Diagrams)
@@ -16,8 +16,42 @@
 8. [SparqlEndpoint](https://sparql-endpoint.onrender.com/sparqlRecommendation)
 9. [Recommendation Service](https://recommendation-api-0q3l.onrender.com/recommendation)
 
+**Project progress**
+
+Week 10
+Andrei initiated the Sparql Endpoint implementation, integrating Stardog, and creating the database.
+Eduard embarked on frontend development.
+
+Week 11
+Andrei finalized the Sparql Endpoint and began developing the Recommendation API, focusing on user option criteria.
+Eduard modeled playlist data and continued frontend development.
+
+Week 12
+Andrei advanced the Recommendation API development, incorporating discogs integration.
+Eduard commenced integration with the Spotify API.
+
+Week 13
+Andrei progressed with the Recommendation API, adding logic for local playlists.
+Eduard developed playlist logic using Spotify data.
+
+Week 14
+Andrei completed the Recommendation API implementation and iniatied the Playlist local recommendation feature.
+Eduard finalized the playlist logic based on Spotify data.
+
+Week 15
+Andrei finalized the playlist local logic, started the Scholarly HTML technical report, refactored initial diagrams, updated the Open API for the Recommendation API.
+Eduard completed the UI, began integration with the Recommendation API, and refactored the Open API for User and Playlist Service.
+
+Week 16
+Andrei wrapped up his section of the Scholarly technical report, initiated the deployment of the Sparql Endpoint and Recommendation API on the Render Platform, and finalized the User Guide Scholarly HTML Report.
+Eduard finished integrating with the Recommendation API, addressed frontend bugs, completed his section of the Scholarly HTML technical report, and created the User Guide video.
 
 
+
+
+
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
