@@ -39,7 +39,7 @@ export default function Login({refreshNavbar}) {
         }
         console.log(`postObject is ${postObject}`);
         if(type === "login") {
-           let response = await fetch('http://localhost:8888/login', {
+           let response = await fetch('https://virewade-node-backend.onrender.com/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ export default function Login({refreshNavbar}) {
                 email: email,
                 password: pass1
             }
-            let response = await fetch("http://localhost:8888/register", {
+            let response = await fetch("https://virewade-node-backend.onrender.com/register", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -107,7 +107,7 @@ export default function Login({refreshNavbar}) {
     //         const {sessionToken, userId} = JSON.parse(existingSession);
         
     //         if(userId) {
-    //             const result = await fetch(`http://localhost:8888/session/validate/${userId}`, {
+    //             const result = await fetch(`https://virewade-node-backend.onrender.com/session/validate/${userId}`, {
     //                 method: 'POST',
     //                 headers: {
     //                     'Content-Type': 'application/json'
