@@ -2,6 +2,18 @@
 #project #infoiasi #wade #web
 # Vire (Vinyl Recommender Tool) 
 
+**Final Deliverables Solution S**:
+
+## Quick Access to Scholarly HTML Report / Open API Services / Diagrams / DataModeling / Code / UserGuide / Our endpoints
+
+1. [Schorlarly HTML Report](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/Scholarly%20HTML%20technical%20report/Vire%20Scholarly%20HTML%20technical%20report.html#playlist_based_recommendation)
+2. [UserService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/User%20Service%20-%20Open%20API/index.html)
+3. [RecommendationService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/Recommendation%20Service%20-%20Open%20API/index.html)
+4. [Playlist API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/Playlist%20Service%20-%20Open%20API/index.html)
+5. [Diagrams](https://github.com/andreiprepelita/VireWade/tree/main/Final%20Deliverables%20Solution%20S/Diagrams)
+
+ 
+
 **Midterm Deliverable Design & Architecture A**:
 
 ## Quick Access to Scholarly HTML Report / Open API Services / Diagrams
