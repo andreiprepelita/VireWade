@@ -7,12 +7,19 @@
 ## Quick Access to Scholarly HTML Report / Open API Services / Diagrams / DataModeling / Code / UserGuide / Our endpoints
 
 1. [Schorlarly HTML Report](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/Scholarly%20HTML%20technical%20report/Vire%20Scholarly%20HTML%20technical%20report.html#playlist_based_recommendation)
-2. [UserService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/User%20Service%20-%20Open%20API/index.html)
-3. [RecommendationService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/Recommendation%20Service%20-%20Open%20API/index.html)
-4. [Playlist API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/Playlist%20Service%20-%20Open%20API/index.html)
-5. [Diagrams](https://github.com/andreiprepelita/VireWade/tree/main/Final%20Deliverables%20Solution%20S/Diagrams)
+2. [UserService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade//blob/main/Final%20Deliverables%20Solution%20S/Open%20API%20Specification/Users%20%26%20Playlist%20Modules%20-%20Spotify%20%26%20Local%20Endpoint%20Opn%20API/index.html)
+3. [RecommendationService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/Open%20API%20Specification/Recommendation%20Module%20-%20Open%20API/index.html)
+4. [Diagrams](https://github.com/andreiprepelita/VireWade/tree/main/Final%20Deliverables%20Solution%20S/Diagrams)
+5. [DataModeling] (https://github.com/andreiprepelita/VireWade/tree/main/Final%20Deliverables%20Solution%20S/DataModeling)
+6. [Code]
+7. [UserGuide] (https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/UserGuide/userGuide.html)
+8. [SparqlEndpoint] (https://sparql-endpoint.onrender.com/sparqlRecommendation)
+9. [Recommendation Service] (https://recommendation-api-0q3l.onrender.com/recommendation)
 
- 
+
+
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 **Midterm Deliverable Design & Architecture A**:
 
