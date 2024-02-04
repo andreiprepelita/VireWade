@@ -56,7 +56,7 @@ public class DiscogsAuthService {
                 "oauth_signature=\"" + UtilDiscogs.CONSUMER_SECRET + "&\", " +
                 "oauth_signature_method=\"" + "PLAINTEXT" + "\", " +
                 "oauth_timestamp=" + System.currentTimeMillis() / 1000 + "\", " +
-                "oauth_callback=" + "\"http://localhost:8080/profile/1\"";
+                "oauth_callback=" + "\"https://vinyl-frontend.onrender.com\"";
     }
 
     public OAuth1DiscogsCredentials getAccessToken(String authentication, String verifier) throws IOException {
