@@ -1,0 +1,51 @@
+﻿{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "foaf": "http://xmlns.com/foaf/0.1/"
+  },
+  "@type": "mo:MusicArtist",
+  "mo:image": "https://i.scdn.co/image/ab6761610000e5eb7fda8adcbe0cd99ec83a3bcf",
+  "foaf:name": "George Harrison",
+  "@id": "http://www.wikidata.org/entity/Q2643"
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "foaf": "http://xmlns.com/foaf/0.1/"
+  },
+  "@type": "mo:MusicArtist",
+  "mo:image": "https://i.scdn.co/image/423e826b3c1b23930a255d7cbc2daf733f795507",
+  "foaf:name": "Miles Davis",
+  "@id": "http://www.wikidata.org/entity/Q93341"
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "foaf": "http://xmlns.com/foaf/0.1/"
+  },
+  "@type": "mo:MusicArtist",
+  "mo:image": "https://i.scdn.co/image/ab6761610000e5eb3811c5d00df7810ebb5151a0",
+  "foaf:name": "Ole Ivars",
+  "@id": "http://www.wikidata.org/entity/Q2019027"
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "foaf": "http://xmlns.com/foaf/0.1/"
+  },
+  "@type": "mo:MusicArtist",
+  "mo:image": "https://i.scdn.co/image/ab6761610000e5ebe9348cc01ff5d55971b22433",
+  "foaf:name": "The Beatles",
+  "@id": "http://www.wikidata.org/entity/Q1299"
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "foaf": "http://xmlns.com/foaf/0.1/"
+  },
+  "@type": "mo:MusicArtist",
+  "mo:image": "https://i.scdn.co/image/ab6761610000e5eb9a93e273380982dff84c0d7c",
+  "foaf:name": "Elvis Presley",
+  "@id": "http://www.wikidata.org/entity/Q303"
+}

@@ -1,0 +1,251 @@
+﻿{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:Vinyl",
+  "dc:title": "Some Time in New York City",
+  "@id": "http://www.wikidata.org/entity/Q516869",
+  "foaf:maker": {
+    "@type": "mo:MusicArtist",
+    "foaf:name": "John Lennon",
+    "@id": "http://www.wikidata.org/entity/Q1203"
+  },
+  "mo:image": "https://i.scdn.co/image/ab67616d0000b27361a389971d7842d02b0623ab",
+  "mo:genre": {
+    "rdfs:label": "rock music",
+    "@id": "http://www.wikidata.org/entity/Q11399"
+  },
+  "dc:date": {
+    "@value": "1972-01-01T00:00:00Z",
+    "@type": "xsd:date"
+  }
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:Vinyl",
+  "dc:title": "Yoko Ono/Plastic Ono Band",
+  "@id": "http://www.wikidata.org/entity/Q507672",
+  "foaf:maker": {
+    "@type": "mo:MusicArtist",
+    "foaf:name": "Yoko Ono",
+    "@id": "http://www.wikidata.org/entity/Q117012"
+  },
+  "mo:image": "https://i.scdn.co/image/ab67616d0000b2736462162d227ec2be2ebee12d",
+  "mo:genre": {
+    "rdfs:label": "rock music",
+    "@id": "http://www.wikidata.org/entity/Q11399"
+  },
+  "dc:date": {
+    "@value": "1970-12-11T00:00:00Z",
+    "@type": "xsd:date"
+  }
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:Vinyl",
+  "dc:title": "Melody - Original Soundtrack Recording",
+  "@id": "http://www.wikidata.org/entity/Q1175799",
+  "foaf:maker": {
+    "@type": "mo:MusicArtist",
+    "foaf:name": "various artists",
+    "@id": "http://www.wikidata.org/entity/Q3108914"
+  },
+  "mo:image": "https://i.scdn.co/image/ab67616d0000b27351876de43cde9ea840aa5699",
+  "mo:genre": {
+    "rdfs:label": "pop music",
+    "@id": "http://www.wikidata.org/entity/Q37073"
+  },
+  "dc:date": {
+    "@value": "1971-05-01T00:00:00Z",
+    "@type": "xsd:date"
+  }
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:Vinyl",
+  "dc:title": "Please Please Me",
+  "@id": "http://www.wikidata.org/entity/Q181826",
+  "foaf:maker": {
+    "@type": "mo:MusicArtist",
+    "foaf:name": "The Beatles",
+    "@id": "http://www.wikidata.org/entity/Q1299"
+  },
+  "mo:image": "https://i.scdn.co/image/ab67616d0000b273dbeec63ad914c973e75c24df",
+  "mo:genre": {
+    "rdfs:label": "rock and roll",
+    "@id": "http://www.wikidata.org/entity/Q7749"
+  },
+  "dc:date": {
+    "@value": "1963-01-01T00:00:00Z",
+    "@type": "xsd:date"
+  }
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:Vinyl",
+  "dc:title": "Ain't She Sweet",
+  "@id": "http://www.wikidata.org/entity/Q4697298",
+  "foaf:maker": {
+    "@type": "mo:MusicArtist",
+    "foaf:name": "The Beatles",
+    "@id": "http://www.wikidata.org/entity/Q1299"
+  },
+  "mo:image": "https://i.scdn.co/image/ab67616d0000b2734ce8b4e42588bf18182a1ad2",
+  "mo:genre": {
+    "rdfs:label": "rock and roll",
+    "@id": "http://www.wikidata.org/entity/Q7749"
+  },
+  "dc:date": {
+    "@value": "1964-10-05T00:00:00Z",
+    "@type": "xsd:date"
+  }
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:Vinyl",
+  "dc:title": "Nice Enough to Eat",
+  "@id": "http://www.wikidata.org/entity/Q17146816",
+  "foaf:maker": {
+    "@type": "mo:MusicArtist",
+    "foaf:name": "various artists",
+    "@id": "http://www.wikidata.org/entity/Q3108914"
+  },
+  "mo:image": "https://i.scdn.co/image/ab67616d0000b2735084cb3fdc277a00c5ae18b6",
+  "mo:genre": {
+    "rdfs:label": "rock music",
+    "@id": "http://www.wikidata.org/entity/Q11399"
+  },
+  "dc:date": {
+    "@value": "1969-11-01T00:00:00Z",
+    "@type": "xsd:date"
+  }
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:Vinyl",
+  "dc:title": "Flash Gordon – Original Soundtrack Music by Queen",
+  "@id": "http://www.wikidata.org/entity/Q275834",
+  "foaf:maker": {
+    "@type": "mo:MusicArtist",
+    "foaf:name": "Queen",
+    "@id": "http://www.wikidata.org/entity/Q15862"
+  },
+  "mo:image": "https://i.scdn.co/image/ab67616d0000b273cec894846895a2cc1668ea9f",
+  "mo:genre": {
+    "rdfs:label": "rock music",
+    "@id": "http://www.wikidata.org/entity/Q11399"
+  },
+  "dc:date": {
+    "@value": "1980-12-08T00:00:00Z",
+    "@type": "xsd:date"
+  }
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:Vinyl",
+  "dc:title": "Heartbreaker",
+  "@id": "http://www.wikidata.org/entity/Q5692719",
+  "foaf:maker": {
+    "@type": "mo:MusicArtist",
+    "foaf:name": "Dolly Parton",
+    "@id": "http://www.wikidata.org/entity/Q180453"
+  },
+  "mo:image": "https://i.scdn.co/image/ab67616d0000b273892175e9897380b9a7b3c603",
+  "mo:genre": {
+    "rdfs:label": "pop music",
+    "@id": "http://www.wikidata.org/entity/Q37073"
+  },
+  "dc:date": {
+    "@value": "1978-07-17T00:00:00Z",
+    "@type": "xsd:date"
+  }
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:Vinyl",
+  "dc:title": "Ringo's Rotogravure",
+  "@id": "http://www.wikidata.org/entity/Q1930582",
+  "foaf:maker": {
+    "@type": "mo:MusicArtist",
+    "foaf:name": "Ringo Starr",
+    "@id": "http://www.wikidata.org/entity/Q2632"
+  },
+  "mo:image": "https://i.scdn.co/image/ab67616d0000b2732435d81b2f093837365a3a3f",
+  "mo:genre": {
+    "rdfs:label": "rock music",
+    "@id": "http://www.wikidata.org/entity/Q11399"
+  },
+  "dc:date": {
+    "@value": "1976-01-01T00:00:00Z",
+    "@type": "xsd:date"
+  }
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:Vinyl",
+  "dc:title": "Tvoje i moje godine",
+  "@id": "http://www.wikidata.org/entity/Q12072791",
+  "foaf:maker": {
+    "@type": "mo:MusicArtist",
+    "foaf:name": "Novi fosili",
+    "@id": "http://www.wikidata.org/entity/Q541346"
+  },
+  "mo:image": "https://i.scdn.co/image/ab67616d0000b2734ac9e4b2bfce3e658ebddd6d",
+  "mo:genre": {
+    "rdfs:label": "pop music",
+    "@id": "http://www.wikidata.org/entity/Q37073"
+  },
+  "dc:date": {
+    "@value": "1985-01-01T00:00:00Z",
+    "@type": "xsd:date"
+  }
+}

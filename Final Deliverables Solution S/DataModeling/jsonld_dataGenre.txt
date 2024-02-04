@@ -1,0 +1,46 @@
+﻿{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:genre",
+  "rdfs:label": "rock music",
+  "@id": "http://www.wikidata.org/entity/Q11399"
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:genre",
+  "rdfs:label": "pop music",
+  "@id": "http://www.wikidata.org/entity/Q37073"
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:genre",
+  "rdfs:label": "stage and screen",
+  "@id": "http://www.wikidata.org/entity/Q61340552"
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:genre",
+  "rdfs:label": "jazz",
+  "@id": "http://www.wikidata.org/entity/Q8341"
+},{
+  "@context": {
+    "mo": "http://purl.org/ontology/mo/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "@type": "mo:genre",
+  "rdfs:label": "hard rock",
+  "@id": "http://www.wikidata.org/entity/Q83270"
+}
