@@ -137,18 +137,7 @@
                   and secret, where secret is used for storing encrypted 
                   passwords or authentication-related data.
                 </p>
-                <p>
-                  <b>Stream_fm_tokens Table:</b> This table holds tokens associated 
-                  with streaming services. Each token has a unique id and 
-                  is linked to a member via the email field. The password 
-                  field is used to store an encrypted password or token.
-                </p>
-                <p>
-                  <b>Record_token Table:</b> Similar to the stream_fm_tokens table, 
-                  this table stores tokens related to recording services. 
-                  It includes a unique id, and the email and password 
-                  fields for authentication purposes.
-                </p>
+                <p>Currently, the collections tables aren't used as we haven't implemented the saving collections methods yet.</p>
               </blockquote>
               <div class="item" style="text-align: center;">
                 <img src="./Resources/DatabaseArchitecture.png" alt="Database">
@@ -202,13 +191,22 @@
               
 
               <h3 id="user_architecture" class="card-title" style="color:green;">User Architecture</h3>
+              <blockquote>
+                <div style="font-size:smaller">
+                  <p>The authentication module was developed using <b>Node.js</b>. We make requests to our <b>PostgreSQL</b> database in order to authenticate, register and validate user data.
+                  </p>
+                  <p>The user module is written in the frontend side of the app, written in <b>Javascript</b> and requires us to make requests to the respective service API in order to authenticate the user and be able to access our playlist and last purchases services.
+                    Once we receive the token from the service the user can get and edit data from his Spotify account and receive recommandations based on his last discog purchases.
+                  </p>
+                </div>
+              </blockquote>
           
               <div class="item" style="text-align: center;">
                 <img src="./Resources/User Arhictecture.drawio.png" alt="userService">
               </div>
               <h2 style="color:red; font-size: larger;"><b>Open API for User Architecture:</b></h2>
               <p>
-                 <a href="https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/User%20Service%20-%20Open%20API/index.html">Click Here</a>
+                 <a href="https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade//blob/main/Final%20Deliverables%20Solution%20S/Open%20API%20Specification/Users%20%26%20Playlist%20Modules%20-%20Spotify%20%26%20Local%20Endpoint%20Opn%20API/index.html">Click Here</a>
               </p>
               
               
@@ -313,7 +311,9 @@
                     <i>Summary:</i> In our user interface, the first step for the user is to link their account with Spotify. Once this association is completed, 
                     they will be able to view personalized recommendations on a page titled "Recommendations Based on Playlists."
                   </p>
-                  <p>TO BE COMPLETED</p>
+                  <p>Once we can find the spotify token in session storage, the app will make requests to the Spotify API in order to get the user's playlists, tracklists, and their album names, ids, links, images, titles and other specific data, and populate the playlist card list.</p>
+                  <p>Each playlist card contains the image if the playlist, the name, adn the tracklist that can be opened, each track having linked external urls in case the user wants to learn more about that specific detail.</p>
+                  <p>Once the list is shown, we make a request to get all the genres of the tracks, in order to be passed to the recommandation API and get recommandations based on the playlist.</p>
                   <p>
                     Another option for receiving recommendations involves users uploading a playlist in XSPF format. This feature allows for playlist-based recommendations 
                     and does not require users to be logged into the application.</p>
@@ -347,6 +347,7 @@
                   The purpose of this module is to uphold the functions necessary for managing playlists, 
                   including creation, editing, deleting, getting and other related tasks.
                 </p>
+                <p>The implemented module is written in <b>Javascript</b> and can be accessed once a valid Spotify token is found in the session storage.  </p>
                 <p>
                   The service is structured as follows:
                 </p>
@@ -354,10 +355,16 @@
               <div class="item" style="text-align: center;">
                 <img src="./Resources/Playlist Architecture.drawio.png" alt="playlistService">
               </div>
-              <h2 style="color:red; font-size: larger;"> <b>Open API for Playlist Architecture:</b></h2>
-              <p>
-                 <a href="https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Midterm%20Deliverable%20Design%20%26%20Architecture%20A/Open%20API%20SPECIFICATION/Playlist%20Service%20-%20Open%20API/index.html">Click Here</a>
-              </p>
+              <blockquote>
+                <p>
+                  Starting from the Playlist page, we handle data from two different flows, from the Spotify Api and from our locally saved data.</br>
+                </p>
+                <p>
+                  In the Spotify flow, we get the playlists list, and we make a request to get the tracklist for each playlist, and model the playlist-related data accordingly.</br>
+                  
+                </p>
+                <p>The local flow hasn't been implemented yet.</p>
+              </blockquote>
 
             </div>
         </div></section>
@@ -638,6 +645,147 @@
                 <br>
                 <br>
                 <h4 class="card-title"><b>Spotify API</b></h4>
+                <p>
+                  Our strategy included recommending vinyl records based on the user's playlists saved on Spotify. For this, we used the <b><a href="https://developer.spotify.com/documentation/web-api">
+                    Spotify API</a></b>.
+                </p>
+                <h4>
+                  What is the method for retrieving necessary data?
+                </h4>
+                <p>
+                  To acquire user data, we must get a valid token from Spotify. For this we used the <a href="https://developer.spotify.com/documentation/web-api/tutorials/implicit-flow" target="_blank">Implicit Grant Flow.</a> 
+                </p>
+                <p>This flow requires the following code to receive the token:</p>
+                <pre><code>
+        var state = randomstring.generate(16);
+        var scope = 'user-read-private user-read-email playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public';
+      
+        res.redirect('https://accounts.spotify.com/authorize?' +
+          querystring.stringify({
+            client_id: process.env.CLIENT_ID,
+            scope: scope,
+            redirect_uri: process.env.REDIRECT_URI,
+            state: state,
+            response_type: 'token'   
+          }));});
+              </code></pre>
+                  <p>Once the request succedes, we receive a token valid for only one hour</p>
+
+                <p>After securing the user token, authenticated requests can be made to these APIs:</p>
+                <ul>
+                  <li>Get user data: https://api.spotify.com/v1/me. With this endpoint we receive all spotify user data.</li>
+                  <li>Get user playlists: https://api.spotify.com/v1/me/playlists?offset=&limit=. This endpoint retrieves the playlists and all related details set in the metadata.</li>
+                  <li>Get tracks of given playlist: https://api.spotify.com/v1/playlists/${playlistId}/tracks. This endpoint will do the same as the one above, but instead of all playlists, it will send the tracklist of a playlist.</li>
+                  <li>Create playlist: https://api.spotify.com/v1/users/${user_id}/playlists. With this we create an empty playlist in the user's spotify account.</li>
+                  <li>Add tracks to newly created playlist: https://api.spotify.com/v1/playlists/${playlistId}/tracks. </li>
+                  <li>Get the genres of the given artists ids: https://api.spotify.com/v1/artists?ids=${artists}</li>
+                </ul>
+
+                </p>
+                <p>All the endpoints from above need to verify the validity of the user's token, which will be sent in the requests options list as follows:
+                  <pre><code>
+                    const requestOptions = {
+                      method: '',
+                      headers: {
+                          Authorization: `Bearer ${access_token}`
+                      }}
+                  </code></pre>
+                </p>
+                <p>
+                  This is a sample of the data we retrieve from the Spotify API.
+                </p>
+                <pre><code>
+                  {
+                    "href" : "https://api.spotify.com/v1/users/userId/playlists?offset=0&limit=10",
+                    "items" : [ {
+                      "collaborative" : false,
+                      "description" : "",
+                      "external_urls" : {
+                        "spotify" : "https://open.spotify.com/playlist/userId"
+                      },
+                      "href" : "https://api.spotify.com/v1/playlists/",
+                      "id" : "",
+                      "images" : [ {
+                        "height" : null,
+                        "url" : "https://image-cdn-ak.spotifycdn.com/image/...",
+                        "width" : null
+                      } ],
+                      "name" : "piese vechi românești pt ca da",
+                      "owner" : {
+                        "display_name" : "eva._",
+                        "external_urls" : {
+                          "spotify" : "https://open.spotify.com/user/..."
+                        },
+                        "href" : "https://api.spotify.com/v1/users/...",
+                        "id" : "",
+                        "type" : "user",
+                        "uri" : "spotify:user:userId"
+                      },
+                      "primary_color" : null,
+                      "public" : false,
+                      "snapshot_id" : "",
+                      "tracks" : {
+                        "href" : "https://api.spotify.com/v1/playlists/.../tracks",
+                        "total" : 44
+                      },
+                      "type" : "playlist",
+                      "uri" : "spotify:playlist:"
+                    }, {
+                      "collaborative" : false,
+                      "description" : "",
+                      "external_urls" : {
+                        "spotify" : "https://open.spotify.com/playlist/"
+                      },
+                      "href" : "https://api.spotify.com/v1/playlists/",
+                      "id" : "",
+                      "images" : [ {
+                        "height" : 640,
+                        "url" : "https://mosaic.scdn.co/640/...",
+                        "width" : 640
+                      }, {
+                        "height" : 300,
+                        "url" : "https://mosaic.scdn.co/300/...",
+                        "width" : 300
+                      }, {
+                        "height" : 60,
+                        "url" : "https://mosaic.scdn.co/60/...",
+                        "width" : 60
+                      } ],
+                      "name" : "Suflet Românesc",
+                      "owner" : {
+                        "display_name" : "HOOOD1N1",
+                        "external_urls" : {
+                          "spotify" : "https://open.spotify.com/user/..."
+                        },
+                        "href" : "https://api.spotify.com/v1/users/...",
+                        "id" : "...",
+                        "type" : "user",
+                        "uri" : "spotify:user:..."
+                      },
+                      "primary_color" : null,
+                      "public" : true,
+                      "snapshot_id" : "...",
+                      "tracks" : {
+                        "href" : "https://api.spotify.com/v1/playlists/.../tracks",
+                        "total" : 62
+                      },
+                      "type" : "playlist",
+                      "uri" : "spotify:playlist:..."
+                    },
+                    ....,
+                     ],
+                    "limit" : 10,
+                    "next" : "https://api.spotify.com/v1/users/.../playlists?offset=10&limit=10",
+                    "offset" : 0,
+                    "previous" : null,
+                    "total" : 24
+                  }
+                </code></pre>
+                <p>From this data returned by Spotify API we extract the playlists, tracks, artists, albums, genres and respective URIs.</p>
+                <p>
+                  Additionally, we offer vinyl suggestions based on the user's playlist tracklist, using data obtained from <b>Spotify</b>.
+                </p>
+
               </blockquote>
             </div>
           </div>
@@ -841,6 +989,57 @@
                 </div>
                
               </blockquote>
+
+              <h3 class="card-title">How we will represent Playlists in our Application?</h3>
+              <blockquote>
+                <ul>
+                  <li><b>@type:MusicPlaylist</b> Specifies the entity's category.</li>
+                  <li><b>@id:</b> Assigns a unique resource identifier URL for the Playlist.</li>
+                  <li><b>numTracks:</b>Specifies the number of tracks.</li>
+                  <li><b>image:</b> The playlist image.</li>
+                  <li><b>name:</b>Indicates the name of the Playlist.</li>
+                  <li> <b>abstract:</b> This is the playlist description. </li>
+                  <li><b>track:</b></li>
+                  <ul>
+                    <li><b>@type: ItemList -</b> Specifies the track's category.</li>
+                    <li><b>itemListElement:</b> This is the array that contains the list of the tracks. </li>
+                  
+                  </ul>
+                </ul>
+                <div class="item" style="text-align: center;">
+                  <img class="img-fluid" src="./Resources/PlaylistModel.png" alt="Playlist Resource Graph">
+                </div>
+                <h4 class="card-title">Output:</h4>
+                <div class="item" style="text-align: center;">
+                  <img class="img-fluid" src="./Resources/PlaylistJSONLD.png" alt="Playlist Ouput">
+                </div>
+               
+              </blockquote>
+
+              <h3 class="card-title">How we will represent Tracks in our Application?</h3>
+              <blockquote>
+                <ul>
+                  <li><b>@type:MusicRecording</b> Specifies the entity's category.</li>
+                  <li><b>@id:</b> Assigns a unique resource identifier URL for the Track.</li>
+                  <li><b>name:</b>Indicates the name of the Track.</li>
+                  <li><b>image:</b> The track image.</li>
+                  <li><b>byArtist:</b></li>
+                  <ul>
+                    <li><b>@type: Person -</b> Specifies the artist's category.</li>
+                    <li><b>name:</b> Indicates the name of the Artist. </li>
+                    <li><b>@id:</b> Assigns a unique resource identifier URL for the Artist.</li>
+                  
+                  </ul>
+                </ul>
+                <div class="item" style="text-align: center;">
+                  <img class="img-fluid" src="./Resources/TrackModel.drawio.png" alt="Track Resource Graph">
+                </div>
+                <h4 class="card-title">Output:</h4>
+                <div class="item" style="text-align: center;">
+                  <img class="img-fluid" src="./Resources/TrackJSONLD.png" alt="Track Ouput">
+                </div>
+               
+              </blockquote>
             </div>
           </div>
         </section>
@@ -890,6 +1089,10 @@
                   <img style="max-width:100%; height: auto;" src="./Resources/vinyl final jsonld sniffer.png" alt="vinyls jsonld">
                 </div>
                 <br>
+                <h4>Other data:</h4>
+                <div class="item" style="text-align: center;">
+                  <img style="max-width:100%; height: auto;" src="./Resources/JSONLd.png" alt="other data jsonld">
+                </div>
                 <p>
                   The models derived from those examples have been included in the DataModeling folder.</p>
 
