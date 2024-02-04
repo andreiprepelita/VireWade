@@ -16,7 +16,7 @@ const VerticalLibrary = ({ elements, playlistStructureData }) => {
     let artists = "";
     let artistsNames = [];
 
-    const getPlaylistStructuredData = (playlistImg, playlistName, playlistDescription, playlistTracks) => {
+    const getPlaylistStructuredData = (playlistImg, playlistName, playlistDescription, playlistTracks, elementUrl) => {
         playlistStructureData = {
             "@context": "https://schema.org/",
             "@type": "MusicPlaylist",
@@ -24,6 +24,7 @@ const VerticalLibrary = ({ elements, playlistStructureData }) => {
             "image": playlistImg,
             "name": playlistName,
             "abstract": playlistDescription,
+            "@id": elementUrl,
             "track": {
                 "@type": "ItemList",
                 "itemListElement": []
@@ -44,9 +45,11 @@ const VerticalLibrary = ({ elements, playlistStructureData }) => {
             playlistStructureData.track.itemListElement.push({
             "@type": "MusicRecording",
             "name": track.track.name,
+            "@id": track.track.external_urls.spotify,
             "byArtist": {
                 "@type": "Person",
-                "name": track.track.artists[0].name
+                "name": track.track.artists[0].name,
+                "@id": track.track.artists[0].external_urls.spotify
                 },
             "genre": track.track.genre,
             "image": track.track.album.images[1].url
@@ -69,7 +72,7 @@ const VerticalLibrary = ({ elements, playlistStructureData }) => {
                         return (
                         <Box className="elementsBox" key={element.id} mr="4">
                             {<script type="application/ld+json">
-                                {JSON.stringify(getPlaylistStructuredData(element.image, element.title, element.description, element.tracks))}
+                                {JSON.stringify(getPlaylistStructuredData(element.image, element.title, element.description, element.tracks, element.url))}
                             </script>}
                             <PlaylistCard key={element.id + i} element={element} artists={artists} artistsNames={artistsNames} playlistUrl={element.url}/>
                         </Box>

@@ -55,7 +55,7 @@ const onShowTracksClicked = () => {
                         let x = track.track;
                         let y = x.artists[0].name;
                         let artistUrl = x.artists[0].external_urls.spotify;
-                        let albumUrl = x.album.external_urls.spotify;
+                        let albumUrl = x.external_urls.spotify;
                         let image = x.album.images[1].url
                         console.log("My track is ", x)
                         return (
