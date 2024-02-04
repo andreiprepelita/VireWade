@@ -10,11 +10,11 @@
 2. [UserService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade//blob/main/Final%20Deliverables%20Solution%20S/Open%20API%20Specification/Users%20%26%20Playlist%20Modules%20-%20Spotify%20%26%20Local%20Endpoint%20Opn%20API/index.html)
 3. [RecommendationService API](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/Open%20API%20Specification/Recommendation%20Module%20-%20Open%20API/index.html)
 4. [Diagrams](https://github.com/andreiprepelita/VireWade/tree/main/Final%20Deliverables%20Solution%20S/Diagrams)
-5. [DataModeling] (https://github.com/andreiprepelita/VireWade/tree/main/Final%20Deliverables%20Solution%20S/DataModeling)
+5. [DataModeling](https://github.com/andreiprepelita/VireWade/tree/main/Final%20Deliverables%20Solution%20S/DataModeling)
 6. [Code]
-7. [UserGuide] (https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/UserGuide/userGuide.html)
-8. [SparqlEndpoint] (https://sparql-endpoint.onrender.com/sparqlRecommendation)
-9. [Recommendation Service] (https://recommendation-api-0q3l.onrender.com/recommendation)
+7. [UserGuide](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/UserGuide/userGuide.html)
+8. [SparqlEndpoint](https://sparql-endpoint.onrender.com/sparqlRecommendation)
+9. [Recommendation Service](https://recommendation-api-0q3l.onrender.com/recommendation)
 
 
 
