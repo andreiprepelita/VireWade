@@ -19,12 +19,12 @@
 **Project progress**
 
 Week 10
-Andrei initiated the Sparql Endpoint implementation, integrating Stardog, and creating the database.
-Eduard embarked on frontend development.
+- Andrei initiated the Sparql Endpoint implementation, integrating Stardog, and creating the database.
+- Eduard embarked on frontend development.
 
 Week 11
-Andrei finalized the Sparql Endpoint and began developing the Recommendation API, focusing on user option criteria.
-Eduard modeled playlist data and continued frontend development.
+-Andrei finalized the Sparql Endpoint and began developing the Recommendation API, focusing on user option criteria.
+-Eduard modeled playlist data and continued frontend development.
 
 Week 12
 Andrei advanced the Recommendation API development, incorporating discogs integration.
