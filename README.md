@@ -15,6 +15,8 @@
 7. [UserGuide](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/UserGuide/userGuide.html)
 8. [SparqlEndpoint](https://sparql-endpoint.onrender.com/sparqlRecommendation)
 9. [Recommendation Service](https://recommendation-api-0q3l.onrender.com/recommendation)
+10. [User Service](https://virewade-node-backend.onrender.com)
+11. [UI App](https://vinyl-frontend.onrender.com)
 
 **Project progress**
 
