@@ -38,6 +38,19 @@ function Discog() {
         fetchData(index)
         setCurrentPage(index)
     }
+
+    const onSubmitDiscogs = async (e) => {
+
+        if(!sessionStorage.getItem('discog_token')) {
+            const res = await fetch('https://recommendation-api-0q3l.onrender.com/discogs/request_token')
+            const token = await res.json()
+            window.location.replace(token.authorizationURL);
+        } else {
+            sessionStorage.removeItem('discog_token')
+            window.location.reload('/')
+        }
+        
+    }
     
     
     const fetchData = async (index) => {
@@ -107,7 +120,7 @@ function Discog() {
                 padding={'20px'}
                 width='30%'
                 alignSelf={'center'}
-                onClick={isAvailableDiscogs ? () => { setShowVinyls(true); fetchData(currentPage) } : () => {navigate('/profile')}}
+                onClick={isAvailableDiscogs ? () => { setShowVinyls(true); fetchData(currentPage) } : () => {onSubmitDiscogs()}}
             >
                {isAvailableDiscogs ? "Get recommandations based on Discog information" : "Connect to Discogs"}
             </Button>
