@@ -12,11 +12,12 @@
 4. [Diagrams](https://github.com/andreiprepelita/VireWade/tree/main/Final%20Deliverables%20Solution%20S/Diagrams)
 5. [DataModeling](https://github.com/andreiprepelita/VireWade/tree/main/Final%20Deliverables%20Solution%20S/DataModeling)
 6. [Code](https://github.com/andreiprepelita/VireWade/tree/main/Final%20Deliverables%20Solution%20S/Code)
-7. [UserGuide](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/UserGuide/userGuide.html)
-8. [SparqlEndpoint](https://sparql-endpoint.onrender.com/sparqlRecommendation)
-9. [Recommendation Service](https://recommendation-api-0q3l.onrender.com/recommendation)
-10. [User Service](https://virewade-node-backend.onrender.com)
-11. [UI App](https://vinyl-frontend.onrender.com)
+7. [UserGuide Scholarly HTML](https://htmlpreview.github.io/?https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/UserGuide/userGuide.html)
+8. [UserGuide Video](https://github.com/andreiprepelita/VireWade/blob/main/Final%20Deliverables%20Solution%20S/UserGuide/Application%20presentation.mkv)
+9. [SparqlEndpoint](https://sparql-endpoint.onrender.com/sparqlRecommendation)
+10. [Recommendation Service](https://recommendation-api-0q3l.onrender.com/recommendation)
+11. [User Service](https://virewade-node-backend.onrender.com)
+12. [UI App](https://vinyl-frontend.onrender.com)
 
 **Project progress**
 
